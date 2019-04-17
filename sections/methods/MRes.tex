@@ -1,0 +1,298 @@
+\section{Introduction} % TODO Update from MRes version
+Solid state chemistry has developed an increasing focus on complex or functional materials.
+Describing systems where a large number of configurations may exist locally requires a significant number of parameters to be determined.
+XRD would not be amenable to this, as an example, as it measures diffraction arising from structured materials so point defects are not measurable.
+
+Computational methods can assist in this area. Sufficiently advanced models can accurately reproduce experimental data, with the calculation of properties not readily determined by experimental methods.
+The exponential growth in computing power over recent decades has allowed increasingly complex systems and phenomenon to be calculated in a reasonable timeframe.
+
+In this chapter, basic concepts and formulae pertaining to the modelling of crystal structures are outlined.
+Mathematical techniques used to efficiently optimize these systems are then presented.
+This overview is brief and primarily discusses techniques used in this report, as more comprehensive reviews are already available. \cite{Gale2003,Jensen2007,Catlow2013}
+
+
+
+\section{Potential models}
+The implementation of accurate potential models is vital if the results of atomistic modelling studies are to accurately reproduce experimental findings.
+These models describe the energy of a system as a function of nuclear coordinates.
+
+Whilst in principle the internal energy of a system is dependant on the momentum and position in space of all nuclei and electrons within the system, the huge number of interactions this entails are not feasible to consider explicitly for all but the simplest of systems.
+
+Instead, the system is treated as a series of distinct ions, and the energy terms are subdivided by the number of bodies in a given interaction:\cite{Gale2003}
+\begin{align}
+U &=& &\sum_{i = 1} U_i&         &+& &\frac{1}{2}\sum_{i = 1} \sum_{j = 1} U_{ij}&  &+& &\frac{1}{6}\sum_{i = 1} \sum_{j = 1} \sum_{k = 1} U_{ijk}& &+& &\cdots\\
+&=& &\sum_{i = 1}^\prime U_i&  &+& &\sum_{i,j = 1}^\prime U_{ij}&                 &+& &\sum_{i,j,k = 1}^\prime U_{ijk}&                           &+& &\cdots
+\label{eq:taylor}
+\end{align}
+With the first term accounting for single-body terms, the second term accounting for those interactions which exist between pairs of bodies and so on.
+The primed sums in Equation 2.2 indicates that only unique terms are considered, thus removing the $\frac{1}{N!}$ term.
+This expansion is exact if expanded to account for all N body interactions in a system.
+However, as it is the lower order terms which account for the vast majority of the potential energy of a system, higher order terms are only included when calculation of specific properties demands their inclusion. An example of this is the need to consider three-body interactions in calculating phonon distribution curves.
+
+Single body interactions are usually implemented where an external forcefield is to be applied to a system, such as the application of an external electric field.
+They can also be used in the implementation of the Einstein model, in which there is no interatomic interactions, and instead species are modelled as being attached to their lattice sites by harmonic springs.
+
+Single body terms are not used in the course of this study, but are referenced here for completeness sake.
+
+\newpage
+\subsection{Two-body interactions}
+The two-body terms in Equation \ref{eq:taylor} are those which account for interactions between individual pairs of ions or atoms. It is convenient to further subdivide these interactions into Coulombic (long-range) and short-range terms as so:
+\begin{equation}
+U_{ij} = \Phi_{Coulombic} + \Phi_{short-range}
+\label{eq:two-body}
+\end{equation}
+
+The Coulombic term in Equation \ref{eq:two-body} is the potenial arising from electrostatic interactions between pairs of ions:
+
+\begin{equation}
+\Phi_{Coulombic} = \frac{q_iq_j}{r_{ij}}
+\label{eq:coulombic}
+\end{equation}
+Where $q_i$ and $q_j$ are the effective charges of the atoms or ions.
+This term is often refered to as the ``long-range'' term, as all other terms considered will tend to be so small as to be not worth considering beyond a certain range.
+It is also typically the dominant term in a system at equilibrium, accounting for around 90\% of the total potential energy in a typical system.\cite{Catlow2013}
+
+The long range nature of the coulombic term results in slow convergence whilst considering two-body interactions in direct space for a large number of ions.
+A method by \citet{Ewald1921} of solving long range interactions in systems subject to periodic boundary conditions is therefore implemented.
+
+In the Ewald summation, Coulombic interactions are further subdivided into short- and long-range components.
+The long-range interactions are then calculated in reciprocal space.
+Even accounting for the additional computational cost of calculating Fourier transforms, this technique significantly reduces the overall computation time required to evaluate Coulombic interactions.
+
+Short-range two-body interactions encompass a wide range of interactions associated with bonded atoms, or ions in the immediate vicinity of other charged species.
+This can include electron-pair repulsions, London interactions and covalent interactions.
+This term can be calculated through the use of tabulated data, or via simple analytical models.
+Analytical models are typically empirically derived from experimental data.
+
+The selection of an appropriate model is vital, with considerations including the ionic/covalent nature of the system, availability of experimental data, and computational cost influencing the choice of model. For ionic systems, the Buckingham Potential usually gives good agreement with experimental data:
+
+
+\begin{equation}
+\Phi_{ij} = A\cdot \exp \left(\frac{-r_{ij}}{\rho_{ij}} \right) - \frac{C}{r_{ij}^6}
+\label{eq:Buckingham}
+\end{equation}
+
+Other common short range potential models are given in Table \ref{tab:potentialmodels}
+
+\begin{table}[t]
+  \centering
+  \caption{Common short-range two-body potential models.\cite{Gale2003}}
+  \label{tab:potentialmodels}
+  \begin{tabular}{@{}lc@{}}
+  \toprule
+  Potential Model         & Expression     \\
+  \midrule
+  Buckingham              & $\displaystyle{\Phi_{ij} = A\cdot \exp \left(\frac{-r_{ij}}{\rho_{ij}} \right) - \frac{C}{r_{ij}^6}}$    \\
+  \addlinespace
+  Harmonic                & $\displaystyle{\Phi_{ij} = \frac{1}{2}k_2(r_{ij}-r_0)^2   + \frac{1}{6}k_3(r_{ij}-r_0)^3    + \frac{1}{24}k_4(r_{ij}-r_0)^4   }$    \\
+  \addlinespace
+  Lennard-Jones           & $\displaystyle{\Phi_{ij} = \left(\frac{A}{r_{ij}^m} \right) - \left( \frac{B}{r_{ij}^n}\right)}$   \\
+  \addlinespace
+  Morse                   & $\displaystyle{\Phi_{ij} = D_e \left((1- \exp(-a(r_{ij} - r_0)))^2           -1\right) }$    \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+
+\vspace{-5pt}
+\paragraph{Finite-range implementation}
+
+As implied by the name, short-range terms are dominant in the short-range, but the energy associated with these interactions drops rapidly with increasing internuclear seperation.
+It is therefore common practice to only compute this term for interactions between pairs of ions/atoms within a threshold distance.
+The implementation of this strategy dramatically reduces computational cost with minimal change in result, so long as an appropriately large threshold radius is selected.
+There is of course a need to ensure the implementation of this does not introduce discontinuity into the system, and so additional terms are added to smoothly reduce the interatomic potential and associated energy derivatives to zero at the threshold.
+
+
+\subsection{Three-body interactions}
+The nature of three-body terms are dependant on the interactions between three ions or atoms.
+These can be interpreted as bond pair repulsions or as a charge dispersion between three bodies in covalent and ionic interpretations respectively.
+This term is small relative to the two-body terms, and is usually only included when high degrees of accuracy are required, or for the calculation of properties dependent on three-body interactions such as phonon distribution curves.
+
+The three-body potential model utilised in this report is the harmonic model:
+\begin{equation}
+  U_{ijk} = \frac{1}{2}k_2(\theta-\theta_0)^2   + \frac{1}{6}k_3(\theta-\theta_0)^3    + \frac{1}{24}k_4(\theta-\theta_0)^4
+  \label{eq:threebody}
+\end{equation}
+
+The harmonic model assigns an equilibrium angle to a given bond pair.
+Any deviations from this ideal angle then manifest as an increase in the potential energy of the system.
+
+\subsection{Lattice energy}
+The lattice energy is simply the energy of formation of a given lattice.
+As temperature is not explicitly considered in GULP, the lattice energy is simply the internal energy.
+Substituting Equations \ref{eq:two-body} to \ref{eq:threebody} into Equation \ref{eq:taylor} yields the following:
+\begin{equation}
+U = \overbrace{\sum_{ij} \frac{q_iq_j}{r_{ij}}}^\text{Coulombic} + \overbrace{\sum_{ij} \Phi_{ij}(r_{ij})}^\text{Short range} + \overbrace{\sum_{ijk} U_{ijk}(r_{ijk})}^\text{Three-body terms}
+\end{equation}
+
+\section{Partial occupancies}
+Partial occupancies can occur in mixed ion systems, where several ions can occupy the same site.
+The simplest technique for addressing this situation is the use of a supercell, in which each site is assigned a given ion so as to achieve the desired stoichiometry.
+This is possible for simple systems, but in complex crystal structures this is not a viable strategy.
+
+This is in part due to the huge number of potential configurations possible in such systems.
+For example, randomly distributing 50 ions at 100 non equivalent lattice sites yields $\frac{100!}{50!\cdot50!} = 10^{29}$ distinct systems.
+
+An alternate strategy in dealing with partial occupancies is to utilize the mean field approximation.
+In this approach, each atom or ion is assigned an occupancy at a given site.
+The interatomic potentials are calculated as usual, and scaled relative to the occupancy of that site:
+$$
+U_{ij} = o_io_jU_{ij}
+$$
+This allows for the average potential to be calculated.
+This technique is useful for calculating structural properties, but care should be taken when determining thermodynamic data where the averaging of distinct energy barriers may lead to inaccuracy.
+
+\section{Polarizability}
+
+An early model of ion polarization is the point polarizable ion model (PPI), in which the dipole moment of an ion ($\mu$) is directly proportional to the strength of the electric field (E):
+\begin{equation}
+\mu = \alpha E
+\end{equation}
+
+This model is useful due to ease of extension to high order polarisabilites (quadrupoles for example).
+Whilst of interest due to being computationally inexpensive, this model is inaccurate when calculating dynamical properties of lattices (e.g. phonon dispersion curves) and fails to accurately predict dielectric constants.
+
+This is attributable to a lack of consideration for coupling between polarization and short term repulsions. That is to say that the polarization of electron clouds of neighbouring ions increases the overlap between electron clouds and acts to dampen the overall effect.
+
+As such, simulations using this approach to accurately predict elastic constants will overestimate the dielectric constant.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.4\linewidth]{figures/shell}
+  \caption[Schematic of the shell model of polarizability.\cite{Dick1958}]{Schematic of the shell model of polarizability.\cite{Dick1958} The valence electron shell is held to the ion core by a harmonic spring, and can be displaced by other charged species or electric fields.}
+\end{figure}
+The shell model\cite{Dick1958} is another simple model of polarization which accounts for polarization coupling, thus overcoming a key limitation of the PPI model.
+Polarisation coupling is modelled by treating the valence electron cloud as a shell of zero mass connected to the ionic core by a harmonic spring.
+
+By allowing the displacement of valence electrons from the ion core, an effective dampening of the polarization occurs, offering better agreement with experiment.
+Potential models are developed individually for shell and core interactions between nearby ions, allowing displacement of the shell from the core.
+
+
+While simple, this model performs well for the prediction of ionic halides and oxides.
+\section{Energy minimization}
+\subsection{The configuration space}
+For every ion in a system, the internal energy varies as a function of its position in space.
+Given that the introduction of additional ions will impact the energy associated with other ions as well as its own, it is not sufficient to define an internal energy as a 3-space.
+Instead, the internal energy of an system containing $n$ ions is a $3n$ dimensional function.
+We define the vector of positions of ions within this configurational space as $x$.
+
+Whilst possible for a system to occupy any position within a configurational space, it will always tend towards more thermodynamically favourable states.
+As such, it is necessary to establish a method to identify $x$ such that $U(x)$ is minimized if the system being studied is to be of any real-world significance.
+
+Whilst the previous sections in this chapter have defined means of calculating the internal energy of an arbitrary configuration, they offer no insight into the likelihood of that system existing.
+It is only by comparing $U(x)$ with adjacent systems in the $3n$ dimensional configurational space that local stability can be established.
+
+
+As an aside, it is worth noting that assessment of locally adjacent configurations can only identify local minima.
+Finding global minima is a problem for which no sure-fire solution exists, beyond computationally expensive brute-force searches.
+A number of well-established techniques which improve upon brute-force methods do exist, including Monte-Carlo methods,\cite{Allan2001} Molecular Dynamics (MD), or genetic algorithms. \cite{Barnes1992}
+
+These techniques are not utilized in this study, as local minimization techniques yield equivalent results so long as initialized near the global minima in the configuration space.
+Experimental data can be used to provide initial conditions known to correspond to viable systems, and is widely available for lithium metal phospates due to academic interest surrounding these materials in recent years.
+
+\subsection{Gradient-based methods}
+
+For a position $x$ in the configurational space, the internal energy of a system can be expanded into a Taylor series:
+\begin{equation}
+  U(x+\delta x) = U(x) + \frac{\partial U}{\partial x} \delta x + \frac{1}{2!} \frac{\partial ^2 U}{\partial x^2}(\delta x)^2 \cdots
+\end{equation}
+
+Truncating this equation at the first derivative yields the energy of a configuration $U(x)$, and a derivative vector $g$, indicating directions in the configuration space in which the energy reduces.
+
+\subsubsection{Steepest descent}
+In this method, the position $x$ is updated by:
+\begin{equation}
+x_{p+1} = x_p + g^p\delta
+\end{equation}
+
+with $\delta$ typically being determined using line searches.
+The gradient matrix is then recalculated for the new position, and the procecure is repeated until convergence is achieved.
+
+Whilst each step in this method is inexpensive computationally, there is no theoretical limit to how many steps will be required to achieve convergence.
+This method also requires recalculation of the gradient vector at each step, and cannot make use of information from previous iterations.
+
+\subsubsection{Conjugate gradients}
+The conjugate gradients method optimizes in a single dimension on each step, with subsequent steps taken orthogonal to past search vectors.
+This converges in $N$ steps for an $N$ dimensional quadratic search space.
+
+Expansion of the Taylor series to include a second derivative term (and thus, a Hessian matrix $H$), allows a system to be solved by the Newton-Raphson method by:
+$$
+\Delta x = -H^{-1}g
+$$
+
+This is exact if close to the minima, although approximate with increasing distance from the minima.
+Employing the steepest descent approach initially, followed by the conjugate gradient methods offers both rapid and bounded convergence to a local minima.
+
+
+As numerical techniques are being utilized, with ionic coordinates and energies being updated iteratively, it is possible to solve to a degree of precision far beyond that which is either experimentally measurable or remotely useful.
+As such, simulations are typically deemed to have converged when the change in energy and ionic coordinates between iterations is below a given threshold value.
+The default convergnce criteria in GULP are used in this study, with any results presented having converged to at least that degree of precision.
+
+\section{Point defects}
+The techniques above are well suited for handling perfect systems, but fail to account for the numerous deviations from perfect crystal structures which occur in real systems.
+These defects usually exist in small quantities, but their presence can drastically impact the properties of the material.
+As an example, the doping of silicon with boron or phosphorous gives rise to p- and n-type semicondictors respectively.
+The presence of excess electrons or electron holes is the basis of the main operating principle of transistors.
+Defects strongly influence Li-ion migration rates through electrode materials and are therefore of interest for characterising battery materials.
+
+Whilst the atomistic modelling techniques already discussed are appliciable in the generic case (as can be demonstrated by their suitability when applied to a P1 symmetry group), they have thus far only been discussed in the context of bulk systems.
+
+An overview of defect types, as well as the formalisms used in defining defect formation, is given in the appendix.
+
+\subsection{Mott-Littleton method}
+The Mott-Littleton method allows for the modelling of a defect, or multiple defects, at infinite dilution.
+This technique is used extensively in literature\cite{Fisher2008} and offers good agreement with experimental data.
+
+Using a relaxed perfect crystal structure as an initial condition, defect(s) are introduced as a pertubation to this system and the system is once more allowed to relax.
+The difference in energy of the two systems can be directly attributed to the presence of the defect, and is thus the energy required to allow formation of that defect.
+As the introduction of a single point defect removes symmetry from the system, a periodic approach is not appropriate, nor is the consideration of an infinite system.
+
+Instead, concentric spherical regions centred about the defect are defined, and only species which fall within these regions are modelled.
+A schematic ilustrating these regions is shown in Figure \ref{fig:mott}. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.9\linewidth]{figures/Mott-Littleton}
+  \caption[Schematic illustrating the regions employed in the Mott-Littleton method.]{Schematic illustrating the regions employed in the Mott-Littleton method. Ions in region I are modelled explicitly due to their proximity to the defect. Region IIb ions are modelled using a continuum method whereas those in region IIa use a harmonic relationship which smooths the transition from explicit to implicit modelling.}
+  \label{fig:mott}
+\end{figure}
+
+Region I contains those ions closest to the defect.
+Their proximity to the defect means it is not feasible to accurately model the impact of the defect on these species with any simple approximations, so they are instead modelled explicity using interatomic potentials and relaxed using appropriate numerical methods.
+Whilst numerical techniques such as the conjugate gradient method can be used to efficiently relax the ions in this region, the 1000 ions which typically constitute region I each with 3 spatial dimensions to be relaxed in yield a 3000 dimensional system of equations to be minimized.
+The computational cost is of $O(n!)$ for an n ion system, and so minimizing radius to reduce n is highly desirable.
+
+Region II is composed of ions whose energy is not calculated explicitly, but instead through analytical techniques.
+It is further subdivided into regions IIa and IIb.
+Region IIb, the outermost region, is too distant to be impacted by short range interactions with the defect.
+As such, the defect interactions are purely coulombic, and can be modelled implicitly using a dielectric continuum.
+The magnitude of the force experienced is a function of the net charge of the defect as well as the distance from the defect center.
+
+
+Ions in region IIa are modelled as having harmonic interactions, with an energy cost associated with displacing region IIa species from their location in the perfect system.
+This region serves to smooth the transition between the explicitly modelled region I and the implicitly modelled region IIb, preventing discontinuities in the energy profile.
+
+The success of this technique relies upon selection of radii such that discontinuities do not occur between regions.
+Selection of radii intervals greater than the cut-off values imposed on short range interatomic potentials can achieve this.
+In other words, region IIa should be large enough such that no species in region I have any short range interactions with species in region IIb.
+
+It is also important that convergence is achieved, so the radius of region I and region IIa should be increased independently until the defect energy observed converges.
+Given the rapid increase in computational cost associated with increasing region sizes (especially region I), the radii selected should be as small as possible whilst not sacrificing accuracy.
+
+\subsection{Supercell approach}
+Supercell methods simply take a large supercell of the repeating crystal unit and add a defect to this supercell.
+The cell is then modelled as before, with the supercell repeating ``infinitely''.
+This approach is limited in that in order to model low defect concentrations, a huge supercell is required.
+
+The supercell approach is therefore more suited to the calculation of systems with high defect concentrations.
+As the supercell method differs little from the bulk method beyond initialization methods, it will not be discussed at length.
+
+The primary limitation of this method is that the supercell must be large enough for convergence to occur, particularly when modelling highly charged species whose coulombic interactions are significant at a large range.
+
+\subsubsection{Symmetry optimization}
+By their nature, crystal structures contain a number of symmetry elements.
+In many cases, a number of interactions will be equivalent, enabling the number of computationally expensive operations to be reduced by simply treating some interactions as being equivalent and calculating them once rather than several times.
+
+The addition of defects to a system reduces the overall symmetry of the structure, but there often still exist some symmetry elements.
+Symmetry optimized algorithms are automatically implemented where appropriate in GULP.
+
+\newpage
