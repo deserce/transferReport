@@ -137,9 +137,39 @@ In this model, an equilibrium angle is assigned to a bond pair, and any deviatio
 %U = \overbrace{\sum_{ij} \frac{q_iq_j}{r_{ij}}}^\text{Coulombic} + \overbrace{\sum_{ij} \Phi_{ij}(r_{ij})}^\text{Short range} + \overbrace{\sum_{ijk} U_{ijk}(r_{ijk})}^\text{Three-body terms}
 %\end{equation}
 
+
+\subsection{Polarizability}
+The electron distribution surrounding an atom or ion will shift according to the local environment in which it exists, effectively allowing the internuclear and electronic interactions to partially decouple.
+A rigid ion model, in which species are modelled as point charges, does not capture this behaviour, defreasing the accuracy of models using it.
+This is a particularly important behaviour when studying ion migration, and so a failure to account for this behaviour can negatively impact the accuracy of results obtained.
+
+An early model of ion polarisation is the point polarisable ion model (PPI), in which the dipole moment of an ion ($\mu$) is directly proportional to the strength of the electric field in which it sits(E):
 \begin{equation}
-U = \overbrace{\sum_{ij} \frac{q_iq_j}{r_{ij}}}^\text{Coulombic} + \overbrace{\sum_{ij} \Phi_{ij}(r_{ij})}^\text{Short range} + \overbrace{\sum_{ijk} U_{ijk}(r_{ijk})}^\text{Three-body terms}
+\mu = \alpha E
 \end{equation}
+Whilst computationally inexpensive and easily extensible to higher order polarizabilities (i.e. quadrupolar systems), this model performs poorly when handling dynamic lattice properties.
+It also poorly predicts dielectric constants, which is easily measurable experimentally and thus a useful criteria for model validation.
+
+This shortcoming can be rationalised by the failure to account for the polarisation of adjacent ions, that is, that neighbouring species being polarised impacts the local electric field and serves to dampen polarisation overall.
+Consequently, this model tends to overestimate dielectric constants if tuned to accurately predict another physical property (e.g. elastic constants).
+
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{figures/coreshell/coreshell}
+  \caption[Simple schematic of the shell model of polarisability.]{Simple schematic of the shell model of polarisability. The valence electron shells (grey) are attached to the ion core by a harmonic spring, and are displaced by nearby charged species or net electric fields.}
+\end{figure}
+The shell model\cite{Dick1958} is another computationally inexpensive model of polarisation which accounts for polarisation coupling, thus overcoming a key limitation of the PPI model.
+Polarisation coupling is modelled by treating the valence electron cloud as a shell connected to the ionic core by a harmonic spring.
+The core represents the nucleus and core electrons of the ion, accounting for the majority of the mass of the ion, while the shell is represents the polarisable valence electrons.
+The mass of the shell is treated as zero in non-dynamical systems (i.e. in structural optimisation, Section \ref{sec:minimization}) where the solver strategies are able to handle zero-mass species without instability.
+In the case of dynamic systems (i.e. Molecular dynamics, Section \ref{sec:MD}), the shell is assigned a small portion of the overall mass to provide a degree of inertia and remove the need for prohibitively small time-steps.
+
+By allowing the displacement of valence electrons from the ion core, an effective dampening of the polarisation occurs, offering better agreement with experiment.
+
+The charges assigned to the core and shell respectively must sum to that of the point charge it replaces, but the values of these and the spring constant are typically empirically derived.
+This polarisation model generally gives good agreement with experiment for ionic halides and oxides.
+
 
 \section{Partial occupancies}
 Partial occupancies can occur in mixed ion systems, where several ions can occupy the same site.
