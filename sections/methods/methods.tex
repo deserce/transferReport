@@ -129,10 +129,14 @@ A commonly used three-body potential is the harmonic model:
 
 In this model, an equilibrium angle is assigned to a bond pair, and any deviations from this angle increase the potential energy of the system.
 
-\subsection{Lattice energy}
-The lattice energy is simply the energy of formation of a given lattice.
-As temperature is not explicitly considered in GULP, the lattice energy is simply the internal energy.
-Substituting Equations \ref{eq:two-body} to \ref{eq:threebody} into Equation \ref{eq:taylor} yields the following:
+%\subsection{Lattice energy}
+%The lattice energy is simply the energy of formation of a given lattice.
+%As temperature is not explicitly considered in GULP, the lattice energy is simply the internal energy.
+%Substituting Equations \ref{eq:two-body} to \ref{eq:threebody} into Equation \ref{eq:taylor} yields the following:
+%\begin{equation}
+%U = \overbrace{\sum_{ij} \frac{q_iq_j}{r_{ij}}}^\text{Coulombic} + \overbrace{\sum_{ij} \Phi_{ij}(r_{ij})}^\text{Short range} + \overbrace{\sum_{ijk} U_{ijk}(r_{ijk})}^\text{Three-body terms}
+%\end{equation}
+
 \begin{equation}
 U = \overbrace{\sum_{ij} \frac{q_iq_j}{r_{ij}}}^\text{Coulombic} + \overbrace{\sum_{ij} \Phi_{ij}(r_{ij})}^\text{Short range} + \overbrace{\sum_{ijk} U_{ijk}(r_{ijk})}^\text{Three-body terms}
 \end{equation}
