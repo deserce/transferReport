@@ -9,26 +9,37 @@ Furthermore, an overview of classical interatomic potential fitting strategies a
 This overview is brief and focuses primarily on techniques used in this report, as more comprehensive reviews are available elsewhere. \cite{Gale2003, Jensen2007, Catlow2013}
 Some work presented in this section is derived from the MRes report which led to this project, as the fundamental equations underpinning computational methods remain the same.
 
+\section{Atomistic modelling}
+An understanding of the forces atoms experience as a function of their environment is vital to gain insights into the properties of systems of interest.
+One class of approaches for calculating the interatomic forces between atoms, \textit{ab initio} techniques, are based on quantum mechanics, and seek to determine electron density as a function of position. Whilst the scale of systems these strategies can be used for is increasing with developments in computational resource available, these techniques remain prohibitively expensive for large systems or systems studied over large time-scales.
+
+In contrast, atomistic techniques seek to express the forces between atoms as a series of empirically derived models, either fitted to experimental or \textit{ab initio} data, which can be cheaply evaluated, allowing for large scale systems to be studied over large time scales. This is particularly important when considering phenomenon which occur over large time scales, such as diffusion. 
+
 \section{Potential models}
-The implementation of accurate potential models is vital if the results of atomistic modelling studies are to accurately reproduce experimental findings.
-These models describe the energy of a system as a function of nuclear coordinates.
+All atoms in a system, and their current position, momentum, and oxidation state, give rise to highly complex interactions contributing to the internal energy of the system, which must be enumerated if a perfect atomistic model is to be developed.
+%In practice, the complexity of such a model would be too expensive to compute, and infeasible to conceive of a rational physical basis for terms consisting of high numbers of interactions 
+%(An equation encompassing all forces arising from 10-body interactions is not easy to determine for example).
 
-Whilst in principle the internal energy of a system is dependant on the momentum and position in space of all nuclei and electrons within the system, the huge number of interactions this entails are not feasible to consider explicitly for all but the simplest of systems.
-
-Instead, the system is treated as a series of distinct ions, and the energy terms are subdivided by the number of bodies in a given interaction:\cite{Gale2003}
+Potential models are used to determine the forces in such systems by treating these as a series of discrete isolated interactions which sum to the same overall effect. 
+The internal energy of the system can then be given as the sum from one to n-body terms as such:\cite{Gale2003}
 \begin{align}
 U &=& &\sum_{i = 1} U_i&         &+& &\frac{1}{2}\sum_{i = 1} \sum_{j = 1} U_{ij}&  &+& &\frac{1}{6}\sum_{i = 1} \sum_{j = 1} \sum_{k = 1} U_{ijk}& &+& &\cdots\\
 &=& &\sum_{i = 1}^\prime U_i&  &+& &\sum_{i,j = 1}^\prime U_{ij}&                 &+& &\sum_{i,j,k = 1}^\prime U_{ijk}&                           &+& &\cdots
 \label{eq:taylor}
 \end{align}
 With the first term accounting for single-body terms, the second term accounting for those interactions which exist between pairs of bodies and so on.
-The primed sums in Equation 2.2 indicates that only unique terms are considered, thus removing the $\frac{1}{N!}$ term.
-This expansion is exact if expanded to account for all N body interactions in a system.
-However, as it is the lower order terms which account for the vast majority of the potential energy of a system, higher order terms are only included when calculation of specific properties demands their inclusion. An example of this is the need to consider three-body interactions in calculating phonon distribution curves.
+The primed sum in Equation \ref{eq:taylor} distinguishes between interactions that are enumerated repeatedly, and instead counts each unique interaction only once, hence cancelling the $\frac{1}{N!}$ term.
+This expansion is exact if expanded to account for all N-body interactions in a system.
 
-Single body interactions are usually implemented where an external forcefield is to be applied to a system, such as the application of an external electric field.
-They can also be used in the implementation of the Einstein model, in which there is no interatomic interactions, and instead species are modelled as being attached to their lattice sites by harmonic springs.
+As it is only the low order terms which give rise to the majority of the internal energy of a system, it suffices to truncate this expansion to lower order terms.
+Typically, this is limited to two-body terms, although higher order terms are included where these strongly impact the system (e.g. bond angles).
+Beyond this, higher order terms are only considered where the calculation of a specific property of interest requires their inclusion.
+Three-body interactions are required to calculate phonon distribution curves for example.
 
+Furthermore, as the number of bodies in an interaction increases, it becomes increasingly difficult to find a rational physical basis on which an empirical model can be based. 
+ 
+Single body interactions are implemented to represent an external forcefield being applied to a system, such as the application of an external electric field interacting with charged species.
+They are also used in the Einstein model, in which species do not interact with one another, and instead are attached to their lattice sites by a spring term.
 Single body terms are not used in the course of this study, but are referenced here for completeness sake.
 
 \newpage
