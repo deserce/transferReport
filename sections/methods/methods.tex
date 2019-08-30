@@ -188,33 +188,7 @@ $$
 This allows for the average potential to be calculated.
 This technique is useful for calculating structural properties, but care should be taken when determining thermodynamic data where the averaging of distinct energy barriers may lead to inaccuracy.
 
-\section{Polarizability}
 
-An early model of ion polarisation is the point polarisable ion model (PPI), in which the dipole moment of an ion ($\mu$) is directly proportional to the strength of the electric field (E):
-\begin{equation}
-\mu = \alpha E
-\end{equation}
-
-This model is useful due to ease of extension to high order polarisabilites (quadrupoles for example).
-Whilst of interest due to being computationally inexpensive, this model is inaccurate when calculating dynamical properties of lattices (e.g. phonon dispersion curves) and fails to accurately predict dielectric constants.
-
-This is attributable to a lack of consideration for coupling between polarisation and short term repulsions. That is to say that the polarisation of electron clouds of neighbouring ions increases the overlap between electron clouds and acts to dampen the overall effect.
-
-As such, simulations using this approach to accurately predict elastic constants will overestimate the dielectric constant.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.4\linewidth]{figures/shell}
-  \caption[Schematic of the shell model of polarisability.\cite{Dick1958}]{Schematic of the shell model of polarisability.\cite{Dick1958} The valence electron shell is held to the ion core by a harmonic spring, and can be displaced by other charged species or electric fields.}
-\end{figure}
-The shell model\cite{Dick1958} is another simple model of polarisation which accounts for polarisation coupling, thus overcoming a key limitation of the PPI model.
-Polarisation coupling is modelled by treating the valence electron cloud as a shell of zero mass connected to the ionic core by a harmonic spring.
-
-By allowing the displacement of valence electrons from the ion core, an effective dampening of the polarisation occurs, offering better agreement with experiment.
-Potential models are developed individually for shell and core interactions between nearby ions, allowing displacement of the shell from the core.
-
-
-While simple, this model performs well for the prediction of ionic halides and oxides.
 \section{Energy minimisation}
 \label{sec:minimization}
 \subsection{The configuration space}
