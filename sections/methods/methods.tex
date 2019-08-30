@@ -44,35 +44,41 @@ Single body terms are not used in the course of this study, but are referenced h
 
 \newpage
 \subsection{Two-body interactions}
-The two-body terms in Equation \ref{eq:taylor} are those which account for interactions between individual pairs of ions or atoms. It is convenient to further subdivide these interactions into Coulombic (long-range) and short-range terms as so:
+The two-body terms in Equation \ref{eq:taylor}: $$\sum_{i,j = 1}^\prime U_{ij}$$ account for the interactions occurring between pairs of atoms or ions in isolation.
+As no reference frame is given, these terms are therefore strictly a function of interatomic separation.
+
+It is conventional to further subdivide these two-body interactions into Coulombic (long-range) and short-range terms as so:
 \begin{equation}
 U_{ij} = \Phi_{Coulombic} + \Phi_{short-range}
 \label{eq:two-body}
 \end{equation}
 
-The Coulombic term in Equation \ref{eq:two-body} is the potential arising from electrostatic interactions between pairs of ions:
+The Coulombic term in Equation \ref{eq:two-body} is the potential arising from electrostatic interactions between pairs of charged species:
 
 \begin{equation}
 \Phi_{Coulombic} = \frac{q_iq_j}{r_{ij}}
 \label{eq:coulombic}
 \end{equation}
-Where $q_i$ and $q_j$ are the effective charges of the atoms or ions.
-This term is often referred to as the ``long-range'' term, as all other terms considered will tend to be so small as to be not worth considering beyond a certain range.
-It is also typically the dominant term in a system at equilibrium, accounting for around 90\% of the total potential energy in a typical system.\cite{Catlow2013}
+Where $q_i$ and $q_j$ are the effective charges of the species.
+This term is colloquially referred to as the ``long-range'' term, as the non-Coulombic component of these interactions are comparatively tiny beyond a certain range.
+It is also typically the dominant component in a system at equilibrium, accounting for around 90\% of the total potential energy in a usual system.\cite{Catlow2013}
 
-The long range nature of the coulombic term results in slow convergence whilst considering two-body interactions in direct space for a large number of ions.
-A method by \citet{Ewald1921} of solving long range interactions in systems subject to periodic boundary conditions is therefore implemented.
+The long-range nature of the Coulombic term leads to slow convergence in direct space for a large number of ions.
+The \citet{Ewald1921} summation can be used to overcome this shortcoming in periodic systems, by further subdividing the Coulombic interactions into short- and long-range terms.
+The short-range components are computed as before, while the long-range terms are solved in reciprocal space.
 
-In the Ewald summation, Coulombic interactions are further subdivided into short- and long-range components.
-The long-range interactions are then calculated in reciprocal space.
-Even accounting for the additional computational cost of calculating Fourier transforms, this technique significantly reduces the overall computation time required to evaluate Coulombic interactions.
+The nature of a two-body interaction can vary widely dependent on context, with the species, charge, and even local environment impacting the resultant potential.
+Depending on the system, covalent interactions, London interactions and electron-pair repulsions may all need to be accounted for with no actual calculation of electron density occurring on which to base the potential.
 
-Short-range two-body interactions encompass a wide range of interactions associated with bonded atoms, or ions in the immediate vicinity of other charged species.
 This can include electron-pair repulsions, London interactions and covalent interactions.
 This term can be calculated through the use of tabulated data, or via simple analytical models.
 Analytical models are typically empirically derived from experimental data.
 
-The selection of an appropriate model is vital, with considerations including the ionic/covalent nature of the system, availability of experimental data, and computational cost influencing the choice of model. For ionic systems, the Buckingham Potential usually gives good agreement with experimental data:
+The selection of an appropriate model is vital, with considerations including the ionic/covalent nature of the system, availability of experimental data, and computational cost influencing the choice of model.
+Furthermore, given potential models are often derived to match experimental data for a given system, ensuring that that same potential is suitable when applied outside of the context in which it was developed is important.
+
+This of course can pose an issue when seeking to study systems where no experimental data is available with which to verify the findings of computational work.
+ For ionic systems, the Buckingham Potential form is conventionally used to for two-body interactions:
 
 
 \begin{equation}
@@ -80,7 +86,7 @@ The selection of an appropriate model is vital, with considerations including th
 \label{eq:Buckingham}
 \end{equation}
 
-Other common short range potential models are given in Table \ref{tab:potentialmodels}
+\noindent Other common short range potential models are given in Table \ref{tab:potentialmodels}
 
 \begin{table}[t]
   \centering
@@ -103,11 +109,11 @@ Other common short range potential models are given in Table \ref{tab:potentialm
 
 \vspace{-5pt}
 \paragraph{Finite-range implementation}
+As the name suggests, the short-range terms dominate in the short-range, but the force arising from these interactions decreases rapidly with increasing interatomic distance.
+To decrease the computational expense, a threshold radius is defined beyond which all forces are assumed to be zero.
+The selection of this threshold is important, as the computational expense is of $O(r_t^2)$, so the shorter this radius the less expensive the simulation, whereas too small a radius will result in a change in the simulation result and decrease in model quality.
 
-As implied by the name, short-range terms are dominant in the short-range, but the energy associated with these interactions drops rapidly with increasing internuclear separation.
-It is therefore common practice to only compute this term for interactions between pairs of ions/atoms within a threshold distance.
-The implementation of this strategy dramatically reduces computational cost with minimal change in result, so long as an appropriately large threshold radius is selected.
-There is of course a need to ensure the implementation of this does not introduce discontinuity into the system, and so additional terms are added to smoothly reduce the interatomic potential and associated energy derivatives to zero at the threshold.
+In order to prevent this strategy introducing discontinuity into the system, additional terms are added to smoothly reduce the interatomic potential and associated energy derivatives to zero at the threshold radius. %TODO rephrase
 
 
 \subsection{Three-body interactions}
@@ -115,14 +121,13 @@ The nature of three-body terms are dependant on the interactions between three i
 These can be interpreted as bond pair repulsions or as a charge dispersion between three bodies in covalent and ionic interpretations respectively.
 This term is small relative to the two-body terms, and is usually only included when high degrees of accuracy are required, or for the calculation of properties dependent on three-body interactions such as phonon distribution curves.
 
-The three-body potential model utilised in this report is the harmonic model:
+A commonly used three-body potential is the harmonic model:
 \begin{equation}
   U_{ijk} = \frac{1}{2}k_2(\theta-\theta_0)^2   + \frac{1}{6}k_3(\theta-\theta_0)^3    + \frac{1}{24}k_4(\theta-\theta_0)^4
   \label{eq:threebody}
 \end{equation}
 
-The harmonic model assigns an equilibrium angle to a given bond pair.
-Any deviations from this ideal angle then manifest as an increase in the potential energy of the system.
+In this model, an equilibrium angle is assigned to a bond pair, and any deviations from this angle increase the potential energy of the system.
 
 \subsection{Lattice energy}
 The lattice energy is simply the energy of formation of a given lattice.
