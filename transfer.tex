@@ -5,7 +5,15 @@
 \usepackage[super,sort&compress,comma]{natbib}
 \usepackage{fancyhdr}
 \usepackage{booktabs}
-\fancyhf{}
+
+\fancyhf{}% Clear header/footer
+\fancyhead[C]{\leftmark}% Right header
+\fancyfoot[L]{}% Left footer
+\fancyfoot[R]{\thepage}% Right footer
+\fancyfoot[C]{DRAFT}
+
+\pagestyle{fancy}
+
 
 \usepackage{geometry}
 \geometry{a4paper,left=40mm,top=30mm, right = 30mm, bottom = 30mm} 
