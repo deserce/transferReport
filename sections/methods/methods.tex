@@ -170,24 +170,24 @@ By allowing the displacement of valence electrons from the ion core, an effectiv
 The charges assigned to the core and shell respectively must sum to that of the point charge it replaces, but the values of these and the spring constant are typically empirically derived.
 This polarisation model generally gives good agreement with experiment for ionic halides and oxides.
 
+\newpage
+\section{Partial occupancy and disorder}
+Partially occupied sites are those which have no fixed species occupying them, but instead contain vacancies, or some species in a known ratio when summed throughout the whole material.
+Disordered solids contain partially occupied lattice sites where the species (or lack thereof) shows no regular ordering in space, instead being randomly distributed throughout the material.
 
-\section{Partial occupancies}
-Partial occupancies can occur in mixed ion systems, where several ions can occupy the same site.
-The simplest technique for addressing this situation is the use of a supercell, in which each site is assigned a given ion so as to achieve the desired stoichiometry.
-This is possible for simple systems, but in complex crystal structures this is not a viable strategy.
 
-This is in part due to the huge number of potential configurations possible in such systems.
-For example, randomly distributing 50 ions at 100 non equivalent lattice sites yields $\frac{100!}{50!\cdot50!} = 10^{29}$ distinct systems.
 
-An alternate strategy in dealing with partial occupancies is to utilise the mean field approximation.
-In this approach, each atom or ion is assigned an occupancy at a given site.
-The interatomic potentials are calculated as usual, and scaled relative to the occupancy of that site:
+One strategy for addressing this is to use the mean-field approximation. 
+At each partially occupied site, the interatomic potentials are calculated as usual for each species which occupies the site. 
+The forces are then scaled according to the relative occupancy of each species:
+
 $$
 U_{ij} = o_io_jU_{ij}
 $$
-This allows for the average potential to be calculated.
-This technique is useful for calculating structural properties, but care should be taken when determining thermodynamic data where the averaging of distinct energy barriers may lead to inaccuracy.
 
+The sum of these scaled potentials yields the mean potential arising from the partially occupied site.
+This technique can be powerful for initial studies of systems in that it yields symmetric (and thus robust) systems, and bypasses the cost issues arising from the combinatorics of generating large systems capturing all likely local environment.
+It is particularly useful for the calculation of structural properties, where the averaging of forces is in effect done when determining large scale parameters.
 
 \section{Energy minimisation}
 \label{sec:minimization}
