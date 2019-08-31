@@ -1,24 +1,25 @@
+add_library('pdf')
 def setup():
-    size(3000, 1500)
+    size(3000, 1500, PDF, "coreshell.pdf")
     ellipseMode(CENTER)
     noFill()
     strokeWeight(6)
     strokeCap(ROUND)
 
 
-core_r = 100
 
-core_c = [117, 112, 179]
-shell_r = 600
-shell_c = [27, 158, 119]
-nspring = 14
-springh = 12
-off = 180
-xpos = 400
 
 
 def draw():
+    core_r = 100
 
+    core_c = [117, 112, 179]
+    shell_r = 600
+    shell_c = [27, 158, 119]
+    nspring = 14
+    springh = 12
+    off = 180
+    xpos = 400
     class coreShell:
 
         def __init__(self, x=0, y=0, offset=0,
@@ -82,5 +83,5 @@ def draw():
     translate(2*xpos,0)
     fill(*[255,100,100])
     text("+ Ion", width/2, height/2);
-    save('coreshell.png')
     noLoop()
+    exit()
