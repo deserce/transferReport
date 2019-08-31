@@ -1,3 +1,4 @@
+add_library('dashedlines')
 
 add_library('pdf')
 def setup():
@@ -14,6 +15,8 @@ def setup():
 
 def draw():
     background(255)
+    dash = DashedLines(this)
+    dash.pattern(15, 15)
     n = 20
     r = 80
     r1 = (width / n) * 3
@@ -42,7 +45,7 @@ def draw():
             else:
                 noFill()
 
-                square(x, y, r)
+                dash.rect(x, y, r,r)
 
     pushMatrix()
     translate(width / 2, height / 2)
