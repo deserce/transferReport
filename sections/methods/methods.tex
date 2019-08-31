@@ -41,8 +41,6 @@ Furthermore, as the number of bodies in an interaction increases, it becomes inc
 Single body interactions are implemented to represent an external forcefield being applied to a system, such as the application of an external electric field interacting with charged species.
 They are also used in the Einstein model, in which species do not interact with one another, and instead are attached to their lattice sites by a spring term.
 Single body terms are not used in the course of this study, but are referenced here for completeness sake.
-
-\newpage
 \subsection{Two-body interactions}
 The two-body terms in Equation \ref{eq:taylor}: $$\sum_{i,j = 1}^\prime U_{ij}$$ account for the interactions occurring between pairs of atoms or ions in isolation.
 As no reference frame is given, these terms are therefore strictly a function of interatomic separation.
@@ -189,65 +187,117 @@ The sum of these scaled potentials yields the mean potential arising from the pa
 This technique can be powerful for initial studies of systems in that it yields symmetric (and thus robust) systems, and bypasses the cost issues arising from the combinatorics of generating large systems capturing all likely local environment.
 It is particularly useful for the calculation of structural properties, where the averaging of forces is in effect done when determining large scale parameters.
 
+That said, the simplification of lattice sites fails to capture the nuance of local environments, potentially missing properties that might only arise in environments containing certain configurations of species.
+As such, caution should be exercised when applying this technique to calculate diffusion barriers.
+Furthermore, the implementation of this technique is poorly compatible with the core-shell model in GULP, preventing their simultaneous usage.
+
+Another strategy for handling partially occupied and disordered systems is the supercell approach.
+The primitive cell is expanded to be repeated a given number of times in the direction of each basis vector, yielding a supercell.
+Each partially occupied site is then assigned one of the species potentially occupying it, such that the desired stoichiometry is achieved across the whole supercell.
+
+Assigning these sites it itself a problem to which many strategies can be applied.
+The brute force approach of testing all configurations in not viable for all but the simplest of systems due to the combinatorial nature of the problem.
+A simple example of distributing 50 ions and 50 vacancies across 100 symmetry inequivalent sites yields $\frac{100!}{50!\cdot50!} = 10^{29}$ distinct cases.
+
+Another strategy is to randomly assign a species to each site, weighted by stoichiometry.
+It is worth clarifying that while perfect disordering is possible, the energetics associated with the formation of a given local environment may bias such systems to exhibit certain local configurations preferentially.
+As an example, a disordered rocksalt with a small portion of vacancies at the anionic site might na{\"i}vely be expected, in a sufficiently large system, to have some cationic sites surrounded by six vacancies.
+However, the energetics associated with the formation of this local environment would significantly reduce the likelihood of its formation.
+
+Accounting for this when attempting to generate disordered supercells is non-trivial, as the energetics of the environment are not known ahead of time, and the law of large numbers dictates that these sites will form if not biased against.
+Further, the potential models used may not be suitable for modelling such unfavourable environments.
+Indeed, this problem becomes even more challenging when seeking to derive potentials to fit a disordered system, as the potentials are needed in order to calculate the energetics of the local environments, yielding a {\color{red} chicken and egg type} issue.
+
+A final strategy is to approximate the disordered solid as being ordered.
+A benefit of this strategy is it can be coupled with DFT studies to predict low energy ordered structures as a basis for the calculation.
+Further, this technique typically yields smaller supercells, making studies in GULP (where periodicity can be leveraged to speed up calculations) significantly cheaper.
+Finally, the increased symmetry and reduced number of local environments present makes finding a robust set of potentials easier for such systems.
+
+This of course relies upon a means of generating a low energy or ground state structure for the system being studied, which is itself a non-trivial matter.
+One such strategy, cluster expansion, \cite{Bhandari2019} was utilised by the authors of source material for this report, and may be implemented by the author in future work.
+
+
 \section{Energy minimisation}
 \label{sec:minimization}
 \subsection{The configuration space}
-For every ion in a system, the internal energy varies as a function of its position in space.
-Given that the introduction of additional ions will impact the energy associated with other ions as well as its own, it is not sufficient to define an internal energy as a 3-space.
-Instead, the internal energy of an system containing $n$ ions is a $3n$ dimensional function.
-We define the vector of positions of ions within this configurational space as $x$.
+\label{sec:config}
+The internal energy of an ionic system is a function of its atomic coordinates.
+While such systems are more easily thought of as a series of points in a 3-space, the resultant energy surface is $3n$ dimensional for a system containing $n$ atoms, with each point on this surface corresponding to a unique set of atomic coordinates.
+We define the vector of positions of these atoms, the configuration space, $\mathbf{x}$.
 
-Whilst possible for a system to occupy any position within a configurational space, it will always tend towards more thermodynamically favourable states.
-As such, it is necessary to establish a method to identify $x$ such that $U(x)$ is minimised if the system being studied is to be of any real-world significance.
+Whilst each position in the configuration space has an associated energy, $U(\mathbf{x})$, real systems tend towards more energetically favourable states.
+Stationary points on the energy surface, those where $\nabla U(\mathbf{x}) = 0$, are of particular interest:
+\begin{labeling}{\textbf{Saddle point}}
+	\item [\textbf{Minima}] Points on the energy surface where:
+	\begin{equation}
+	\nabla^2 U(\mathbf{x}) > 0
+	\end{equation}
+	\noindent
+	These points correspond to stable structures.
+	Multiple minima may exist, corresponding to different configurations or phases that the system can occupy, while the lowest energy minima, the global minima, corresponds to the ground state of the system.
+	\item [\textbf{Saddle point}] The point corresponding to the maximum energy whilse taking a minimum energy path between two minima.
+	These points correspond to transition states, and are of interest when studying phase changes or ion migration.
+\end{labeling}
 
-Whilst the previous sections in this chapter have defined means of calculating the internal energy of an arbitrary configuration, they offer no insight into the likelihood of that system existing.
-It is only by comparing $U(x)$ with adjacent systems in the $3n$ dimensional configurational space that local stability can be established.
+It is worth noting that whilst it is trivial to confirm that a point is stationary, it is not possible to establish whether a point is globally minumum without an exhaustive search,
+Some techniques such as Monte-Carlo methods can, with sufficient run time, identify points which are most likely globally minimum, but for all but the simplest systems, a global search is infeasible.\cite{Barnes1992}
 
 
-As an aside, it is worth noting that assessment of locally adjacent configurations can only identify local minima.
-Finding global minima is a problem for which no sure-fire solution exists, beyond computationally expensive brute-force searches.
-A number of well-established techniques which improve upon brute-force methods do exist, including Monte-Carlo methods,\cite{Allan2001} Molecular Dynamics (MD), or genetic algorithms. \cite{Barnes1992}
-
-These techniques are not utilised in this study, as local minimisation techniques yield equivalent results so long as initialised near the global minima in the configuration space.
-Experimental data can be used to provide initial conditions known to correspond to viable systems, and is widely available for lithium metal phosphates due to academic interest surrounding these materials in recent years.
+As local minimisation techniques yield the global minimum so long as initialised near the final value, good initial conditions derived from experiment, \textit{ab initio} studies, or an educated guess can obviate the need for global optimisers in some cases.
 
 \subsection{Gradient-based methods}
 
-For a position $x$ in the configurational space, the internal energy of a system can be expanded into a Taylor series:
+The internal energy of a system at a given point on the energy surface can be expanded into a Taylor series:
 \begin{equation}
-  U(x+\delta x) = U(x) + \frac{\partial U}{\partial x} \delta x + \frac{1}{2!} \frac{\partial ^2 U}{\partial x^2}(\delta x)^2 \cdots
+\label{eq:taylor}
+  U(\mathbf{x}+\delta \mathbf{x}) = U(\mathbf{x}) + \frac{\partial U}{\partial \mathbf{x}} \delta \mathbf{x} + \frac{1}{2!} \frac{\partial ^2 U}{\partial \mathbf{x}^2}(\delta \mathbf{x})^2 \cdots
 \end{equation}
 
-Truncating this equation at the first derivative yields the energy of a configuration $U(x)$, and a derivative vector $g$, indicating directions in the configuration space in which the energy reduces.
+Truncating this equation at the second term yields the energy at a given point on the energy surface $U(\mathbf{x})$, and a derivative vector $g$, corresponding to the direction on the energy surface where $U(\mathbf{x})$ increases most rapidly.
 
 \subsubsection{Steepest descent}
-In this method, the position $x$ is updated by:
+In this method, the position in the energy space $\mathbf{x}$ is iteratively updated by:
 \begin{equation}
-x_{p+1} = x_p + g^p\delta
+\mathbf{x}_{p+1} = \mathbf{x}_p + g^p\delta
 \end{equation}
 
-with $\delta$ typically being determined using line searches.
-The gradient matrix is then recalculated for the new position, and the procecure is repeated until convergence is achieved.
-
-Whilst each step in this method is inexpensive computationally, there is no theoretical limit to how many steps will be required to achieve convergence.
-This method also requires recalculation of the gradient vector at each step, and cannot make use of information from previous iterations.
+with an appropriate value of $\delta$ informed by line searches.
+The procedure is repeated until some convergence criteria is met.
+Whilst calculating the next step is relatively inexpensive, there is no theoretical limit to the number iterations required for convergence.
+Furthermore, as for each $\mathbf{x}_p$, $U(\mathbf{x_p})$ must be evaluated, this can be an expensive procedure if evaluating $U(\mathbf{x_p})$ is costly, i.e. for systems with large numbers of species.
+This technique also recalculates the gradient vector each step, making no use of information from prior iterations.
 
 \subsubsection{Conjugate gradients}
-The conjugate gradients method optimizes in a single dimension on each step, with subsequent steps taken orthogonal to past search vectors.
-This converges in $N$ steps for an $N$ dimensional quadratic search space.
+The conjugate gradients method optimises in $g^0$ on the first iteration, running until a minimum along that vector is found.
+$g^1$ is then evaluated and the minimisation procedure is repeated. 
+Each new vector is constrained to being orthogonal to all previous search vectors.
+If $\mathbf{x}_0$ is sufficiently close to a minima, the energy surface in the search region will be approximately quadratic. 
+In this case, the conjugate gradients method converges in $N$ steps for an $N$ dimensional energy surface. 
+Put another way, it converges in $3N$ steps for a $N$ body system in 3D space.
 
-Expansion of the Taylor series to include a second derivative term (and thus, a Hessian matrix $H$), allows a system to be solved by the Newton-Raphson method by:
-$$
-\Delta x = -H^{-1}g
-$$
-
-This is exact if close to the minima, although approximate with increasing distance from the minima.
-Employing the steepest descent approach initially, followed by the conjugate gradient methods offers both rapid and bounded convergence to a local minima.
+\subsubsection{Newton-Raphson Method}
+The Newton-Raphson method is a widely used second order minimiser.
+Rather than truncating the Taylor expansion of the energy surface (Equation \ref{eq:taylor}) at the first derivative, as in the steepest descent and conjugate gradient methods, an additional second derivative term is included (yielding a Hessian matrix $H$).
 
 
-As numerical techniques are being utilised, with ionic coordinates and energies being updated iteratively, it is possible to solve to a degree of precision far beyond that which is either experimentally measurable or remotely useful.
-As such, simulations are typically deemed to have converged when the change in energy and ionic coordinates between iterations is below a given threshold value.
-The default convergence criteria in GULP are used in this study, with any results presented having converged to at least that degree of precision.
+\begin{equation}
+\Delta \mathbf{x}_p = -H^{-1}g^p
+\end{equation}
+\begin{equation}
+\mathbf{x}_{p+1} = \mathbf{x}_p + \Delta \mathbf{x}_p
+\end{equation}
+
+As with the conjugate gradients method, an initial condition near the minima will guarantee convergence, in this case in a single iteration.
+That said, outside the quadratic region near minima, the Newton-Raphson method can be numerically unstable.
+Furthermore, calculating and inverting the Hessian matrix is a highly expensive.
+As such, a BFGS optimiser\cite{Shanno1970} is typically used to update the Hessian between iterations, only explicitly recalculating it only when a criterion indicating the updated Hessian is likely inaccurate is met.
+This is considerably cheaper than a Newton-Raphson method on its own.
+
+Where numerical stability is an issue, conjugate gradients or a steepest descent can be used for an initial pass until close to the minima.
+The BFGS optimiser can then be used once in a more stable region of the configuration space.
+
+As it is possible to run optimisers until converged to an arbitrary degree of precision (far beyond chemical accuracy), sensible convergence criteria are required to prevent excessively long calculations.
+Unless otherwise stated, the default convergence criteria in GULP and LAMMPS are used in this report, with any results presented having converged to at least the degree of precision reported.
 
 \newpage
 \begin{figure}[h]
