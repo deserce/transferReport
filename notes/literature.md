@@ -120,12 +120,7 @@ Li4Mn2O5
 - Too covalent, O not redox active
 - Ordering expected to be important
 
-### Local ordering
 
-- Purely random distributions give unphysical states 
-  - As example, in a system with 1 in 6 O vacancies, there would be $(1/6)^6 = 21$ per million sites with 6 surrounding O vacancies. Binomial distribution
-  - The energetics of this are of course infeasible, demonstrating there is at least some local ordering
-  - Maybe discuss this in the computational methods section
 
 
 
