@@ -261,44 +261,40 @@ Whilst the atomistic modelling techniques already discussed are appliciable in t
 An overview of defect types, as well as the formalisms used in defining defect formation, is given in the appendix.
 
 \subsection{Mott-Littleton method}
-The Mott-Littleton method allows for the modelling of a defect, or multiple defects, at infinite dilution.
-This technique is used extensively in literature\cite{Fisher2008} and offers good agreement with experimental data.
+The Mott-Littleton method allows for the modelling of one or more defects at infinite dilution.
+The perfect crystal structure is first solved using the techniques listed in Section \ref{sec:minimization}, and the converged result used as an initial condition.
+Defects are then introduced the system is once more allowed to relax.
+The difference in energy of the systems is directly attributable to the perturbation introduced, and is therefore the energy required to form the defect introduced.
+Use of a small periodic system would repeat the defect and be equivalent to simulating the defect at high concentration.
 
-Using a relaxed perfect crystal structure as an initial condition, defect(s) are introduced as a perturbation to this system and the system is once more allowed to relax.
-The difference in energy of the two systems can be directly attributed to the presence of the defect, and is thus the energy required to allow formation of that defect.
+Instead, the system is divided into three concentric spherical regions, as illustrated in Figure \ref{fig:mott}.
 As the introduction of a single point defect removes symmetry from the system, a periodic approach is not appropriate, nor is the consideration of an infinite system.
-
-Instead, concentric spherical regions centred about the defect are defined, and only species which fall within these regions are modelled.
-A schematic illustrating these regions is shown in Figure \ref{fig:mott}. 
 
 \begin{figure}
   \centering
-  \includegraphics[width = 0.9\linewidth]{figures/Mott-Littleton}
-  \caption[Schematic illustrating the regions employed in the Mott-Littleton method.]{Schematic illustrating the regions employed in the Mott-Littleton method. Ions in region I are modelled explicitly due to their proximity to the defect. Region IIb ions are modelled using a continuum method whereas those in region IIa use a harmonic relationship which smooths the transition from explicit to implicit modelling.}
+  \includegraphics[width = \linewidth]{figures/mott/mott}
+  \caption[Mott-Littleton method schematic]{Schematic illustrating the Mott-Littleton method. Ions in region I (green) are modelled explicitly using potential forms due to their proximity to the defect (square). Region IIb ions (white) are modelled using a continuum method. Region IIa ions (green) use a harmonic relationship, smoothing the transition from explicit (Region I) to implicit (Region IIb) modelling.}
   \label{fig:mott}
 \end{figure}
 
 Region I contains those ions closest to the defect.
-Their proximity to the defect means it is not feasible to accurately model the impact of the defect on these species with any simple approximations, so they are instead modelled explicitly using interatomic potentials and relaxed using appropriate numerical methods.
-Whilst numerical techniques such as the conjugate gradient method can be used to efficiently relax the ions in this region, the 1000 ions which typically constitute region I each with 3 spatial dimensions to be relaxed in yield a 3000 dimensional system of equations to be minimised.
-The computational cost is of $O(n!)$ for an n ion system, and so minimising radius to reduce n is highly desirable.
+Their close proximity to the defect means no simple approximation can be made to predict the defects impact.
+As such, the relaxation of these species is modelled explicitly, using potential models and gradient descent techniques.
 
-Region II is composed of ions whose energy is not calculated explicitly, but instead through analytical techniques.
-It is further subdivided into regions IIa and IIb.
-Region IIb, the outermost region, is too distant to be impacted by short range interactions with the defect.
-As such, the defect interactions are purely coulombic, and can be modelled implicitly using a dielectric continuum.
-The magnitude of the force experienced is a function of the net charge of the defect as well as the distance from the defect center.
+Ions in Region II are sufficiently far from the defect to be reasonably approximated using analytical methods.
+Region IIb, the outermost region, is sufficiently far from the defect to only impacted by Coulombic interactions with the defect.
+These are modelled using a dielectric continuum, the magnitude of the force experienced, and corresponding energy change, being a function of the net charge of the defect and the distance from the defect centre.
 
 
-Ions in region IIa are modelled as having harmonic interactions, with an energy cost associated with displacing region IIa species from their location in the perfect system.
-This region serves to smooth the transition between the explicitly modelled region I and the implicitly modelled region IIb, preventing discontinuities in the energy profile.
+Ions in region IIa are modelled as having harmonic interactions with the defect, having an energy cost associated with their displacement from their initial position.
+This region smooths the transition between the explicit modelling regime in region I and the implicit modelling regime in region IIb, avoiding discontinuities in the resultant energy surface.
 
-The success of this technique relies upon selection of radii such that discontinuities do not occur between regions.
-Selection of radii intervals greater than the cut-off values imposed on short range interatomic potentials can achieve this.
-In other words, region IIa should be large enough such that no species in region I have any short range interactions with species in region IIb.
+The success of this technique relies upon selection of radii for the regions such that discontinuities do not occur between regions.
+Selection of radii intervals greater than the cut-off values imposed on short range interatomic potentials typically achieves this.
+That is to say, region IIa should be large enough such that no species in region I have any short range interactions with species in region IIb.
 
-It is also important that convergence is achieved, so the radius of region I and region IIa should be increased independently until the defect energy observed converges.
-Given the rapid increase in computational cost associated with increasing region sizes (especially region I), the radii selected should be as small as possible whilst not sacrificing accuracy.
+Further, the computational cost of relaxing region I is approximately of {\color{red}$O(r^2!)$}.
+As such, a radius for region I should be chosen such that the resultant defect energy does not change with increasing radius, whilst being as small as possible to reduce simulation time.
 
 \subsection{Supercell approach}
 Supercell methods simply take a large supercell of the repeating crystal unit and add a defect to this supercell.
