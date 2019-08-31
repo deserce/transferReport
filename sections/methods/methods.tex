@@ -255,8 +255,31 @@ These defects usually exist in small quantities, but their presence can drastica
 As an example, the doping of silicon with boron or phosphorous gives rise to p- and n-type semiconductors respectively.
 The presence of excess electrons or electron holes is the basis of the main operating principle of transistors.
 Defects strongly influence Li-ion migration rates through electrode materials and are therefore of interest for characterising battery materials.
+\newpage
+\begin{figure}[h]
+  \centering
+  \includegraphics[width = 0.55\linewidth]{figures/pbc/pbc}
+  \caption[Periodic boundary conditions schematic]{Schematic of a simulation using periodic boundary conditions.}
+  \label{fig:periodic}
+\end{figure}
 
 Whilst the atomistic modelling techniques already discussed are appliciable in the generic case (as can be demonstrated by their suitability when applied to a P1 symmetry group), they have thus far only been discussed in the context of bulk systems.
+\section{Periodic Boundary Conditions}
+At the scale of atomistic modelling, the materials being studied effectively stretch out infinitely relative to the scale of short-range and Coulombic interactions.
+It is of course not feasible to model these systems as such, so boundary conditions which closely approximate this are needed.
+
+Periodic boundary conditions (Figure \ref{fig:periodic}) take the contents of the simulation, and create copies of it at each boundary.
+When calculating interactions, species in the ``main'' simulation are able to interact with other species in the main simulation, and those in the repeated simulations, subject to cutoff criteria applied to said interactions.
+As the system is infinitely repeating, each copy of an atom must by definition be experiencing the same net force as each of its copies.
+As such, it is sufficient to calculate the forces for a single cell only.
+
+Another important of periodic boundary conditions is that atoms which would leave the boundaries of the simulation in the next iteration or time-step are reintroduced at the opposite boundary.
+For Molecular Dynamics simulations (Section \ref{sec:MD}), this allows for atoms to move freely rather than being constrained to certain positions in order to keep a constant number of bodies in the simulation.
+This is particularly useful when studying diffusion, allowing atoms near simulation boundaries to hop to all adjacent sites.
+
+
+\newpage
+
 
 An overview of defect types, as well as the formalisms used in defining defect formation, is given in the appendix.
 
