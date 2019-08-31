@@ -249,12 +249,6 @@ As numerical techniques are being utilised, with ionic coordinates and energies 
 As such, simulations are typically deemed to have converged when the change in energy and ionic coordinates between iterations is below a given threshold value.
 The default convergence criteria in GULP are used in this study, with any results presented having converged to at least that degree of precision.
 
-\section{Point defects}
-The techniques above are well suited for handling perfect systems, but fail to account for the numerous deviations from perfect crystal structures which occur in real systems.
-These defects usually exist in small quantities, but their presence can drastically impact the properties of the material.
-As an example, the doping of silicon with boron or phosphorous gives rise to p- and n-type semiconductors respectively.
-The presence of excess electrons or electron holes is the basis of the main operating principle of transistors.
-Defects strongly influence Li-ion migration rates through electrode materials and are therefore of interest for characterising battery materials.
 \newpage
 \begin{figure}[h]
   \centering
@@ -263,7 +257,6 @@ Defects strongly influence Li-ion migration rates through electrode materials an
   \label{fig:periodic}
 \end{figure}
 
-Whilst the atomistic modelling techniques already discussed are appliciable in the generic case (as can be demonstrated by their suitability when applied to a P1 symmetry group), they have thus far only been discussed in the context of bulk systems.
 \section{Periodic Boundary Conditions}
 At the scale of atomistic modelling, the materials being studied effectively stretch out infinitely relative to the scale of short-range and Coulombic interactions.
 It is of course not feasible to model these systems as such, so boundary conditions which closely approximate this are needed.
@@ -280,6 +273,11 @@ This is particularly useful when studying diffusion, allowing atoms near simulat
 
 \newpage
 
+
+\section{Point defects}
+Whilst the atomistic modelling techniques already discussed are applicable in the generic case (as can be demonstrated by their suitability when applied to a P1 symmetry group), they have thus far only been discussed in the context of bulk systems.
+In solid-state materials, it is often the presence of defects which gives rise to properties of interest, most likely in concentrations far too low to be studied in a periodic system.
+As an example, the energy associated with the formation and migration of \ce{Li+} ions in candidate electrode materials is a key metric of their likely performance.
 
 An overview of defect types, as well as the formalisms used in defining defect formation, is given in the appendix.
 
