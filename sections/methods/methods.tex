@@ -5,7 +5,7 @@ Not only can computational methods reduce experimental load by identifying promi
 
 This study primarily uses potentials-based minimisation techniques and Molecular Dynamics (MD), implemented in GULP \cite{Gale2003} and LAMMPS \cite{StevePlimton1995} respectively.
 In this chapter, the fundamental concepts and mathematics underpinning these techniques are presented.
-Furthermore, an overview of classical interatomic potential fitting strategies are presented to contrast to the work presented herein. %TODO chapter reference
+Furthermore, {\color{red}an overview of classical interatomic potential fitting strategies are presented to contrast to the work presented herein.} %TODO chapter reference
 This overview is brief and focuses primarily on techniques used in this report, as more comprehensive reviews are available elsewhere. \cite{Gale2003, Jensen2007, Catlow2013}
 Some work presented in this section is derived from the MRes report which led to this project, as the fundamental equations underpinning computational methods remain the same.
 
@@ -356,7 +356,7 @@ That is to say, region IIa should be large enough such that no species in region
 Further, the computational cost of relaxing region I is approximately of {\color{red}$O(r^2!)$}.
 As such, a radius for region I should be chosen such that the resultant defect energy does not change with increasing radius, whilst being as small as possible to reduce simulation time.
 
-\subsection{Supercell approach} %TODO Rewrite, clarify usefulness in MD
+\subsection{{\color{red}Supercell approach}} %TODO Rewrite, clarify usefulness in MD
 Supercell methods simply take a large supercell of the repeating crystal unit and add a defect to this supercell.
 The cell is then modelled as before, with the supercell repeating ``infinitely''.
 This approach is limited in that in order to model low defect concentrations, a huge supercell is required.
@@ -366,13 +366,13 @@ As the supercell method differs little from the bulk method beyond initialisatio
 
 The primary limitation of this method is that the supercell must be large enough for convergence to occur, particularly when modelling highly charged species whose Coulombic interactions are significant at a large range.
 
-\subsubsection{Symmetry optimisation} %TODO rewrite
+\subsubsection{{\color{red}Symmetry optimisation}} %TODO rewrite
 By their nature, crystal structures contain a number of symmetry elements.
 In many cases, a number of interactions will be equivalent, enabling the number of computationally expensive operations to be reduced by simply treating some interactions as being equivalent and calculating them once rather than several times.
 The addition of defects to a system reduces the overall symmetry of the structure, but there often still exist some symmetry elements.
 Symmetry optimised algorithms are automatically implemented where appropriate in GULP.
 
-\section{Molecular Dynamics (MD)}
+\section{{\color{red}Molecular Dynamics (MD)}}
 \label{sec:MD}
 Energy minimisation techniques are used to study systems at zero Kelvin, 
 
@@ -396,7 +396,7 @@ Calculating diffusion coefficients and activation barriers
 
 
 \newpage
-\section{Potential fitting}
+\section{{\color{red}Potential fitting}}
 In order for simulations to provide valuable insights into the material being studies, the potential forms used closely approximate the true energy surface.
 Whilst some universal forcefields are available, the phenomenon of interest in cathode materials cannot be adequately replicated with these.
 As such, unless some potentials developed for the same or similar systems is already available, some new potentials must be derived for the system or class of systems being studied.
