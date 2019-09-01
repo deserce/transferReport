@@ -80,10 +80,10 @@ def draw():
     text("Anode", rw/2 - electrodew/2, rh/2 + wireh/2);
     text("Graphite", rw/2 - electrodew/2, rh/2 + wireh*5/4);
     
-    fill(200)
+    fill(184, 115, 51)
     rect(rw/2-wireo-platew/2,-rh/2,platew, rh*0.95)
     
-    fill(184, 115, 51)
+    fill(200)
     rect(-(rw/2-wireo+platew/2),-rh/2,platew, rh*0.95)
     
     fill(0)
