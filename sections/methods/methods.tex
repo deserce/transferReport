@@ -17,8 +17,6 @@ In contrast, atomistic techniques seek to express the forces between atoms as a 
 
 \section{Potential models}
 All atoms in a system, and their current position, momentum, and oxidation state, give rise to highly complex interactions contributing to the internal energy of the system, which must be enumerated if a perfect atomistic model is to be developed.
-%In practice, the complexity of such a model would be too expensive to compute, and infeasible to conceive of a rational physical basis for terms consisting of high numbers of interactions 
-%(An equation encompassing all forces arising from 10-body interactions is not easy to determine for example).
 
 Potential models are used to determine the forces in such systems by treating these as a series of discrete isolated interactions which sum to the same overall effect. 
 The internal energy of the system can then be given as the sum from one to n-body terms as such:\cite{Gale2003}
@@ -126,15 +124,6 @@ A commonly used three-body potential is the harmonic model:
 \end{equation}
 
 In this model, an equilibrium angle is assigned to a bond pair, and any deviations from this angle increase the potential energy of the system.
-
-%\subsection{Lattice energy}
-%The lattice energy is simply the energy of formation of a given lattice.
-%As temperature is not explicitly considered in GULP, the lattice energy is simply the internal energy.
-%Substituting Equations \ref{eq:two-body} to \ref{eq:threebody} into Equation \ref{eq:taylor} yields the following:
-%\begin{equation}
-%U = \overbrace{\sum_{ij} \frac{q_iq_j}{r_{ij}}}^\text{Coulombic} + \overbrace{\sum_{ij} \Phi_{ij}(r_{ij})}^\text{Short range} + \overbrace{\sum_{ijk} U_{ijk}(r_{ijk})}^\text{Three-body terms}
-%\end{equation}
-
 
 \subsection{Polarizability}
 The electron distribution surrounding an atom or ion will shift according to the local environment in which it exists, effectively allowing the internuclear and electronic interactions to partially decouple.
