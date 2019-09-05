@@ -357,15 +357,12 @@ That is to say, region IIa should be large enough such that no species in region
 Further, the computational cost of relaxing region I is approximately of {\color{red}$O(r^2!)$}.
 As such, a radius for region I should be chosen such that the resultant defect energy does not change with increasing radius, whilst being as small as possible to reduce simulation time.
 
-\subsection{{\color{red}Supercell approach}} %TODO Rewrite, clarify usefulness in MD
+\subsection{Supercell approach}  
 Supercell methods simply take a large supercell of the repeating crystal unit and add a defect to this supercell.
 The cell is then modelled as before, with the supercell repeating ``infinitely''.
 This approach is limited in that in order to model low defect concentrations, a huge supercell is required.
 
-The supercell approach is therefore more suited to the calculation of systems with high defect concentrations.
-As the supercell method differs little from the bulk method beyond initialisation methods, it will not be discussed at length.
-
-The primary limitation of this method is that the supercell must be large enough for convergence to occur, particularly when modelling highly charged species whose Coulombic interactions are significant at a large range.
+As such, this method is generally instead only applied in Molecular Dynamics (Section \ref{sec:MD}), where a large concentration of Li vacancies are added in order to allow diffusion events to be observed.
 
 \subsubsection{{\color{red}Symmetry optimisation}} %TODO rewrite
 By their nature, crystal structures contain a number of symmetry elements.
