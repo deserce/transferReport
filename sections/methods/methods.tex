@@ -372,76 +372,105 @@ Symmetry optimised algorithms are automatically implemented where appropriate in
 
 \section{{\color{red}Molecular dynamics (MD)}}
 \label{sec:MD}
-Energy minimisation techniques are used to study systems at zero Kelvin, 
+Energy minimisation techniques are used to study systems at zero Kelvin.
+As such, phenomenon arising only where ions have thermal energy cannot be studied with these techniques.
 
-\subsection{Verlet algorithm}
+Molecular dynamics (MD) can overcome this issue by assigning each particle a velocity (usually subject to a Boltzmann distribution) and allows the system to evolve over time subject to some imposed constraints.
+This in effect allows for phenomenon arising from thermal effects to be studied,
+assigns and tracks kinetic energy of atoms, allowing the system to evolve over time.
 
-\subsection{Ensembles}
-
-\subsection{Procedure}
-\begin{itemize}
-	\item Introduction of defects
-	\item Structural optimization
-	\item Initilisation
-	\item Equilibrition
-	\item Time stepping
-\end{itemize}
-\subsection{Analysis}
-\paragraph{MSD}
-Calculating diffusion coefficients and activation barriers
-\paragraph{Trajectory Visualisation}
-\paragraph{Time averaged densities}
-
-
-\newpage
-\section{{\color{red}Potential fitting}}
-In order for simulations to provide valuable insights into the material being studies, the potential forms used closely approximate the true energy surface.
-Whilst some universal forcefields are available, the phenomenon of interest in cathode materials cannot be adequately replicated with these.
-As such, unless some potentials developed for the same or similar systems is already available, some new potentials must be derived for the system or class of systems being studied.
-
-\subsection{Basis}
-In order to fit a potential, some prior information about the system must be available. 
-If experimental data is available for material of interest, it is possible to fit potentials to this.
-Crystallographic data provides atomic coordinates and unit cell parameters which, if replicated by a given set of potential, serve as a good metric of performance.
-Of course, the number of degrees of freedom associated with a typical potential set is large, so crystallographic data may not be sufficient to yield a unique potential set.
-Dielectric constants, elastic constants and other easily measured parameters may also serve as a basis for fitting.
-
-In the absence of experimental data, such as in screening studies, \textit{ab initio} studies can be used as a substitute. 
-In this case, it is possible to fit directly to the potential energy surface the \textit{ab initio} yields.
-
-\subsection{{\color{red}Selection of potential form}}
-The selection of potential forms will influence the quality of fit, with more complex potential forms able to more closely replicate the energy surface of the basis information.
-
-
-\subsection{Metrics}
-In order to distinguish between sets of potential parameters, an appropriate metric must be selected.
-Some commonly used metrics to compare the basis information and calculated structure:
-\begin{labeling}{\textbf{Atomic displacements}}
-	\item [\textbf{Lattice parameters}] The length of, and angles between, the unit cell basis vectors
-	\item [\textbf{Atomic displacements}] Cartesian or fractional displacement of each atom
-	\item [\textbf{Forces}] The magnitude and direction of the net force on each atom
-\end{labeling}
-Some or all of these metrics can be used, depending on the quality and nature of the basis information.
-For example, while forces can be used as a metric for fitting using crystallographic data as a basis, all forces will be zero in this case, so use of \textit{ab initio} data may be preferable for this metric, allowing the potential to be fit to a wider range of interatomic separations.
-
-A generic cost function can then be defined as:
+The equation which fundamentally governs MD simulations is simply Newtons law of motion:
 \begin{equation}
-	F = \sum_{n=1}^{N_{obs}}w_i(f_i^{obs} - f_i^{calc})^{n_i}
+	\mathbf{F} = m\mathbf{a}
 \end{equation}
 
-Where $w_i$ is a weighting term, increasing the bias of the fit towards matching certain observables.
-$n_i$ can be set as 1 to give a linear fit, where the cost function is simply the sum of the error of the observables, or 2, giving the sum square of errors which more heavily penalises large errors in a given observation.
+As the force each particle is a function of the positions of each particle in space, which in turn evolves as a function of time, it is necessary to solve this equation repeatedly.
 
-\subsection{Search algorithms}
-A number of pre-existing strategies for searching the parameter space (analogous to the configuration space discussed in Section \ref{sec:minimization}).
-Many of the techniques discussed in that section can also be applied to this problem.
-Of course, unlike in energy minimisation simulations where a reasonable initial condition can be determined, it is often the case in potential fitting where no prior information is available, nor is it possible to arrive at an initial condition intuitively.
-In such cases, local optimisers, which are reliant on the path of steepest descent leading to the global minima if the global minima is to be obtained, may not be appropriate.
-Global optimisers, such as genetic algorithms and Monte-Carlo techniques may be appropriate in these conditions.
-Pairing global optimisers (to broadly sample the parameter space), with local optimisers (to improve on the quality of parameters yielded by the global optimiser) is one way of overcoming the limits of local optimisers while limiting the cost of global optimisers.
+The force acting on each particle is assumed to be constant for some small period of time $\Delta t$.
+With this assumption, the position and velocity of each particle at time $t+\Delta t$ can using an Euler integration scheme by:
+\newpage
+\subsection{Integration schemes}
+The Taylor expansion is a technique which allows a function to be expressed as a infinite sum of terms calculated from that functions derivatives at a given point:
+\begin{equation}
+f(t) = f(t_0 + \Delta t) = \sum_{n=0}^\infty \frac{1}{n!}f^{(n)}(t_0)\Delta t^n
+\end{equation}
+Applying this to the position of atoms in the system as a function of time yields:
+\begin{align}
+\mathbf{x}(t_0 + \Delta t) &= &x(t_0) \; &+ &x'(t_0)\Delta t \;&+& &\frac{1}{2}x''(t_0)\Delta t^2 \;&+& \frac{1}{6}x'''(t_0)\Delta t^3& +\;\dots\\
+                           &= &x_{t_0} \; &+  &v_{t_0}\Delta t \;&+&   &\frac{1}{2}a_{t_0}\Delta t^2     \;&+& \frac{1}{6}j_{t_0}\Delta t^3& +\;\dots
+\end{align}
+Truncating this expansion at different terms yields a series of potential equations which can be solved, the discarded terms constituting the error in each step.
+The lowest order discarded term will determine the magnitude of the error, with ``simpler'' expansions requiring a correspondingly smaller $\Delta t$ in order to reduce the magnitude of the error to an acceptable value.
 
-A limitation of all these approaches is that unless the selected potential form is such that all the basis data can be perfectly and uniquely replicated by a given parameter set, it is expected that the cost function surface will contain numerous local minima.
-This is especially likely where experimental data is being used, introducing some degree of random error to the basis information.
+\paragraph{Euler integration}
+Truncating the Taylor expansion of the position and velocity of particles as a function of time at the first term gives an Euler integration scheme:
+\begin{equation}
+	\mathbf{v}_{t +\Delta t} = \mathbf{v}_t + \frac{d\mathbf{v}}{dt}\Delta t = \mathbf{v}_t + \mathbf{a}_t\Delta t +\Theta(\Delta t^2)
+	\end{equation}
+\begin{equation}
+	\mathbf{x}_{t +\Delta t} = \mathbf{x}_t + \frac{d\mathbf{x}}{dt}\Delta t = \mathbf{x}_t + \mathbf{v}_t\Delta t +\Theta(\Delta t^2)
+\end{equation}
+With $\Theta$ representing the error, the brackets indicating the relationship between the size of the error and the choice of time step.
+Unfortunately, the $\Theta(\Delta t^2)$ error terms in this integration scheme require a prohibitively small $\Delta t$ to be used for all but the simplest of systems. 
+
+\paragraph{Verlet algorithm} A commonly used integration scheme, the Verlet algorithm, instead truncates the Taylor expansion of the atom positions at the third derivative:
+\begin{equation}
+\mathbf{x}_{t + \Delta t} = x_{t} \; +  v_{t}\Delta t \;+ \frac{1}{2}a_{t}\Delta t^2     \;+ \frac{1}{6}j_{t}\Delta t^3 + \Theta(\Delta t^4)
+\label{eq:verlet1}
+\end{equation}
+with $j$ indicating the ``jerk'', or rate of change of acceleration of the function.
+As the rate of change of acceleration is related to the rate of change of force, the jerk term is not readily calculated.
+The Verlet algorithm overcomes this issue by using information known about the system in previous time steps $t_{t}$:
+\begin{equation}
+\mathbf{x}_{t - \Delta t} = x_{t} \; -  v_{t}\Delta t \;+ \frac{1}{2}a_{t}\Delta t^2     \;+ \frac{1}{6}j_{t}\Delta t^3 + \Theta(\Delta t^4)
+\label{eq:verlet2}
+\end{equation}
+
+Summing equations \ref{eq:verlet1} and \ref{eq:verlet2} yields:
+\begin{align}
+\mathbf{x}_{t + \Delta t} + \mathbf{x}_{t - \Delta t} &= 2x_{t} + a_{t}\Delta t^2 + \Theta(\Delta t^4)\\
+\mathbf{x}_{t + \Delta t} &= 2x_{t} + a_{t}\Delta t^2 -  \mathbf{x}_{t - \Delta t} + \Theta(\Delta t^4)
+\label{eq:verlet}
+\end{align}
+
+\noindent allowing for the positions of particles to be calculated at the next time step.
+Interestingly, this integration scheme not only obviates determining the rate of change of acceleration of particles, it also skips the calculation of the velocity term.
+The Verlet integrator is also time reversible and symplectic (preserves energy), making it suitable for the dynamic systems encountered in MD.
+Of course, in order to calculate the kinetic energy of the system, knowledge of particle velocities is needed.
+Subtraction of equation \ref{eq:verlet2} from \ref{eq:verlet2} yields:
+\begin{equation}
+	v_{t} = \frac{x_{t+\Delta t} - x_{t-\Delta t}}{2\Delta t} + \Theta(\Delta t^2)
+\end{equation}
+giving the Verlet velocity.
+As with the $\Theta(\Delta t^2)$ term being too large for calculating the position with a Euler integration scheme, the error term here requires prohibitively small time steps for complex systems.
+Velocities are to determine the temperature of the system, which in turn must be a conserved quantity in certain ensembles. %TODO
+
+\paragraph{Velocity Verlet} The Velocity-Verlet algorithm explicitly calculates velocities at half time steps:
+\begin{align}
+	v_{t +\frac{1}{2}\Delta t} &= \frac{x_{t+\Delta t} - x_t}{\Delta t}\\[10pt]
+	&= v_t + \frac{1}{2}a_t\Delta t + \Theta(\Delta t^3)
+\end{align}
+This half-velocity, the predicted velocity at the time half way between the current and next time step, is then used to update the current positions of ions in the system as in a Euler scheme:
+\begin{equation}
+	x_{t+\Delta t} = x_t + v_{t +\frac{1}{2}\Delta t}\Delta t + \Theta(\Delta t^4)
+\end{equation}
+
+\noindent The velocity at the next time step is then calculated by:
+\begin{equation}
+	v_{t + \Delta t} = v_{t +\frac{1}{2}\Delta t} + \frac{1}{2}a_{t+\Delta t}\Delta t + \Theta(\Delta t^3)
+\end{equation}
+
+Explicitly calculating the velocities in this manner maintains the order of the error in the particle positions, whilst increasing the order of the error in the velocity terms.
+
+It is worth noting that none of the integration schemes are ``self-starting'', that is to say, they are reliant on some initial velocities being known in order to be used.
+For a system containing $N$ bodies, velocities will be randomly assigned to give the system a desired initial temperature subject to:
+\begin{equation}
+	\sum^N_{i=1}m_i\mathbf{v}_i^2 = 3Nk_bT
+\end{equation}
+whilst ensuring the system has no net momentum in any vector:
+\begin{equation}
+	\sum^N_{i=1}m_i\mathbf{v} = 0
+\end{equation}
 
 One technique currently in development by the author, in collaboration with Dr. Benjamin Morgan and Dr. Lucy Morgan, is to apply a Bayesian approach to potential fitting.
 Rather than 
