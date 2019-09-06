@@ -422,7 +422,7 @@ with $j$ indicating the ``jerk'', or rate of change of acceleration of the funct
 As the rate of change of acceleration is related to the rate of change of force, the jerk term is not readily calculated.
 The Verlet algorithm overcomes this issue by using information known about the system in previous time steps $t_{t}$:
 \begin{equation}
-\mathbf{x}_{t - \Delta t} = x_{t} \; -  v_{t}\Delta t \;+ \frac{1}{2}a_{t}\Delta t^2     \;+ \frac{1}{6}j_{t}\Delta t^3 + \Theta(\Delta t^4)
+\mathbf{x}_{t - \Delta t} = x_{t} \; -  v_{t}\Delta t \;+ \frac{1}{2}a_{t}\Delta t^2     \;- \frac{1}{6}j_{t}\Delta t^3 + \Theta(\Delta t^4)
 \label{eq:verlet2}
 \end{equation}
 
