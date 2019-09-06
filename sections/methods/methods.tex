@@ -502,6 +502,35 @@ whilst ensuring the system has no net momentum in any vector:
 	\sum^N_{i=1}m_i\mathbf{v} = 0
 \end{equation}
 
+While these velocities ensure that the desired kinetic energy is present in the initial steps of the simulation, it does nothing to prevent the assignment of unphysical velocities.
+In order to prevent this biasing the results obtained, the simulation is allowed to run until a pseudo-steady state is reached. 
+The number of steps necessary to obtain this is strongly case dependent, but can usually be visually identified in the data and discarded manually if necessary.
+
+\subsection{Ensembles}
+An ensemble is the set of all accessible states a simulation might access given sufficient time, subject to some constraints.
+Selection of appropriate constraints enables a series of simulations to probe a system of interest across a range of specified conditions.
+\paragraph{Canonical (NVT) ensemble}
+The canonical ensemble keeps constant the number of bodies (N), the volume (V) of the simulation cell, and the temperature of the simulation (calculated by Equation \ref{eq:boltz}).
+Whilst the number of bodies and cell volume are readily preserved, the internal energy and thus temperature may change over time due to rounding errors in the integration method.
+
+\paragraph{Isobaric-isothermal (NPT) ensemble}
+The Isobaric-isothermal ensemble keeps constant the number of bodies (N), the pressure (P) of the simulation cell, and the temperature of the simulation (calculated by Equation \ref{eq:boltz}).
+In this instance, both the pressure and temperature of the system need adjusting over time.
+
+A naiv{\"e} approach to maintain temperature is to calculate the temperature at each time step, and scale the velocities of each particle accordingly.
+This technique prevents any temporary deviations in temperature, which is an unrealistic constraints.
+
+A more realistic approach is to use a thermostat, coupling the system to a heat sink at the target temperature.
+The rate of change of instantaneous velocity is then given by:
+\begin{equation}
+\frac{dT_{t}}{dt} = \frac{1}{\tau}(T_{sink} - T_t)
+\end{equation}
+where $\tau$ is in effect a gain term for a proportional controller attached to the system.
+Similarly, the system pressure can be controlled by scaling the atomic coordinates of each particle subject to:
+\begin{equation}
+\frac{dP_{t}}{dt} = \frac{1}{\tau}(P_{sink} - P_t)
+\end{equation}
+\newpage
 %\section{{\color{red}Potential fitting}}
 %In order for simulations to provide valuable insights into the material being studies, the potential forms used closely approximate the true energy surface.
 %Whilst some universal forcefields are available, the phenomenon of interest in cathode materials cannot be adequately replicated with these.
