@@ -460,37 +460,48 @@ This half-velocity, the predicted velocity at the time half way between the curr
 	v_{t + \Delta t} = v_{t +\frac{1}{2}\Delta t} + \frac{1}{2}a_{t+\Delta t}\Delta t + \Theta(\Delta t^3)
 \end{equation}
 
-Explicitly calculating the velocities in this manner maintains the order of the error in the particle positions, whilst increasing the order of the error in the velocity terms.
+\noindent Explicitly calculating the velocities in this manner maintains the order of the error in the particle positions, whilst increasing the order of the error in the velocity terms.
 
-It is worth noting that none of the integration schemes are ``self-starting'', that is to say, they are reliant on some initial velocities being known in order to be used.
+\subsection{Timestepping and equilibriation}
+The choice of time step will strongly influence the output of an MD simulation. 
+Selection of an excessively small $\Delta t$ will result in simulations being too expensive to observe phenomenon which occur over large time periods such as bulk diffusion.
+Counter to this, too large a $\Delta t$ can allow for atoms to occupy unphysical states.
+For example, as the Velocity Verlet algorithm only evaluates forces at $x_{t}$ and $x_{t +\Delta t}$,  a particle with low kinetic energy may skip over an large energy barrier present at $x_{t +\frac{1}{2}\Delta t}$ if allowed to move too great a distance between time steps.
+Typically, selecting time steps an order of magnitude below the period of atomic vibrations (\SIrange{0.1}{1}{\femto\second}) prevents unphysical phenomenon at the least computational expense.
+
+\subsection{Initialisation and equilibration}
+Prior to useful information being obtained fron an MD simulation, the system must be initialised and allowed to equilibrate.
+This is generally done in a number of steps:
+\paragraph{Structure generation}
+Phenomenon of interest in battery materials, such as Li ion diffusion, occur over large length scales and are studied using statistical techniques.
+As such a supercell approach is generally used to provide the sufficient bodies and space for these phenomenon to be observed.
+Relaxed structures from energy minimisation codes, using the same potential forms as are used in the MD simulation, are commonly used as the repeating unit here.
+In disordered solids, this step is non-trivial, with the configuration space of a typical MD simulation far exceeding that explorable by \textit{ab initio} methods.
+Techniques allowing for low energy local structures to be characterised and ``tiled'' may be a technique to allow pseudo-random structure generation; an interesting avenue for future work, but not implemented as of yet.
+
+\paragraph{Introduction of defects}
+For diffusion to be observed, a key phenomenon in battery materials, some mobile species vacancies must be introduced.
+Mobile species can then hop to these vacant sites, allowing ionic motion to be characterised.
+The location of these defects is randomly assigned in this study, where bulk phenomenon are of interest.
+The introduction of these defects must be charge compensated.
+As MD does not explicitly calculate electron densities, it is not possible to associate the charge compensation with a specific set of atoms.
+Instead the charge is ``smeared'' across all species which could have changed oxidation state for a given vacancy concentration.
+As an example, in the case of introducing 10\% Li vacancies to a \ce{LiCoO2} cathode, a charge of $+0.1$ per formula unit must be assigned to the Co ions, giving an overall oxidation state of \ce{Co^{3.1}+}.
+
+A second energy minimisation must then be performed to allow the structure to relax locally around the vacancies introduced.
+
+\paragraph{Initialisation}
+None of the integration schemes discussed are ``self-starting'', that is to say, they are reliant on some initial velocities being known in order to be used.
 For a system containing $N$ bodies, velocities will be randomly assigned to give the system a desired initial temperature subject to:
 \begin{equation}
 	\sum^N_{i=1}m_i\mathbf{v}_i^2 = 3Nk_bT
+	\label{eq:boltz}
 \end{equation}
 whilst ensuring the system has no net momentum in any vector:
 \begin{equation}
 	\sum^N_{i=1}m_i\mathbf{v} = 0
 \end{equation}
 
-%
-%\subsection{Ensembles}
-%
-%\subsection{Procedure}
-%\begin{itemize}
-%	\item Introduction of defects
-%	\item Structural optimization
-%	\item Initilisation
-%	\item Equilibrition
-%	\item Time stepping
-%\end{itemize}
-%\subsection{Analysis}
-%\paragraph{MSD}
-%Calculating diffusion coefficients and activation barriers
-%\paragraph{Trajectory Visualisation}
-%\paragraph{Time averaged densities}
-%
-%
-%\newpage
 %\section{{\color{red}Potential fitting}}
 %In order for simulations to provide valuable insights into the material being studies, the potential forms used closely approximate the true energy surface.
 %Whilst some universal forcefields are available, the phenomenon of interest in cathode materials cannot be adequately replicated with these.
