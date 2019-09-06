@@ -531,6 +531,20 @@ Similarly, the system pressure can be controlled by scaling the atomic coordinat
 \frac{dP_{t}}{dt} = \frac{1}{\tau}(P_{sink} - P_t)
 \end{equation}
 \newpage
+\subsection{Analysis}
+In order to extract useful information from MD simulations, analysis of the positions of atoms as a function of time must be undertaken.
+A number of key parameters are calculated, from which interesting material properties can be derived.
+\paragraph{Mean square displacement}
+The mean square displacement (MSD) measures the distance each atom has moved from its position at time zero, or more commonly, time zero with trajectory information from the equilibration period discarded.
+The MSD for an $N$ body system at time $t$ is defined as:
+\begin{equation}
+	MSD_t = \langle (\mathbf{x}_t - \mathbf{x}_0)^2 \rangle = \frac{1}{N}\sum_{i=1}^N(x_{i, t = t} - x_{i, t = 0})^2
+\end{equation}
+The MSD can be calculated for the system as a whole, or for a specific subset of particles.
+By calculating the diffusion coefficient associated with all the particles of a given species, the self-diffusion coefficient of that species is then given by:
+\begin{equation}
+	MSD_t = 2dDt
+\end{equation}
 %\section{{\color{red}Potential fitting}}
 %In order for simulations to provide valuable insights into the material being studies, the potential forms used closely approximate the true energy surface.
 %Whilst some universal forcefields are available, the phenomenon of interest in cathode materials cannot be adequately replicated with these.
