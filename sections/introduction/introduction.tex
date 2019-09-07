@@ -28,9 +28,7 @@ which are electrically isolated from one another but able to freely exchange ion
 The cell is charged by applying an external potential across the cell, forcing electrons to the anode.
 \ce{Li+} ions are extracted from the \ce{LiCoO2} cathode, diffuse between the electrodes via an electrolyte (\ce{LiFP6 in organic solvent} typically), and intercalate into the anode structure to maintain charge neutrality.
 
-During discharge, the reverse process occurs, with \ce{Li+} ions driven by a difference in electrical potential between the electrodes, and electrons travelling via an external circuit, allowing useful work to be done.
-When discharging, the \ce{Li+} ions are driven back to the cathode by the difference in chemical potential between the electrodes.
-Electrons move back to the cathode via an external circuit, allowing work to be done.
+During discharge, the reverse process occurs, with \ce{Li+} ions driven by a difference in chemical potential between the electrodes, and electrons travelling via an external circuit to maintain charge neutrality, allowing useful work to be done.
 
 
 \begin{figure}
@@ -48,7 +46,7 @@ Electrons move back to the cathode via an external circuit, allowing work to be 
   \caption{Discharging}
   \label{fig:GoodenoughDischarging}
 \end{subfigure}
-\caption[Li-ion battery schematic]{A schematic of a common Li-ion battery. During charging (a), electrons are driven to the anode by an external potential. \ce{Li+} ions move from the cathode to the anode to charge balance. During discharge (b), \ce{Li+} ions are driven to the cathode by a difference in chemical potential. The electrodes are electrically isolated by the separator, and are forced to instead travel via an external circuit and provide work.} 
+\caption[Li-ion battery schematic]{A schematic of a common Li-ion battery. During charging (a), electrons are driven to the anode by an external potential. \ce{Li+} ions move from the cathode to the anode to charge balance. During discharge (b), \ce{Li+} ions are driven to the cathode by a difference in chemical potential. The electrodes are electrically isolated by the separator, so electrons are instead forced to travel via an external circuit and provide work.} 
 \label{fig:Goodenough}
 \end{figure}
 
@@ -56,7 +54,7 @@ Electrons move back to the cathode via an external circuit, allowing work to be 
 \section{Electrolyte materials}
 In order for useful work to be yielded from batteries, and in order to prevent short circuiting, the electrodes must be electrically isolated from one another.
 In practice, this is implemented by use of a porous but electrically insulating separator material (typically a multilayer polymer) coupled with an electrolyte material.
-As the rate at which the battery can discharge is dependant on the rate at which the electrodes can exchange \ce{Li+} ions, high ionic conductivity is a vital for commercially viable electrolytes.
+As the rate at which the battery can discharge is dependant on the rate at which the electrodes can exchange \ce{Li+} ions, high ionic conductivity is vital for commercially viable electrolytes.
 
 
 \subsection{Liquid electrolytes}
@@ -87,7 +85,7 @@ As such, current commercial batteries generally use a graphitic anode which unde
 \end{equation}
 The performance of graphite anodes is a function of their morphology, meaning the capacity achieved is strongly influenced by the manufacturing processes used and the state of health of the battery.
 That said, 
-The use of carbon (albeit value-added carbon) as key material in batteries is of course a huge advantage due to its high abundance, low cost, and excellent electrical conductivity.
+The use of graphite (albeit value-added graphite) as key material in batteries is of course a huge advantage due to its high abundance, low cost, and excellent electrical conductivity.
 Whilst the graphite anodes are not the current limiting factor in commercial batteries, having higher capacities (\SI{372}{\milli\ampere\hour\per\gram}) than the best available cathodes, they are still of research interest in anticipation of next-generation cathodes.
 
 Tin and silicon based alloys offer higher capacities than graphite, but are currently not viable due to myriad issues including large volume changes (+200\% for Si) over a charge/discharge cycle.\cite{Scrosati2011}
@@ -116,10 +114,10 @@ Different metals allow for a larger fraction of Li to be reversibly extracted, c
 
 \paragraph{\ce{LiCoO2}}
 As shown in Figure \ref{fig:Goodenough}, the first commercial rechargeable Li-ion battery used a \ce{LiCoO2} (LCO) cathode (Figure \ref{fig:LCO}).
-With a capacity of around {\color{red}\SI{150}{\milli\ampere\hour\per\gram}} constituted a step change from its predecessors when it was introduced in the 1990's, and it remains prevalent in commercial applications today, particularly in portable electronics.
+Its capacity of around \SI{150}{\milli\ampere\hour\per\gram} constituted a step change from its predecessors when it was introduced in the 1990's, and it remains prevalent in commercial applications today, particularly in portable electronics.
 
 That said, a number of issues exist with LCO cathodes.
-Firstly, the delithiation of the cathode is only reversible up to 50 \% removal of the total Li, thus around half (\SI{140}{\milli\ampere\hour\per\gram}) of the theoretical capacity (\SI{275}{\milli\ampere\hour\per\gram}) cannot be reversibly accessed.
+Firstly, the delithiation of the cathode is only reversible up to 50 \% removal of the total Li, thus around half (\SI{125}{\milli\ampere\hour\per\gram}) of the theoretical capacity (\SI{275}{\milli\ampere\hour\per\gram}) cannot be reversibly accessed.
 Additionally, there are a number of ethical, economic, and sustainability issues associated with the supply of cobalt,\cite{Mauger2017, Larcher2015} driving research into layered metal oxide chemistries using other metals:\cite{Rozier2015}
 
 \begin{labeling}{\textbf{\ce{LiMnO2}}}
@@ -194,7 +192,7 @@ An inductive effect from the \ce{(PO4)^3-} raises the redox potential of the \ce
 Indeed, this material is commonly used in high power situations, such as power tool applications.
 The use of Fe rather than Co significantly reduces material costs, and increases the environmental credentials of this material.
 
-The 1D migration channels\cite{Islam2014} somewhat hinder advancements via metal substitution of this cathode, as those metals with moderate \ce{Li/M} antisite defect concentrations suffer from reduced from performance via channel blocking.
+The 1D migration channels\cite{Islam2014} somewhat hinder advancements via metal substitution of this cathode, as those metals with moderate \ce{Li/M} antisite defect concentrations suffer from reduced performance arising due to channel blocking.
 
 \newpage
 \begin{figure}
@@ -206,7 +204,7 @@ The 1D migration channels\cite{Islam2014} somewhat hinder advancements via metal
 
 \subsection{\ce{LiMn2O4} spinel (LMO)}
 Despite its relatively low capacities (\SI{140}{\milli\ampere\hour\per\gram}), \ce{LiMn2O4} spinel (LMO) has found some commercial success in applications requiring high discharge rates.
-Low internal resistance, arising from the 3 dimensional ion conduction pathways, allow for fast charging and discharge at high currents.
+Low internal resistance, arising from the 3 dimensional ion conduction pathways, allow for rapid cycling at high currents.
 
 Whilst pure LMO batteries are uncommon, they are commonly coupled with NMC cathodes in EV applications, with the NMC component providing larger capacities, and the LMO component enabling for short periods of high current discharge, as required during rapid acceleration.
 This LMO/NMC combination is used in the Nissan Leaf, Chevrolet Volt and BMW i3.
@@ -216,7 +214,7 @@ As such, there is interest in phasing out this material to extend the life of ne
 \newpage
 \section{Li-rich cathodes}
 A limitation of the layered oxide materials discussed thus far is the limited extent to which delithiation can reversibly occur.
-Even were a means of stabilising these cathodes up to a fully delithiated state devised, the theoretical maximum capacities of conventional layered oxide cathodes may be insufficient for future automotive applications.
+Even were a means of stabilising these cathodes in a fully delithiated state devised, the theoretical maximum capacities of conventional layered oxide cathodes may be insufficient for future automotive applications.
 
 Li-rich cathodes seek to increase the capacity of conventional \ce{LiMO2} materials by substitution of some portion of \ce{M^3+} for \ce{Li^+}.
 The term ``Li-rich'' derives then from the excess of Li relative to transition metals in the cathode:
@@ -237,16 +235,16 @@ These mechanisms have been the area of much research, and despite extensive lite
 Of particular interest is the O-redox mechanism which has been demonstrated in many systems.\cite{Li2018a}
 
 Whilst many Li-rich materials have been shown to be oxygen-redox-active, they generally exhibit undesirable characteristics including voltage fade, hysteresis, and O loss.\cite{Csernica2019}
-The factors which impact these phenomenon have been extensively studied but remains an active and unresolved area of research.\cite{Rozier2015,Csernica2019, Li2018a, Seo2016}
+The factors which impact these phenomenon have been extensively studied but remain an active and unresolved area of research.\cite{Rozier2015,Csernica2019, Li2018a, Seo2016}
 \newpage
 \subsection{\ce{Li2MnO3}}
-\ce{Li2MnO3}, being an end member of the Li-rich layered oxide cathodes, is the one of the most widely studied Li-rich materials.
-, 
+\ce{Li2MnO3}, being an end member of the Li-rich layered oxide cathodes, is one of the most widely studied Li-rich materials.
 It exhibits a O3-type monoclinic structure, with an ordered (honeycomb) distribution of \ce{Li+/Mn^4+} ions in the mixed \ce{[Li_{1/3}Mn_{2/3}]O2} layer.\cite{Rozier2015}
 
-Initially thought to be electrochemically inactive due to the already fully oxidised \ce{Mn^4+}, it was later shown to  demonstrate a huge theoretical capacity of \SI{285}{\milli\ampere\hour\per\gram}.\cite{Kuganathan2019a}
+Initially thought to be electrochemically inactive due to the already fully oxidised \ce{Mn^4+}, \ce{Li2MnO3} was later shown to  demonstrate a huge theoretical capacity of \SI{285}{\milli\ampere\hour\per\gram}.\cite{Kuganathan2019a}
 The electrochemical activity was attributed to a partial loss of \ce{Li2O}, leading to the formation of \ce{Li2MnO3} domains in a \ce{LiMnO2} matrix on partial delithiation.
-Further, the use of \ce{Mn} offers huge environmental and economic benefits versus \ce{Co} containing cathodes.
+
+The use of \ce{Mn} offers huge environmental and economic benefits versus \ce{Co} containing cathodes.
 Unfortunately, its poor structural stability during cycling and low electrical conductivity render its use in any practical application infeasible.
 It does however provide a relatively simple reference material for study, to allow a better understanding of more complex Li-rich layered oxides.
 
@@ -275,9 +273,9 @@ It does however provide a relatively simple reference material for study, to all
 \end{figure}
 
 Li-rich NMC, shown schematically in Figure \ref{fig:tarasconNMC}, is NMC in which some metal species have been exchanged fo Li.
-As with the \ce{LiMO2} cathodes, the rich chemistry associated with use of mixed metal species offers a wide range of compositions and provides scope to overcome some of the issues associated with the current state of the art in Li-rich cathodes, such as voltage fade and O-loss.
+As with the \ce{LiMO2} cathodes, the rich chemistry associated with use of mixed metal species offers a wide range of compositions and provides scope to overcome some of the issues associated with the current state of the art Li-rich cathodes, such as voltage fade and O-loss.
 Surface coatings have been proposed as a means of extending the lifetime of Li-Rich NMC cathodes, by preventing side reactions with the electrolyte and limiting the formation of non-conductive species which harm electrochemical performance.
-Whilst an undeniably useful avenue of research, the additional processing steps may make the implementation of this at a commercial scale unfeasible.
+Whilst an undeniably useful avenue of research, the additional processing steps may make the implementation of this at a commercial scale infeasible.
 Furthermore, the absence of a fundamental understanding of the mechanisms giving rise to these detrimental properties will inevitably hinder progress.
 As the exact origin of these phenomenon is not widely agreed upon, and may indeed change between systems, much of the research surrounding Li-rich NMC has been in attempting to better understand the fundamental phenomenon which give rise to these undesirable properties.
 
