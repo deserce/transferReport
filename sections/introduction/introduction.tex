@@ -23,12 +23,13 @@ In the years since, a range of battery chemistries have been developed, tailored
 
 \subsection{Anatomy of an electrochemical cell}
 Figure \ref{fig:Goodenough} illustrates a typical electrochemical cell, specifically the first commercial Li-ion battery.
-The cell consists of an anode and cathode\footnote{It is conventional when discussing battery materials to refer to the positive electrode during discharge as the anode, and the negative electrode as the cathode during charging \& discharging.},
-which are electrically isolated from one another but able to freely exchange ions via an electrolyte.
+The cell consists of an anode and cathode\footnote{It is conventional when discussing battery materials to refer to the electrode which is positive during discharge as the anode, and that which is negative as the cathode.},
+which are electrically isolated from one another, but able to freely exchange ions via an electrolyte.
 The cell is charged by applying an external potential across the cell, forcing electrons to the anode.
 \ce{Li+} ions are extracted from the \ce{LiCoO2} cathode, diffuse between the electrodes via an electrolyte (\ce{LiFP6 in organic solvent} typically), and intercalate into the anode structure to maintain charge neutrality.
 
-During discharge, the reverse process occurs, with \ce{Li+} ions driven by a difference in chemical potential between the electrodes, and electrons travelling via an external circuit to maintain charge neutrality, allowing useful work to be done.
+During discharge, the reverse process occurs.
+\ce{Li+} ions driven by a difference in chemical potential move from the anode to the cathode, and electrons travel via an external circuit to maintain charge neutrality, allowing useful work to be done.
 
 
 \begin{figure}
@@ -46,7 +47,7 @@ During discharge, the reverse process occurs, with \ce{Li+} ions driven by a dif
   \caption{Discharging}
   \label{fig:GoodenoughDischarging}
 \end{subfigure}
-\caption[Li-ion battery schematic]{A schematic of a common Li-ion battery. During charging (a), electrons are driven to the anode by an external potential. \ce{Li+} ions move from the cathode to the anode to charge balance. During discharge (b), \ce{Li+} ions are driven to the cathode by a difference in chemical potential. The electrodes are electrically isolated by the separator, so electrons are instead forced to travel via an external circuit and provide work.} 
+\caption[Li-ion battery schematic]{A schematic of a common Li-ion battery. During charging (a), electrons are driven to the anode by an external potential. \ce{Li+} ions move from the cathode to the anode to maintain charge neutrality. During discharge (b), \ce{Li+} ions are driven to the cathode by a difference in chemical potential. As the electrodes are electrically isolated from one another by the separator, electrons are instead forced to travel via an external circuit and provide work.} 
 \label{fig:Goodenough}
 \end{figure}
 
@@ -103,7 +104,7 @@ While a wide range of materials are currently of research interest, only a few c
 \label{fig:LCO}
 \end{figure}
 \ce{LiMO2} adopt \ce{\alpha-NaFeO2} structures (Figure \ref{fig:LCO}), which is the prototype structure of \ce{AMO2} layered cathode materials.
-It adopts a structure with alternating layers of \ce{[CoO2]-} and \ce{Li+} layers ($R\bar{3}M$).\cite{Islam2014}
+The structure is comprised of alternating layers of \ce{[CoO2]-} and \ce{Li+} layers ($R\bar{3}M$).\cite{Islam2014}
 The low migration barrier between adjacent \ce{Li+} sites within each layer leads to fast 2D ion transport through the structure.
 The reaction occurring as lithium is reversibly extracted from \ce{LiMO2} cathodes can be written as:\cite{Islam2014}
 \begin{equation}
@@ -124,18 +125,18 @@ Additionally, there are a number of ethical, economic, and sustainability issues
 	\item [\textbf{\ce{LiNiO2}}] Despite being cheaper, more sustainable, and having a higher theoretical capacity (\SI{200}{\milli\ampere\hour\per\gram}) than \ce{LiCoO2}, the low thermal stability of lithium nickel oxide cathodes in the presence of organic electrolytes poses a significant safety risk, making it unsuitable for commercial applications.
 	Furthermore, it is not easily synthesised due to the formation of non-stoichiometric compounds arising from the spontaneous reduction of \ce{Ni^3+} to  \ce{Ni^2+}, resulting in \ce{Ni^2+} ions on \ce{Li+} sites.
 	\item [\textbf{\ce{LiMnO2}}] The similarity of the ionic radii of high-spin \ce{Mn^3+} (\SI{0.65}{\angstrom}) and \ce{Li+} (\SI{0.76}{\angstrom}) prevents the formation of stable layered \ce{LiMnO2}.
-	While metastable \ce{LiMnO2} can be synthesised, the more stable \ce{LiMn2O4} forms upon delithiation, giving poor electrochemical performance.
+	While metastable \ce{LiMnO2} can be synthesised, the more stable \ce{LiMn2O4} forms upon cycling, giving poor electrochemical performance.
 \end{labeling}
 
 \newpage
 \subsection{Mixed-metal layered \ce{LiMO2}}
 A strategy to incorporate some of the benefits of \ce{LiNiO2}, whilst overcoming the stability and synthesis issues which have prevented its practical use is the partial substitution of Ni for other metals.
 Binary and ternary \ce{LiMO2} have been extensively studied, yielding compounds which have enjoyed commercial success.
-Each of the below compounds have the same structure as \ce{LiCoO2} shown in Figure \ref{fig:LCO}, with the occupancy of each metal site determined by the stoichiometry of the mixed-compounds, and any ordering effects observed.
+Each of the below compounds have the same layered structure as \ce{LiCoO2} shown in Figure \ref{fig:LCO}, with the occupancy of each metal site determined by the stoichiometry of the mixed-compounds, and any relevant cation ordering effects.
 
 \paragraph{\ce{Li[Ni_{1-y-z}Co_yAl_z]O2} (NCA)}
 The issues with \ce{LiNiO2} arise due to the instability of \ce{Ni^3+} at elevated temperatures, and the similar ionic radii of \ce{Ni^2+} and \ce{Li+} causing migration of \ce{Ni} into the \ce{Li} layers.
-\ce{Li[Ni_{1-y-z}Co_yAl_z]O2} (NCA) type cathodes seek to overcome these issues through the partial substitution of \ce{Ni^3+} with \ce{Co^3+} and \ce{Al^3+}:
+\ce{Li[Ni_{1-y-z}Co_yAl_z]O2} (NCA) type cathodes overcome these issues through the partial substitution of \ce{Ni^3+} with \ce{Co^3+} and \ce{Al^3+}:
 \begin{labeling}{\textbf{\ce{Co^3+}}}
 \item [\textbf{\ce{Co^3+}}] The addition of \ce{Co^3+} stabilises \ce{Ni^3+} at elevated temperatures, minimising the formation of \ce{Ni^2+}.
 The similar ionic radii of \ce{Co^3+} (\SI{0.545}{\angstrom}) and \ce{Ni^3+} (\SI{0.56}{\angstrom}) allows the formation of \ce{Li(Ni,Co)O2} solid solutions.
@@ -166,15 +167,15 @@ As such, \ce{LiNi_{0.8}Co_{0.15}Al_{0.05}O2} has enjoyed wide commercial success
 \paragraph{\ce{Li[Ni_{1-y-z}Mn_yCo_z]O2} (NMC)}
 Initially overlooked as a poor cathode candidate when it was first reported in 1992,\cite{Rossen1992} \ce{Li[Ni_{1-x}Mn_x]O2} cathodes were revisited and expanded on in the early 2000's.\cite{Lu2001,Yabuuchi2008, Venkatraman2004}.
 Whilst high temperature synthesis overcame issues associated with cation distribution,\cite{Hinuma2007} the tendency for the Ni and Mn to be in 2+ and 4+ oxidation states respectively gave rise to the same issues seen in \ce{LiNiO2}, namely \ce{Ni^2+} in the Li layer.
-This meant that the high capacities observed \SI{200}{\milli\ampere\hour\per\gram} in \ce{Li[Ni_{0.5}Mn_{0.5}]O2} were only accessible at low discharge rates due to inhibited Li migration, limiting the practicality of this material.
+This meant that the high capacities observed \SI{200}{\milli\ampere\hour\per\gram} in \ce{Li[Ni_{0.5}Mn_{0.5}]O2} were only accessible at low discharge rates due to inhibited Li migration, limiting the practicality of this material as a cathode.
 
-As with LCA, the addition of \ce{Co} limited the formation of \ce{Ni^2+} in the Li layer, leading to the \ce{Li[Ni_{1-y-z}Mn_yCo_z]O2} (NMC) class of materials.
+As with LCA, the partial substitution of \ce{Ni} for \ce{Co} limited the formation of \ce{Ni^2+} in the Li layer, leading to the \ce{Li[Ni_{1-y-z}Mn_yCo_z]O2} (NMC) class of materials.
 \ce{Li[Ni_{1/3}Mn_{1/3}Co_{1/3}]O2} (NMC-111, named for the Ni:Mn:Co ratio) is currently commercialised with a practical reversible capacity of \SI{180}{\milli\ampere\hour\per\gram}.
 
 Figure \ref{fig:NMCcomp} shows the discharge capacity, thermal stability, and capacity retention for various NMC compositions.
 Broadly speaking, the discharge capacity of the material is improved by increased Ni content, the thermal stability improved by increased Mn content, and the capacity retention improves with increasing Co content.
 As such, research efforts focusing on retaining high capacity retention and thermal stabilities at higher Ni concentrations are plentiful.
-One promising strategy to achieve this is the formation of hierarchical cathode particles, with high capacity Ni cores and stable Mn shells. \cite{Zhou2018}
+One promising strategy to achieve this is the formation of hierarchical cathode particles, with high capacity Ni-rich cores and stable Mn-rich shells. \cite{Zhou2018}
 \newpage
 \begin{figure}
 \centering
@@ -223,12 +224,12 @@ The term ``Li-rich'' derives then from the excess of Li relative to transition m
 	\frac{[\textrm{Li}]}{[\textrm{TM}]} > 1
 \end{equation}
 
-Whilst this does yield higher theoretical capacities due to the increased fraction of Li in the structure, this change also has potential negative implications on the electrochemical performance of the cathode:
+Whilst this does yield higher theoretical capacities due to the increased fraction of Li in the structure, this change also has a potentially negative impact on the electrochemical performance of the cathode:
 \begin{labeling}{\textbf{Redox well}}
 	\item [\textbf{Stability}] The removal of \ce{M} reduces the number of stabilising \ce{M-O} bonds.
 	This reduces the thermal stability and cycle life of the cathodes.
 	\item [\textbf{Redox well}] Transition metal species serve to charge compensate the extraction of \ce{Li+} from the cathode.
-	Reduced transition metal availability requires other charge compensation mechanisms to allow further extraction of Li.
+	Reduced transition metal availability requires other charge compensation mechanisms to allow full extraction of Li.
 	\end{labeling}
 
 As Li extraction in excess of one Li per transition metal species has been observed in many Li-rich cathodes, other charge compensation mechanisms must exist.
@@ -274,7 +275,7 @@ It does however provide a relatively simple reference material for study, to all
 \end{figure}
 
 Li-rich NMC, shown schematically in Figure \ref{fig:tarasconNMC}, is NMC in which some metal species have been exchanged fo Li.
-As with the \ce{LiMO2} cathodes, the rich chemistry associated with use of mixed metal species offers a wide range of compositions and provides scope to overcome some of the issues associated with the current state of the art Li-rich cathodes, such as voltage fade and O-loss.
+As with the \ce{LiMO2} cathodes, the rich chemistry associated with the presence of multiple metal species offers a wide range of compositions and provides scope to overcome some of the issues associated with the current state of the art Li-rich cathodes, such as voltage fade and O-loss.
 Surface coatings have been proposed as a means of extending the lifetime of Li-Rich NMC cathodes, by preventing side reactions with the electrolyte and limiting the formation of non-conductive species which harm electrochemical performance.
 Whilst an undeniably useful avenue of research, the additional processing steps may make the implementation of this at a commercial scale infeasible.
 Furthermore, the absence of a fundamental understanding of the mechanisms giving rise to these detrimental properties will inevitably hinder progress.
@@ -283,7 +284,7 @@ As the exact origin of these phenomenon is not widely agreed upon, and may indee
 
 \newpage
 \subsection{Li-rich disordered rocksalts}
-Conventional cathode materials tend to have ordered structures, as the creation of distinct transition metal sites, and Li sites/diffusion pathways provides stability.
+Conventional cathode materials tend to have ordered structures, as the presence of distinct transition metal sites and Li sites/diffusion pathways provides stability upon cycling.
 The lack of intermixing of Li and transition metal species is vital to ensure good Li-ion mobility and prevent detriment to electrochemical performance.
 Ceder \textit{et al.}\cite{Casimir2014} proposed however, that the ``ordering paradigm'' adopted by the battery community led to a number of viable cathode candidates being overlooked.
 By percolation theory, so long as the ratio of Li:TM sites is above some critical concentration, a network of low-energy pathways should exist, allowing mobility and extraction to occur.\cite{Urban2014}
@@ -292,7 +293,7 @@ Of particular interest in this work are two disordered rocksalt structures:
 
 \begin{labeling}{\textbf{\ce{Li2MnO2F}}}
 \item [\textbf{\ce{Li4Mn2O5}}] First presented in 2015 by Freire \textit{et al.},\cite{Freire2016a} this material demonstrates a huge specific capacity of \SI{355}{\milli\ampere\hour\per\gram}.
-Diaz-Lopez \textit{et al.}\cite{Diaz-Lopez2018} characterised the material, demonstrating that a \ce{MnO} rocksalt with high \ce{Li/Mn} disorder at cationic sites, with 1/\nth{6} O vacancies at the anionic site provided good agreement with synchrotron and powder diffraction studies.
+Diaz-Lopez \textit{et al.}\cite{Diaz-Lopez2018} characterised the material, demonstrating that a \ce{MnO} rocksalt structure with high \ce{Li/Mn} disorder at cationic sites, and 1/\nth{6} O vacancies at the anionic site provided good agreement with synchrotron and powder diffraction data.
 Yao \textit{et al.}\cite{Diaz-Lopez2017}, and later Bhattacharya \textit{et al.}, used these findings as a basis for a DFT study.
 These studies identified a number of ordered structures which were of a lower energy than quasi-disordered structures.
 
