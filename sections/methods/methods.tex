@@ -5,7 +5,7 @@ Not only can computational methods reduce experimental load by identifying promi
 
 This study primarily uses potentials-based minimisation techniques and Molecular Dynamics (MD), implemented in GULP \cite{Gale2003} and LAMMPS \cite{StevePlimton1995} respectively.
 In this chapter, the fundamental concepts and mathematics underpinning these techniques are presented.
-Furthermore, an overview of classical interatomic potential fitting strategies are presented and contrasted with in development techniques.to contrast to the work presented herein. %TODO chapter reference
+Further to this, conventional techniques for parameter derivation are contrasted with techniques currently in development.
 This overview is brief and focuses primarily on techniques used in this report, as more comprehensive reviews are available elsewhere. \cite{Gale2003, Jensen2007, Catlow2013}
 Some work presented in this section is derived from the MRes report which led to this project, as the fundamental equations underpinning computational methods remain the same.
 
@@ -68,16 +68,13 @@ The short-range components are computed as before, while the long-range terms ar
 
 The nature of a two-body interaction can vary widely dependent on context, with the species, charge, and even local environment impacting the resultant potential.
 Depending on the system, covalent interactions, London interactions and electron-pair repulsions may all need to be accounted for with no actual calculation of electron density occurring on which to base the potential.
-
-This can include electron-pair repulsions, London interactions and covalent interactions.
-This term can be calculated through the use of tabulated data, or via simple analytical models.
-Analytical models are typically empirically derived from experimental data.
+Instead, the resultant force is generally calculated using an empirical model derived to match experimental or \textit{ab initio} data.
 
 The selection of an appropriate model is vital, with considerations including the ionic/covalent nature of the system, availability of experimental data, and computational cost influencing the choice of model.
 Furthermore, given potential models are often derived to match experimental data for a given system, ensuring that that same potential is suitable when applied outside of the context in which it was developed is important.
 
 This of course can pose an issue when seeking to study systems where no experimental data is available with which to verify the findings of computational work.
- For ionic systems, the Buckingham Potential form is conventionally used to for two-body interactions:
+ For ionic systems, the Buckingham Potential form is commonly used for two-body interactions:
 
 
 \begin{equation}
@@ -116,9 +113,9 @@ In order to prevent this strategy introducing discontinuity into the system, add
 
 
 \subsection{Three-body interactions}
-The nature of three-body terms are dependant on the interactions between three ions or atoms.
-These can be interpreted as bond pair repulsions or as a charge dispersion between three bodies in covalent and ionic interpretations respectively.
-This term is small relative to the two-body terms, and is usually only included when high degrees of accuracy are required, or for the calculation of properties dependent on three-body interactions such as phonon distribution curves.
+Three-body interactions can be interpreted as those which arise due to bond/electron pair repulsion or charge dispersion between three bodies in covalent and ionic models of bonding respectively.
+The inclusion of this term is not necessary in all systems, but can increase the quality of certain battery models, particularly when modelling polyanion species.
+The magnitude of this term is relatively small compared to two-body interactions, and unless a a strong three-body interaction exists in a system, it is only included to calculate of properties dependent on three-body interactions such as phonon distribution curves.
 
 A commonly used three-body potential is the harmonic model:
 \begin{equation}
@@ -128,16 +125,16 @@ A commonly used three-body potential is the harmonic model:
 
 In this model, an equilibrium angle is assigned to a bond pair, and any deviations from this angle increase the potential energy of the system.
 
-\subsection{Polarizability}
+\subsection{Polarisability}
 The electron distribution surrounding an atom or ion will shift according to the local environment in which it exists, effectively allowing the internuclear and electronic interactions to partially decouple.
-A rigid ion model, in which species are modelled as point charges, does not capture this behaviour, defreasing the accuracy of models using it.
+A rigid ion model, in which species are modelled as point charges, does not capture this behaviour, decreasing the accuracy of models using it.
 This is a particularly important behaviour when studying ion migration, and so a failure to account for this behaviour can negatively impact the accuracy of results obtained.
 
 An early model of ion polarisation is the point polarisable ion model (PPI), in which the dipole moment of an ion ($\mu$) is directly proportional to the strength of the electric field in which it sits (E):
 \begin{equation}
 \mu = \alpha E
 \end{equation}
-Whilst computationally inexpensive and easily extensible to higher order polarizabilities (i.e. quadrupolar systems), this model performs poorly when handling dynamic lattice properties.
+Whilst computationally inexpensive and easily extensible to higher order polarisabilities (i.e. quadrupolar systems), this model performs poorly when handling dynamic lattice properties.
 It also poorly predicts dielectric constants, which is easily measurable experimentally and thus a useful criteria for model validation.
 
 This shortcoming can be rationalised by the failure to account for the polarisation of adjacent ions, that is, that neighbouring species being polarised impacts the local electric field and serves to dampen polarisation overall.
@@ -150,7 +147,7 @@ Consequently, this model tends to overestimate dielectric constants if tuned to 
   \caption[Shell model schematic]{Schematic of the shell model of polarisability. The valence electron shells (grey) are attached to the ion core by a harmonic spring, and are displaced by nearby charged species or net electric fields.}
 \end{figure}
 The shell model\cite{Dick1958} is another computationally inexpensive model of polarisation which accounts for polarisation coupling, thus overcoming a key limitation of the PPI model.
-Polarisation coupling is modelled by treating the valence electron cloud as a shell connected to the ionic core by a harmonic spring.
+Polarisation coupling is modelled by treating the valence electron cloud as a shell connected to an ionic core by a harmonic spring.
 The core represents the nucleus and core electrons of the ion, accounting for the majority of the mass of the ion, while the shell is represents the polarisable valence electrons.
 The mass of the shell is treated as zero in non-dynamical systems (i.e. in structural optimisation, Section \ref{sec:minimization}) where the solver strategies are able to handle zero-mass species without instability.
 In the case of dynamic systems (i.e. Molecular dynamics, Section \ref{sec:MD}), the shell is assigned a small portion of the overall mass to provide a degree of inertia and remove the need for prohibitively small time-steps.
@@ -175,8 +172,8 @@ U_{ij} = o_io_jU_{ij}
 $$
 
 The sum of these scaled potentials yields the mean potential arising from the partially occupied site.
-This technique can be powerful for initial studies of systems in that it yields symmetric (and thus robust) systems, and bypasses the cost issues arising from the combinatorics of generating large systems capturing all likely local environment.
-It is particularly useful for the calculation of structural properties, where the averaging of forces is in effect done when determining large scale parameters.
+This technique can be powerful for initial studies of systems in that it yields symmetric (and thus robust) systems, and bypasses the cost issues arising from the combinatorics of generating large systems capturing all likely local environments.
+It is particularly useful for the calculation of structural properties, where the averaging of forces arising from each species effectively occurs across the bulk.
 
 That said, the simplification of lattice sites fails to capture the nuance of local environments, potentially missing properties that might only arise in environments containing certain configurations of species.
 As such, caution should be exercised when applying this technique to calculate diffusion barriers.
@@ -186,18 +183,18 @@ Another strategy for handling partially occupied and disordered systems is the s
 The primitive cell is expanded to be repeated a given number of times in the direction of each basis vector, yielding a supercell.
 Each partially occupied site is then assigned one of the species potentially occupying it, such that the desired stoichiometry is achieved across the whole supercell.
 
-Assigning these sites it itself a problem to which many strategies can be applied.
+Assigning these sites is itself a problem to which many strategies can be applied.
 The brute force approach of testing all configurations in not viable for all but the simplest of systems due to the combinatorial nature of the problem.
 A simple example of distributing 50 ions and 50 vacancies across 100 symmetry inequivalent sites yields $\frac{100!}{50!\cdot50!} = 10^{29}$ distinct cases.
 
 Another strategy is to randomly assign a species to each site, weighted by stoichiometry.
 It is worth clarifying that while perfect disordering is possible, the energetics associated with the formation of a given local environment may bias such systems to exhibit certain local configurations preferentially.
-As an example, a disordered rocksalt with a small portion of vacancies at the anionic site might na{\"i}vely be expected, in a sufficiently large system, to have some cationic sites surrounded by six vacancies.
+As an example, a disordered rock salt with a small portion of vacancies at the anionic site might na{\"i}vely be expected, in a sufficiently large system, to have some cationic sites surrounded by six vacancies.
 However, the energetics associated with the formation of this local environment would significantly reduce the likelihood of its formation.
 
 Accounting for this when attempting to generate disordered supercells is non-trivial, as the energetics of the environment are not known ahead of time, and the law of large numbers dictates that these sites will form if not biased against.
 Further, the potential models used may not be suitable for modelling such unfavourable environments.
-Indeed, this problem becomes even more challenging when seeking to derive potentials to fit a disordered system, as the potentials are needed in order to calculate the energetics of the local environments, yielding a {\color{red} chicken and egg type} issue.
+Indeed, this problem becomes even more challenging when seeking to derive potentials to fit a disordered system, as the potentials are needed in order to calculate the energetics of the local environments, possibly needing additional information about these environments to be solved.
 
 A final strategy is to approximate the disordered solid as being ordered.
 A benefit of this strategy is it can be coupled with DFT studies to predict low energy ordered structures as a basis for the calculation.
@@ -205,7 +202,7 @@ Further, this technique typically yields smaller supercells, making studies in G
 Finally, the increased symmetry and reduced number of local environments present makes finding a robust set of potentials easier for such systems.
 
 This of course relies upon a means of generating a low energy or ground state structure for the system being studied, which is itself a non-trivial matter.
-One such strategy, cluster expansion, \cite{Bhandari2019} was utilised by the authors of source material for this report, and may be implemented by the author in future work.
+One such strategy, {\color{red}cluster expansion}, \cite{Bhandari2019} may be implemented by the author in future work.
 
 
 \section{Energy minimisation}
