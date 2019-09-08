@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage[super,sort&compress,comma]{natbib}
 \usepackage{fancyhdr}
 \usepackage{booktabs}
@@ -15,6 +16,8 @@
 \usepackage{scrextend}
 \usepackage{subcaption}
 \usepackage{mhchem}
+\usepackage{chemformula}
+\setchemformula{kroeger-vink}
 \usepackage{blindtext}
 \usepackage[super]{nth}
 \usepackage{siunitx}
@@ -105,4 +108,8 @@ This thesis may be made available for consultation within the University Library
 \bibliographystyle{rsc}
 \addcontentsline{toc}{chapter}{References}
 \bibliography{library}
+\newpage
+
+\input{sections/appendix/top}
+
 \end{document}

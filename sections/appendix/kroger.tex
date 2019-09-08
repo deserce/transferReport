@@ -1,0 +1,113 @@
+\appendix
+\chapter{Defects}
+Discussion of crystals as structures fails to capture the full nuance of systems encountered in the real world.
+In practice, thermal vibrations and deviations from ideal stoichiometry lead to the formation of defects.
+The concentration, diffusivity, and nature of these defects all strongly influence key properties for energy storage materials.
+
+
+Defects can be subcategorized by their dimensionality as listed in Table A.1:
+
+\begin{table}[bh!]
+\centering
+\label{tab:defecthierarchy}
+\caption{The defect hierarchy \citep{Carter2013}}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Type            & Dimensionality  & Example\\
+\midrule
+Point defect    & Zero            & Vacancy\\
+Line defect     & One             & Dislocation\\
+Planar defect   & Two             & Grain boundary\\
+Volume defect   & Three           & Pore\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+It is only point defects which are considered within this report.
+\newpage
+\section{Point defects}
+Point defects are those which only occur at a single point within a crystal structure and do not extend beyond that point in any dimension.
+
+
+
+\begin{labeling}{\textbf{Interstitial}}
+\item[\textbf{Vacancy}] Sites not occupied by an ion, which would be in the perfect crystal structure. The movement of a neigbouring ion into a vacancy creates a new vacancy. As such, it is convenient to assign diffusivity values to defects, similar to the treatment of electron holes as mobile in metals. The energy associated with this defect is the energy required to move the ion to a point an infinite distance from the defect (i.e. the removed ion is no longer interacting with the crystal).
+
+\item[\textbf{Interstitial}] The presence of an ion at a site not occupuied as prescribed by the perfect crystal structure. These defects are typically high energy, especially with large ions, as the neighboring ions are displaced to accomodate the new ion.
+\item[\textbf{Impurity}] The introduction of ions not found in the perfect crystal. This can either be at an interstitial site (interstitial impurity), or in lieu of an ion in the perfect crystal (substitutional defect).
+For substitutional defects, they can effectively be considered to be combination of a vacancy at the lattice site, followed by an interstitial impurity at that same lattice site.
+\end{labeling}
+
+With the exception of substitutional impurities which may conserve charge, (e.g. \ce{Ni^{2+}} impurity at \ce{Fe^{2+}} site), the creation of point defects has an associated charge. The creation of an oxygen vacancy has a charge of +2 for example.
+
+\newpage
+\section{Kr\"oger-Vink Notation}
+At this point, it is convenient to formalize notation used in defining defects to supplement further explaination.
+Kr\"oger-Vink Notation \citep{Kroger1958} is widely used as a means of explicitly defining how point defects form or interact.
+The notation uses the structure: \begin{equation}
+\ch{S^c_{p}}
+\label{eq:kroger}
+\end{equation} with \textbf{S} as the species, \textbf{c} as the charge, and \textbf{p} as the position.
+
+The species, $S$, indicates whether the species is chemical (denoted by the appropriate chemical symbol), or a vacancy (denoted \ch{V} or \ch{Va} to avoid confusion with Vanadium).
+Null reactant can be indicated with the symbol $\varnothing$.
+By formalizing the existence of vacancies within equations, the effective charge resultant from the loss of an ion is easily accounted for.
+
+Charge is described using the superscripts \ch{S^*} and \ch{S'} to represent positive and negative charges respectively. The number of times the superscript is repeated correcponds to the magnitude of the charge.
+\ch{S'}, \ch{S''}, and \ch{S'''} represent charges of 1-, 2- and 3- respectively as an example.
+Neutral charges are represented as \ch{S^x}.
+
+Finally, the location of the defect is given as a subscript $p$.
+This can either indicate the defect is present at a regular lattice site, in which case the chemical symbol of the species which occupys the site is given (\ch{H,~ He,~ Li,~ \ldots}), or indicate the defect is in the interstitial space, indicated by the subscript $i$.
+
+% The above is summarized in Table \ref{tab:krogerSummary}.
+
+
+\begin{table}[bh!]
+\centering
+\label{tab:krogerSummary}
+\caption{Summary of possible values for Equation \ref{eq:kroger} using Kr\"oger-Vink notation  \citep{Carter2013}}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Symbol          & Possible Values                & Notes\\
+\midrule
+S              & \ch{H,~ He,~ Li}, \ldots                                              & Indicates a chemical species\\
+                & V                                                                             & Vacancy. If Vanadium is present, use Va for Vacancy.\\
+                & $\varnothing$                                                                 & Null reactant   \\
+c               & $\bullet,~ \bullet\!\bullet,~ \bullet\!\bullet \bullet$, \ldots        & Positively charged species: 1+, 2+, 3+, ...       \\
+                & $\prime,~ \prime \prime,~ \prime \prime \prime$, \ldots               &  Negatively charged species: 1-, 2-, 3-, ...      \\
+                & $\times$                                                                      &  Neutrally charged species.      \\
+p               & \ch{H,~ He,~ Li}, \ldots                                               &  Defect at position occupied by species p in ideal crystal.\\
+                & i                                                                             &  Defect in interstitial space.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+\section{Associated defects for \ce{LiFePO4}}
+As crystals must be neutrally charged, defect formation will often occur in groups, with a number of fundamental defects occuring to form charge neutral defects. Here the possible defects for \ce{LiFePO4} are listed.
+In the case of mixed systems, defects have only been considered using partial occupancy approaches.
+As such, the following equations still apply, but with pseudo-ions instead of \ce{Fe}.
+
+\begin{labeling}{\textbf{Schottky-like}}
+\item[\textbf{Full Schottky}] A defect in which vacancies occur corresponding to the stoichiometric ratios of the perfect crystal. In \ce{LiFePO4}, a full Schotty defect would be the creation of a single \ce{Li^+, Fe^+} and \ce{P^{5+}} vacancies, with a net charge of -8, offset by the creation of four \ce{O2^-} defects.
+\begin{equation}
+\varnothing \rightarrow \ce{V^\prime_{Li} +  V^{\prime \prime}_{Fe} + V^{\prime \prime \prime \prime \prime}_{P} + 4V^{\bullet \bullet}_{O} + LiFePO4}
+\end{equation}
+\item[\textbf{Schottky-like}] As with Full Schottky defects, but stoichiometry is not conserved.
+For \ce{LiFePO4}, there are two possible partial Schottky-like defects:
+\begin{align}
+\varnothing &\rightarrow \ce{2V^\prime_{Li} + V^{\bullet \bullet}_{O} + Li2O} \\
+\varnothing &\rightarrow \ce{2V^{\prime \prime}_{Fe} + V^{\bullet \bullet}_{O} + FeO}
+\end{align}
+\item[\textbf{Frenkel}] The formation of vacancies on their own results in a charged crystal which is highly unfavourable. As such, the ion usually instead moves to an interstitial site and forms a corresponding interstitial defect with equal but opposite charge to maintain neutrality:
+\begin{align}
+\varnothing &\rightarrow \ce{V^\prime_{Li} +  Li^{\bullet}_{i}}\\
+\varnothing &\rightarrow \ce{V^{\prime \prime}_{Fe} +  Fe^{\bullet\bullet}_{i}}\\
+\varnothing &\rightarrow \ce{V^{\bullet\bullet}_{O} +  O^{\prime \prime}_{i}}
+\end{align}
+\item[\textbf{Antisite}] The exchange of two ions between their normal lattice sites. These are of significant interests for \ce{LiFePO4}, as \ce{Li/Fe} antisite defects can form in \ce{Li} channels and prevent \ce{Li} migration.
+\begin{align}
+\varnothing &\rightarrow \ce{Li^\prime_{Fe} +  Fe^{\bullet}_{Li}}
+\end{align}
+\end{labeling}
