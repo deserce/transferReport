@@ -361,11 +361,12 @@ This approach is limited in that in order to model low defect concentrations, a 
 
 As such, this method is generally instead only applied in Molecular Dynamics (Section \ref{sec:MD}), where a large concentration of Li vacancies are added in order to allow diffusion events to be observed.
 
-\subsubsection{{\color{red}Symmetry optimisation}} %TODO rewrite
-By their nature, crystal structures contain a number of symmetry elements.
-In many cases, a number of interactions will be equivalent, enabling the number of computationally expensive operations to be reduced by simply treating some interactions as being equivalent and calculating them once rather than several times.
-The addition of defects to a system reduces the overall symmetry of the structure, but there often still exist some symmetry elements.
-Symmetry optimised algorithms are automatically implemented where appropriate in GULP.
+\subsubsection{Symmetry optimisation}
+Space groups allow for crystal structures to be expressed with their inherent symmetry included.
+These symmetrical elements will often lead to a number of interactions being equivalent.
+This in turn leads either to situations where the number of evaluations of potential functions can be reduced, or forces the evaluation of a force can be disregarded where it is known that the forces will always cancel each other out.
+GULP will automatically use symmetry optimised minimisation techniques where possible.
+
 
 \section{Molecular dynamics (MD)}
 \label{sec:MD}
