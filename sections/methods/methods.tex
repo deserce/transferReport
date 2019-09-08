@@ -278,7 +278,7 @@ Rather than truncating the Taylor expansion of the energy surface (Equation \ref
 As with the conjugate gradients method, an initial condition near the minima will guarantee convergence, in this case in a single iteration.
 That said, outside the quadratic region near minima, the Newton-Raphson method can be numerically unstable.
 Furthermore, calculating and inverting the Hessian matrix is a highly expensive.
-As such, a BFGS optimiser\cite{Shanno1970} is typically used to update the Hessian between iterations, only explicitly recalculating it only when a criterion indicating the updated Hessian is likely inaccurate is met.
+As such, a BFGS optimiser\cite{Shanno1970} is typically used to update the Hessian between iterations, only explicitly recalculating the Hessian when some criterion indicating the updated Hessian is likely inaccurate is met.
 This is considerably cheaper than a Newton-Raphson method on its own.
 
 Where numerical stability is an issue, conjugate gradients or a steepest descent can be used for an initial pass until close to the minima.
@@ -300,11 +300,11 @@ It is of course not feasible to model these systems as such, so boundary conditi
 
 Periodic boundary conditions (Figure \ref{fig:periodic}) take the contents of the simulation, and create copies of it at each boundary.
 When calculating interactions, species in the ``main'' simulation are able to interact with other species in the main simulation, and those in the repeated simulations, subject to cutoff criteria applied to said interactions.
-As the system is infinitely repeating, each copy of an atom must by definition be experiencing the same net force as each of its copies.
-As such, it is sufficient to calculate the forces for a single cell only.
+As the system is infinitely repeating, each copy of an atom must, by definition, be experiencing the same net force as each of its copies.
+As such, it is sufficient to calculate the forces on bodies in a single cell only.
 
-Another important of periodic boundary conditions is that atoms which would leave the boundaries of the simulation in the next iteration or time-step are reintroduced at the opposite boundary.
-For Molecular Dynamics simulations (Section \ref{sec:MD}), this allows for atoms to move freely rather than being constrained to certain positions in order to keep a constant number of bodies in the simulation.
+Another important feature of periodic boundary conditions is that atoms which would leave the boundaries of the simulation in the next iteration or time-step are reintroduced at the opposite boundary.
+For molecular dynamics simulations (Section \ref{sec:MD}), this allows for atoms to move freely rather than being constrained to certain positions in order to keep a constant number of bodies in the simulation.
 This is particularly useful when studying diffusion, allowing atoms near simulation boundaries to hop to all adjacent sites.
 
 
@@ -321,8 +321,8 @@ An overview of defect types, as well as the formalisms used in defining defect f
 \subsection{Mott-Littleton method}
 The Mott-Littleton method allows for the modelling of one or more defects at infinite dilution.
 The perfect crystal structure is first solved using the techniques listed in Section \ref{sec:minimization}, and the converged result used as an initial condition.
-Defects are then introduced the system is once more allowed to relax.
-The difference in energy of the systems is directly attributable to the perturbation introduced, and is therefore the energy required to form the defect introduced.
+Defects are then introduced to the system, and it is once more allowed to relax.
+The difference in energy of the two systems is directly attributable to the perturbation introduced, and is therefore the energy required to form the defect introduced.
 Use of a small periodic system would repeat the defect and be equivalent to simulating the defect at high concentration.
 
 Instead, the system is divided into three concentric spherical regions, as illustrated in Figure \ref{fig:mott}.
