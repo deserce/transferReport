@@ -5,8 +5,8 @@ In order to curtail \ce{CO2} emissions and limit the impact of global warming, a
 Unfortunately, a characteristic of many renewable energy sources, such as wind and solar energy, is the intermittent nature of its generation.\cite{Goodenough2010a,Ellis2012,Liu2013}
 As such, it is necessary to decouple the generation and consumption of the energy produced by these means via intermediate storage.
 
-Vehicle electrification may displace conventional combustion engine driven transport, another major source of greenhouse gases and pollution.\cite{Blomgren2017a}
-While some commercial success has being enjoyed for electric vehicles in recent years, concerns surrounding safety, longevity, and insufficient energy density to overcome the ``range anxiety'' of most consumers demands further development of battery technologies for widespread adoption of electric vehicles to occur.\cite{Cano2018a}
+Vehicle electrification may displace conventional combustion engine driven transport, another major source of greenhouse gases and pollution.\cite{Blomgren2017}
+While some commercial success has being enjoyed for electric vehicles in recent years, concerns surrounding safety, longevity, and insufficient energy density to overcome the ``range anxiety'' of most consumers demands further development of battery technologies for widespread adoption of electric vehicles to occur.\cite{Cano2018a,Schmuch2018}
 
 Finally, consumer demand for increasingly powerful, thin, and light portable electronics with larger times between charges has pushed current battery chemistries to their limits.\cite{Liu2010}
 With the majority of developments in batteries for portable electronics in recent years arising not from improvements in their chemistries, but by improved manufacturing processes with diminishing returns, the need for a fundamentally different battery chemistry may arise in the near future.
@@ -16,7 +16,7 @@ Any given use case will prioritise different properties in their energy storage 
 
 \section{Li-ion batteries}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
-Lithium, being the lightest and most electropositive metal, is well suited to applications in high density energy storage.
+Lithium, being the lightest and most electropositive metal,\cite{Tarascon2010} is well suited to applications in high density energy storage.
 The first commercial Li-ion battery was developed in the 1980's by John Goodenough\cite{Mizushima1981} and manufactured by Sony Co. in 1991.\cite{Li2018}
 This development, coupled with the rapid decrease in the size of transistors, sparked the portable electronics revolution.
 In the years since, a range of battery chemistries have been developed, tailored to specific applications.
@@ -62,9 +62,9 @@ As the rate at which the battery can discharge is dependant on the rate at which
 All Li-ion battery systems currently available commercially use liquid electrolytes.\cite{Famprikis2019}
 These typically consist of \ce{LiFP6} salts dissolved in a mixture of organic solvents.
 The exact composition will vary dependant on the choice of electrodes, application, and manufacturer.
-That said, the use of ethyl methyl carbonate (EC) is universal in organic electrolytes, as its inclusion results in the formation of a passivating layer on graphite anodes, preventing solvent molecules from intercalating into the anode and destroying the graphitic structure.
+That said, the use of ethyl methyl carbonate (EC) is universal in organic electrolytes, as its inclusion results in the formation of a passivating layer on graphite anodes, preventing solvent molecules from intercalating into the anode and destroying the graphitic structure.\cite{Palacin2009}
 
-These electrolyte solutions are typically stable to \SI{3.5}{\volt}, above which the electrolyte decomposes in a kinetically limited process.\cite{Palacin2009a}
+These electrolyte solutions are typically stable to \SI{3.5}{\volt}, above which the electrolyte decomposes in a kinetically limited process.
 As conventional batteries are often charged above \SI{3.5}{\volt}, this causes a slow decline in the performance of the battery over time.
 The use of hierarchical electrode materials may mitigate this issue and allow the use of higher voltage cathode chemistries. \cite{Zhou2018}
 
@@ -80,7 +80,7 @@ In particular, they may allow the use of Li-metal anodes (see Section \ref{sec:a
 \label{sec:anodes}
 Li metal is theoretically the best possible anode material with a huge theoretical capacity (\SI{3860}{\milli\ampere\hour\per\gram}/\SI{2061}{\milli\ampere\hour\per\centi\meter\cubed}), and was used in early Li battery research. 
 Unfortunately, dendrite formation at the anode surface ultimately leads to short circuiting and fires, preventing its use with current commercially viable electrolytes. \cite{Cheng2017,Guo2017a,Lin2017}
-As such, current commercial batteries generally use a graphitic anode which undergoes the following reversible reaction:
+As such, current commercial batteries generally use a graphitic anode which undergoes the following reversible reaction:\cite{Islam2014}
 \begin{equation}
 \ce{Li_xC6(s) <-> $x$Li+(soln) +6C(s) + $x$e-}
 \end{equation}
@@ -93,7 +93,7 @@ Tin and silicon based alloys offer higher capacities than graphite, but are curr
 
 \newpage
 \section{Cathode materials}
-Cathode materials are currently the limiting factor in commercial batteries, making them a highly active and rapidly changing field of research.
+Cathode materials are currently the limiting factor in commercial batteries, making them a highly active and rapidly changing field of research.\cite{Marom2011}
 While a wide range of materials are currently of research interest, only a few classes of cathode materials have enjoyed widespread commercialisation thus far.
 
 \subsection{\ce{LiMO2}}
@@ -105,7 +105,7 @@ While a wide range of materials are currently of research interest, only a few c
 \end{figure}
 \ce{LiMO2} adopt \ce{\alpha-NaFeO2} structures (Figure \ref{fig:LCO}), which is the prototype structure of \ce{AMO2} layered cathode materials.
 The structure is comprised of alternating layers of \ce{[CoO2]-} and \ce{Li+} layers ($R\bar{3}M$).\cite{Islam2014}
-The low migration barrier between adjacent \ce{Li+} sites within each layer leads to fast 2D ion transport through the structure.
+The low migration barrier between adjacent \ce{Li+} sites within each layer leads to fast 2D ion transport through the structure.\cite{Ellis2010a}
 The reaction occurring as lithium is reversibly extracted from \ce{LiMO2} cathodes can be written as:\cite{Islam2014}
 \begin{equation}
 \ce{Li_{1-x}MO2(s) +$x$Li+(soln) +$x$e- <=> LiMO2(s)}
@@ -115,31 +115,31 @@ Different metals allow for a larger fraction of Li to be reversibly extracted, c
 
 \paragraph{\ce{LiCoO2}}
 As shown in Figure \ref{fig:Goodenough}, the first commercial rechargeable Li-ion battery used a \ce{LiCoO2} (LCO) cathode (Figure \ref{fig:LCO}).
-Its capacity of around \SI{150}{\milli\ampere\hour\per\gram} constituted a step change from its predecessors when it was introduced in the 1990's, and it remains prevalent in commercial applications today, particularly in portable electronics.
+Its capacity of around \SI{150}{\milli\ampere\hour\per\gram} constituted a step change from its predecessors when it was introduced in the 1990's, and it remains prevalent in commercial applications today, particularly in portable electronics.\cite{Goodenough2013}
 
 That said, a number of issues exist with LCO cathodes.
-Firstly, the delithiation of the cathode is only reversible up to 50 \% removal of the total Li, thus around half (\SI{125}{\milli\ampere\hour\per\gram}) of the theoretical capacity (\SI{275}{\milli\ampere\hour\per\gram}) cannot be reversibly accessed.
+Firstly, the delithiation of the cathode is only reversible up to 50 \% removal of the total Li, thus around half of the theoretical capacity (\SI{275}{\milli\ampere\hour\per\gram}) cannot be reversibly accessed.\cite{Rozier2015}
 Additionally, there are a number of ethical, economic, and sustainability issues associated with the supply of cobalt,\cite{Mauger2017, Larcher2015} driving research into layered metal oxide chemistries using other metals:\cite{Rozier2015}
 
 \begin{labeling}{\textbf{\ce{LiMnO2}}}
 	\item [\textbf{\ce{LiNiO2}}] Despite being cheaper, more sustainable, and having a higher theoretical capacity (\SI{200}{\milli\ampere\hour\per\gram}) than \ce{LiCoO2}, the low thermal stability of lithium nickel oxide cathodes in the presence of organic electrolytes poses a significant safety risk, making it unsuitable for commercial applications.
-	Furthermore, it is not easily synthesised due to the formation of non-stoichiometric compounds arising from the spontaneous reduction of \ce{Ni^3+} to  \ce{Ni^2+}, resulting in \ce{Ni^2+} ions on \ce{Li+} sites.
-	\item [\textbf{\ce{LiMnO2}}] The similarity of the ionic radii of high-spin \ce{Mn^3+} (\SI{0.65}{\angstrom}) and \ce{Li+} (\SI{0.76}{\angstrom}) prevents the formation of stable layered \ce{LiMnO2}.
+	Furthermore, it is not easily synthesised due to the formation of non-stoichiometric compounds arising from the spontaneous reduction of \ce{Ni^3+} to  \ce{Ni^2+}, resulting in \ce{Ni^2+} ions on \ce{Li+} sites.\cite{Das2017}
+	\item [\textbf{\ce{LiMnO2}}] The similarity of the ionic radii of high-spin \ce{Mn^3+} (\SI{0.65}{\angstrom}) and \ce{Li+} (\SI{0.76}{\angstrom}) prevents the formation of stable layered \ce{LiMnO2}.\cite{Rozier2015,Rossen1992}
 	While metastable \ce{LiMnO2} can be synthesised, the more stable \ce{LiMn2O4} forms upon cycling, giving poor electrochemical performance.
 \end{labeling}
 
 \newpage
 \subsection{Mixed-metal layered \ce{LiMO2}}
-A strategy to incorporate some of the benefits of \ce{LiNiO2}, whilst overcoming the stability and synthesis issues which have prevented its practical use is the partial substitution of Ni for other metals.
+A strategy to incorporate some of the benefits of \ce{LiNiO2}, whilst overcoming the stability and synthesis issues which have prevented its practical use is the partial substitution of Ni for other metals.\cite{Rozier2015}
 Binary and ternary \ce{LiMO2} have been extensively studied, yielding compounds which have enjoyed commercial success.
 Each of the below compounds have the same layered structure as \ce{LiCoO2} shown in Figure \ref{fig:LCO}, with the occupancy of each metal site determined by the stoichiometry of the mixed-compounds, and any relevant cation ordering effects.
 
 \paragraph{\ce{Li[Ni_{1-y-z}Co_yAl_z]O2} (NCA)}
-The issues with \ce{LiNiO2} arise due to the instability of \ce{Ni^3+} at elevated temperatures, and the similar ionic radii of \ce{Ni^2+} and \ce{Li+} causing migration of \ce{Ni} into the \ce{Li} layers.
+The issues with \ce{LiNiO2} arise due to the instability of \ce{Ni^3+} at elevated temperatures, and the similar ionic radii of \ce{Ni^2+} and \ce{Li+} causing migration of \ce{Ni} into the \ce{Li} layers.\cite{Das2017}
 \ce{Li[Ni_{1-y-z}Co_yAl_z]O2} (NCA) type cathodes overcome these issues through the partial substitution of \ce{Ni^3+} with \ce{Co^3+} and \ce{Al^3+}:
 \begin{labeling}{\textbf{\ce{Co^3+}}}
 \item [\textbf{\ce{Co^3+}}] The addition of \ce{Co^3+} stabilises \ce{Ni^3+} at elevated temperatures, minimising the formation of \ce{Ni^2+}.
-The similar ionic radii of \ce{Co^3+} (\SI{0.545}{\angstrom}) and \ce{Ni^3+} (\SI{0.56}{\angstrom}) allows the formation of \ce{Li(Ni,Co)O2} solid solutions.
+The similar ionic radii of \ce{Co^3+} (\SI{0.545}{\angstrom}) and \ce{Ni^3+} (\SI{0.56}{\angstrom}) allows the formation of \ce{Li(Ni,Co)O2} solid solutions.\cite{Rozier2015}
 The large difference in ionic radii of these species with \ce{Li+} leads to M/Li ordering and stable layered oxides.
 
 \item [\textbf{\ce{Al^3+}}] \ce{Al^3+} cations occupy M sites in the \ce{MO2} layers.
@@ -194,7 +194,7 @@ An inductive effect from the \ce{(PO4)^3-} raises the redox potential of the \ce
 Indeed, this material is commonly used in high power situations, such as power tool applications.
 The use of Fe rather than Co significantly reduces material costs, and increases the environmental credentials of this material.
 
-The 1D migration channels\cite{Islam2014} somewhat hinder advancements via metal substitution of this cathode, as those metals with moderate \ce{Li/M} antisite defect concentrations suffer from reduced performance arising due to channel blocking.
+The 1D migration channels\cite{Islam2014} somewhat hinder advancements via metal substitution of this cathode, as those metals with moderate \ce{Li/M} antisite defect concentrations suffer from reduced performance arising due to channel blocking.\cite{Fisher2008b}
 
 \newpage
 \begin{figure}
@@ -209,8 +209,7 @@ Despite its relatively low capacities (\SI{140}{\milli\ampere\hour\per\gram}), \
 Low internal resistance, arising from the 3 dimensional ion conduction pathways, allow for rapid cycling at high currents.
 
 Whilst pure LMO batteries are uncommon, they are commonly coupled with NMC cathodes in EV applications, with the NMC component providing larger capacities, and the LMO component enabling for short periods of high current discharge, as required during rapid acceleration.
-This LMO/NMC combination is used in the Nissan Leaf, Chevrolet Volt and BMW i3.
-
+This strategy of combining battery chemistries is used in a number of production vehicles including the Nissan Leaf.\cite{Schmuch2018, Blomgren2017}
 These cathodes also offer good thermal stability, but have a poor lifespan.
 As such, there is interest in phasing out this material to extend the life of new electric vehicles.
 \newpage
