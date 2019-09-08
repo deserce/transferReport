@@ -393,8 +393,8 @@ f(t) = f(t_0 + \Delta t) = \sum_{n=0}^\infty \frac{1}{n!}f^{(n)}(t_0)\Delta t^n
 \end{equation}
 Applying this to the position of atoms in the system as a function of time yields:
 \begin{align}
-\mathbf{x}(t_0 + \Delta t) &= &x(t_0) \; &+ &x'(t_0)\Delta t \;&+& &\frac{1}{2}x''(t_0)\Delta t^2 \;&+& \frac{1}{6}x'''(t_0)\Delta t^3& +\;\dots\\
-                           &= &x_{t_0} \; &+  &v_{t_0}\Delta t \;&+&   &\frac{1}{2}a_{t_0}\Delta t^2     \;&+& \frac{1}{6}j_{t_0}\Delta t^3& +\;\dots
+\mathbf{x}(t_0 + \Delta t) &= &\mathbf{x}(t_0) \; &+ &\mathbf{x}'(t_0)\Delta t \;&+& &\frac{1}{2}\mathbf{x}''(t_0)\Delta t^2 \;&+& \frac{1}{6}\mathbf{x}'''(t_0)\Delta t^3& +\;\dots\\
+                           &= &\mathbf{x}_{t_0} \; &+  &\mathbf{v}_{t_0}\Delta t \;&+&   &\frac{1}{2}\mathbf{a}_{t_0}\Delta t^2     \;&+& \frac{1}{6}\mathbf{j}_{t_0}\Delta t^3& +\;\dots
 \end{align}
 Truncating this expansion at different terms yields a series of potential equations which can be solved, the discarded terms constituting the error in each step.
 The lowest order discarded term will determine the magnitude of the error, with ``simpler'' expansions requiring a correspondingly smaller $\Delta t$ in order to reduce the magnitude of the error to an acceptable value.
@@ -412,21 +412,21 @@ Unfortunately, the $\Theta(\Delta t^2)$ error terms in this integration scheme r
 
 \paragraph{Verlet algorithm} A commonly used integration scheme, the Verlet algorithm, instead truncates the Taylor expansion of the atom positions at the third derivative:
 \begin{equation}
-\mathbf{x}_{t + \Delta t} = x_{t} \; +  v_{t}\Delta t \;+ \frac{1}{2}a_{t}\Delta t^2     \;+ \frac{1}{6}j_{t}\Delta t^3 + \Theta(\Delta t^4)
+\mathbf{x}_{t + \Delta t} = \mathbf{x}_{t} \; +  \mathbf{v}_{t}\Delta t \;+ \frac{1}{2}\mathbf{a}_{t}\Delta t^2     \;+ \frac{1}{6}\mathbf{j}_{t}\Delta t^3 + \Theta(\Delta t^4)
 \label{eq:verlet1}
 \end{equation}
 with $j$ indicating the ``jerk'', or rate of change of acceleration of the function.
 As the rate of change of acceleration is related to the rate of change of force, the jerk term is not readily calculated.
 The Verlet algorithm overcomes this issue by using information known about the system in previous time steps $t_{t}$:
 \begin{equation}
-\mathbf{x}_{t - \Delta t} = x_{t} \; -  v_{t}\Delta t \;+ \frac{1}{2}a_{t}\Delta t^2     \;- \frac{1}{6}j_{t}\Delta t^3 + \Theta(\Delta t^4)
+\mathbf{x}_{t - \Delta t} = \mathbf{x}_{t} \; -  \mathbf{v}_{t}\Delta t \;+ \frac{1}{2}\mathbf{a}_{t}\Delta t^2     \;- \frac{1}{6}\mathbf{j}_{t}\Delta t^3 + \Theta(\Delta t^4)
 \label{eq:verlet2}
 \end{equation}
 
 Summing equations \ref{eq:verlet1} and \ref{eq:verlet2} yields:
 \begin{align}
-\mathbf{x}_{t + \Delta t} + \mathbf{x}_{t - \Delta t} &= 2x_{t} + a_{t}\Delta t^2 + \Theta(\Delta t^4)\\
-\mathbf{x}_{t + \Delta t} &= 2x_{t} + a_{t}\Delta t^2 -  \mathbf{x}_{t - \Delta t} + \Theta(\Delta t^4)
+\mathbf{x}_{t + \Delta t} + \mathbf{x}_{t - \Delta t} &= 2\mathbf{x}_{t} + \mathbf{a}_{t}\Delta t^2 + \Theta(\Delta t^4)\\
+\mathbf{x}_{t + \Delta t} &= 2\mathbf{x}_{t} + \mathbf{a}_{t}\Delta t^2 -  \mathbf{x}_{t - \Delta t} + \Theta(\Delta t^4)
 \label{eq:verlet}
 \end{align}
 
@@ -436,7 +436,7 @@ The Verlet integrator is also time reversible and symplectic (preserves energy),
 Of course, in order to calculate the kinetic energy of the system, knowledge of particle velocities is needed.
 Subtraction of equation \ref{eq:verlet2} from \ref{eq:verlet2} yields:
 \begin{equation}
-	v_{t} = \frac{x_{t+\Delta t} - x_{t-\Delta t}}{2\Delta t} + \Theta(\Delta t^2)
+	\mathbf{v}_{t} = \frac{\mathbf{x}_{t+\Delta t} - \mathbf{x}_{t-\Delta t}}{2\Delta t} + \Theta(\Delta t^2)
 \end{equation}
 giving the Verlet velocity.
 As with the $\Theta(\Delta t^2)$ term being too large for calculating the position with a Euler integration scheme, the error term here requires prohibitively small time steps for complex systems.
@@ -444,8 +444,8 @@ Velocities are to determine the temperature of the system, which in turn must be
 
 \paragraph{Velocity Verlet} The Velocity-Verlet algorithm explicitly calculates velocities at half time steps:
 \begin{align}
-	v_{t +\frac{1}{2}\Delta t} &= \frac{x_{t+\Delta t} - x_t}{\Delta t}\\[10pt]
-	&= v_t + \frac{1}{2}a_t\Delta t + \Theta(\Delta t^3)
+	\mathbf{v}_{t +\frac{1}{2}\Delta t} &= \frac{\mathbf{x}_{t+\Delta t} - \mathbf{x}_t}{\Delta t}\\[10pt]
+	&= \mathbf{v}_t + \frac{1}{2}\mathbf{a}_t\Delta t + \Theta(\Delta t^3)
 \end{align}
 This half-velocity, the predicted velocity at the time half way between the current and next time step, is then used to update the current positions of ions in the system as in a Euler scheme:
 \begin{equation}
@@ -454,7 +454,7 @@ This half-velocity, the predicted velocity at the time half way between the curr
 
 \noindent The velocity at the next time step is then calculated by:
 \begin{equation}
-	v_{t + \Delta t} = v_{t +\frac{1}{2}\Delta t} + \frac{1}{2}a_{t+\Delta t}\Delta t + \Theta(\Delta t^3)
+	\mathbf{v}_{t + \Delta t} = \mathbf{v}_{t +\frac{1}{2}\Delta t} + \frac{1}{2}\mathbf{a}_{t+\Delta t}\Delta t + \Theta(\Delta t^3)
 \end{equation}
 
 \noindent Explicitly calculating the velocities in this manner maintains the order of the error in the particle positions, whilst increasing the order of the error in the velocity terms.
