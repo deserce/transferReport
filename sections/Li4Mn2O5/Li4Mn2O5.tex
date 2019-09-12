@@ -12,8 +12,13 @@ While no ordering is noted in experimental work,\cite{Freire2016,Diaz-Lopez2018a
 It is worth noting that these studies, which utilised \textit{ab initio} methods, had no prerequisite for potential models robust in a wide range of local environments as is the case for such systems to be studied in this work.
 
 \newpage
+\subsection{Mean-field approximation}
+As discussed in {\color{red} Section 2}, the mean-field approximation can be used to study systems with partially occupied sites without the need to assign either a vacancy or given species to each site.
+This is a useful exercise for the purposes of validating potential parameters against experimental lattice parameters.
+The potential parameters used to study this system were taken from past work in literature on lithium manganese oxides by \citet{Ammundsen1999}, and are listed in Table \ref{tab:potentials}.
+As GULP cannot implement the core-shell model for systems with multiple species occupying a given site, a rigid-ion model is used here.
 
-\section{Tables}
+The lattice parameters calculated give good agreement with experimental work, within $2.5\%$ of experimental work, although it is noted in literature that local deviations from the rock-salt structure arising from structural disorder give rise to a broad range of interatomic spacings, which this model cannot replicate.
 
 \begin{table}[t]
 \centering
@@ -27,21 +32,28 @@ It is worth noting that these studies, which utilised \textit{ab initio} methods
 \ce{O^2- -\;O^2-}        & 22764.3 & 0.1490                         & 43.0 & -2.96      & 57.0\\
 \bottomrule
 \end{tabular}
+\label{tab:potentials}
 \end{table}
 
+
 \newcommand{\tableline}{\multicolumn{1}{c}{--}}
+\newcommand{\tableliner}{\multicolumn{1}{c}{{\color{red}--}}}
 \newcommand{\mc}[1]{\multicolumn{1}{c}{#1}}
 
 \begin{table}[t]
 \centering
-\caption{Calculated lattice parameters of \ce{Li4Mn2O5} using mean-field approximation.}
+\caption{Calculated lattice parameters of \ce{Li4Mn2O5} using mean-field approximation compared to experimental data.}
 \begin{tabular}{lS[table-format=1.4]S[table-format=1.4]S[table-format=1.4]S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]}
 \toprule
 \textbf{Lattice parameter} &\mc{\textbf{a} (\AA)}   & \mc{\textbf{b} (\AA)} & \mc{\textbf{c} (\AA)}& \mc{$\boldsymbol{\alpha}$ (\si{\degree})} & \mc{$\boldsymbol{\beta}$ (\si{\degree})} & \mc{$\boldsymbol{\gamma}$ (\si{\degree})}\\
 \midrule
 Experimental \cite{Freire2016} & 4.1733  & \tableline & \tableline & 90.0 & \tableline & \tableline \\
 Mean-field                     & 4.0705  & \tableline & \tableline & 90.0 & \tableline & \tableline \\ 
-\textit{\% $\Delta$}                 & -2.46   & \tableline & \tableline & \tableline & \tableline & \tableline \\\bottomrule
+\textit{$\Delta$}                 & -0.1028   & \tableline & \tableline & \tableline & \tableline & \tableline \\
+\textit{$\Delta$ (\%)}                 & -2.46   & \tableline & \tableline & \tableline & \tableline & \tableline \\\bottomrule
+\end{tabular}
+\end{table}
+\newpage
 \end{tabular}
 \end{table}
 
