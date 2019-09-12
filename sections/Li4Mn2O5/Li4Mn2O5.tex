@@ -126,3 +126,47 @@ Literature potentials unsuitable.
 Unstable in MD in either case
 
 \newpage
+\subsection{Ordered structures}
+As generation of random structures led to unstable simulations, irrespective of potentials selected, ordered structures were taken from literature.
+\citet{Diaz-Lopez2017} proposed a ground state structure, shown in Figure 
+
+\begin{figure}[p]
+\centering
+
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width = 0.9\linewidth]{figures/structures/ordered_in}
+\caption{Input structure\cite{Diaz-Lopez2017}}
+\end{subfigure}%
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width = 0.9\linewidth]{figures/structures/ordered_in}
+\caption{Relaxed structure}
+\end{subfigure}
+
+\caption[Comparison of the initial and relaxed structures for ordered \ce{Li4Mn2O5}]{Comparison of the initial and relaxed structures for \ce{Li4Mn2O5}, with ordering as proposed by \citet{Diaz-Lopez2017}.}
+\end{figure}
+
+\begin{table}[p]
+\centering
+\caption{Calculated lattice parameters of ordered \ce{Li4Mn2O5} compared to DFT data from literature.}
+\begin{tabular}{lS[table-format=4.4]S[table-format=4.4]S[table-format=4.4]S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]}
+\toprule
+\textbf{Lattice parameter} &\mc{\textbf{a} (\AA)}   & \mc{\textbf{b} (\AA)} & \mc{\textbf{c} (\AA)}& \mc{$\boldsymbol{\alpha}$ (\si{\degree})} & \mc{$\boldsymbol{\beta}$ (\si{\degree})} & \mc{$\boldsymbol{\gamma}$ (\si{\degree})}\\
+\midrule
+DFT structure \cite{Diaz-Lopez2017} &  4.0390  & 12.4312 &  4.0268 & 90.0       & \tableline & \tableline \\
+This work                           &  3.9446  & 12.3911 &  3.9541 & 90.0       & \tableline & \tableline \\ 
+\textit{$\Delta$}                   & -0.0944  & -0.0401 & -0.0726 & \tableline & \tableline & \tableline \\
+\textit{$\Delta$ (\%)}              & -2.34    & -0.32   & -1.80   & \tableline & \tableline & \tableline \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[height = 0.5\textheight]{figures/orderedlabels/orderedlabels}
+\caption[Site labelling scheme for ordered \ce{Li4Mn2O5}]{Site labelling scheme for ordered \ce{Li4Mn2O5}. A reflection at either the top or bottom plane yields the structure proposed by \citet{Diaz-Lopez2017}. Li ions: green; Mn ions: purple; O atoms: red.
+}
+\label{fig:orderedlabel}
+\end{figure}
