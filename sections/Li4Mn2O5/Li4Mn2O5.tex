@@ -54,7 +54,67 @@ Mean-field                     & 4.0705  & \tableline & \tableline & 90.0 & \tab
 \end{tabular}
 \end{table}
 \newpage
-\end{tabular}
-\end{table}
 
-\section{Chapter summary}
+\subsection{Random structure generation}
+In the absence of information regarding the energetics or stability of given local environments, nor a means of determining forces by calculated electron densities and thus modelling ``extreme'' environments, it must suffice to study randomly generated structures.
+These structures may well contain local environments not able to be suitably replicated with the potential model available.
+
+Twenty random structures were generated, half containing 216 atoms and the other half containing 1728 atoms, with each site randomly assigned an atom in accordance with the occupancy of that site.
+As each site now explicitly contained a single ion, the core-shell model could be used in order to increase the accuracy of calculations.
+Of the ten systems generated for the 216 and 1728 atom systems, two and eight of these systems converged respectively.
+The other systems either exceeded the maximum number of function calls (100,000), which in GULP is generally indicative that a system is unlikely to converge, or some core-shell distance exceeded 0.6 \AA, indicating that a local environment existed which could not adequately be modelled by the potential parameters selected.
+
+Table \ref{tab:randomresults} gives the lattice parameters of each of the relaxed random structures which converged.
+Supercell lengths are scaled to allow direct comparison with experimental data.\cite{Freire2016}
+Whilst some structures do give good agreement with experimental lattice parameters (e.g. 1728 atoms, trial 9), some other randomly generated structures have cell lengths which differ from experiment by over 7 percent.
+
+Even for those structures which do closely match experimental lattice parameters, local deviations of atom positions are huge, suggesting that either the potentials selected are not suitable for the material or that randomly generating structures in this manner leads to unphysical local environments forming. This can be seen in Figure \ref{fig:random}, which is representative of the distortions seen in all randomly generated structures upon relaxation.
+
+\newpage
+\begin{landscape}
+\begin{table}[h]
+\centering
+\caption{Calculated lattice parameters of \ce{Li4Mn2O5} for randomly generated structures compared to experimental data, discarding those simulations which did not converge.}
+\begin{tabular}{lr @{\hskip 1cm} *{3}{d{1.4}} *{3}{d{3.1}} @{\hskip 1cm} *{6}{d{2.2}}}
+\toprule
+&&\multicolumn{6}{c}{Lattice parameter}&\multicolumn{6}{c}{$\Delta$ (\%)}\\
+\cmidrule(lr){3-8}
+\cmidrule(lr){9-14}
+\textbf{Case} &\textbf{\#}&\mc{\textbf{a} (\AA)}   & \mc{\textbf{b} (\AA)} & \mc{\textbf{c} (\AA)}& \mc{$\boldsymbol{\alpha}$ (\si{\degree})} & \mc{$\boldsymbol{\beta}$ (\si{\degree})} & \mc{$\boldsymbol{\gamma}$ (\si{\degree})} &\mc{\textbf{a}}   & \mc{\textbf{b}} & \mc{\textbf{c}}& \mc{$\boldsymbol{\alpha}$} & \mc{$\boldsymbol{\beta}$} & \mc{$\boldsymbol{\gamma}$}\\
+\midrule \vspace{0.5cm}
+Experimental \cite{Freire2016}& & 4.1733  &  & & 90.0 &  &  &&&&&& \\ 
+216 atoms & 1 & 3.9236 & 4.3417 & 4.2291 & 89.1 & 89.1 & 88.8 & 5.98 & -4.04 & -1.34 & 0.95 & 1.00 & 1.35\\ 
+& 8 & 4.2818 & 3.9504 & 4.3069 & 88.2 & 90.0 & 90.1 & -2.60 & 5.34 & -3.20 & 2.05 & 0.01 & -0.07\\ 
+& 9 & 4.0880 & 4.0162 & 4.4424 & 88.5 & 89.6 & 89.2 & 2.04 & 3.76 & -6.45 & 1.69 & 0.44 & 0.87\\ \vspace{0.5cm}
+& 10 & 4.0871 & 4.5213 & 3.9217 & 91.1 & 87.9 & 87.6 & 2.07 & -8.34 & 6.03 & -1.19 & 2.37 & 2.66\\ 
+1728 atoms & 1 & 3.8624 & 4.4443 & 4.1821 & 88.7 & 90.1 & 89.6 & 7.45 & -6.50 & -0.21 & 1.42 & -0.06 & 0.50\\ 
+& 2 & 3.9664 & 4.3081 & 4.2099 & 90.9 & 90.7 & 88.8 & 4.96 & -3.23 & -0.88 & -1.05 & -0.75 & 1.31\\ 
+& 4 & 4.1231 & 4.1710 & 4.1417 & 90.1 & 90.1 & 89.4 & 1.20 & 0.06 & 0.76 & -0.06 & -0.06 & 0.67\\ 
+& 5 & 4.0915 & 4.2965 & 4.1210 & 89.5 & 89.5 & 89.9 & 1.96 & -2.95 & 1.25 & 0.57 & 0.53 & 0.06\\ 
+& 7 & 4.0180 & 4.3784 & 4.0803 & 90.3 & 90.2 & 89.5 & 3.72 & -4.92 & 2.23 & -0.36 & -0.23 & 0.59\\ 
+& 8 & 4.1189 & 4.3067 & 4.0170 & 90.6 & 89.1 & 88.6 & 1.30 & -3.20 & 3.74 & -0.69 & 1.03 & 1.52\\ 
+& 9 & 4.1648 & 4.1826 & 4.1599 & 90.1 & 91.0 & 89.8 & 0.20 & -0.22 & 0.32 & -0.15 & -1.14 & 0.22\\ 
+& 10 & 4.0773 & 4.3573 & 4.1014 & 90.9 & 90.2 & 89.6 & 2.30 & -4.41 & 1.72 & -1.00 & -0.22 & 0.49\\ \bottomrule
+\end{tabular}
+\label{tab:randomresults}
+\end{table}
+\end{landscape}
+\newpage
+\begin{figure}[H]
+\centering
+ \begin{subfigure}{\textwidth}
+ \centering
+    \includegraphics[height=0.4\textheight]{figures/structures/random_initial}
+    \caption{Initial structure}
+    \label{fig:random_initial}
+ \end{subfigure}
+  \begin{subfigure}{\textwidth}
+   \centering
+    \includegraphics[height=0.4\textheight]{figures/structures/random_final}
+    \caption{Relaxed structure}
+    \label{fig:random_final}
+ \end{subfigure}
+\label{fig:random}
+\caption{Comparison of the initial and final structures obtained by relaxing a randomly generated 1728 atom (trial 9) \ce{Li4Mn2O5} disordered rock-salt.}
+\end{figure}
+
