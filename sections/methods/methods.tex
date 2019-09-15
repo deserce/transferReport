@@ -81,6 +81,8 @@ This of course can pose an issue when seeking to study systems where no experime
 
 \noindent Other common short range potential models are given in Table \ref{tab:potentialmodels}
 
+\newpage
+
 \begin{table}[t]
   \centering
   \caption{Common short-range two-body potential models.\cite{Gale2003}}
@@ -101,17 +103,17 @@ This of course can pose an issue when seeking to study systems where no experime
 \end{table}
 
 \vspace{-5pt}
+
 \paragraph{Finite-range implementation}
 As the name suggests, the short-range terms dominate in the short-range, but the force arising from these interactions decreases rapidly with increasing interatomic distance.
-To decrease the computational expense, a threshold radius is defined beyond which all forces are assumed to be zero.
+To decrease computational expense, a threshold radius is defined beyond which all forces are assumed to be zero.
 The selection of this threshold is important, as the computational expense is of $O(r_t^2)$, so the shorter this radius the less expensive the simulation, whereas too small a radius will result in a change in the simulation result and decrease in model quality.
-
-In order to prevent this strategy introducing discontinuity into the system, additional terms are added to smoothly reduce the interatomic potential and associated energy derivatives to zero at the threshold radius. %TODO rephrase
+In order to prevent this strategy introducing discontinuity into the system, additional terms are added to smoothly reduce the interatomic potential and associated energy derivatives to zero at the threshold radius. 
 
 
 \subsection{Three-body interactions}
 Three-body interactions can be interpreted as those which arise due to bond/electron pair repulsion or charge dispersion between three bodies in covalent and ionic models of bonding respectively.
-The inclusion of this term is not necessary in all systems, but can increase the quality of certain battery models, particularly when modelling polyanion species.
+The inclusion of this term is not necessary in all systems, but can increase the quality of certain battery models, particularly when modelling polyanion species, such as \ce{PO4} and \ce{SiO4}.
 The magnitude of this term is relatively small compared to two-body interactions, and unless a strong three-body interaction exists in a system, it is only included to calculate of properties dependent on three-body interactions such as phonon dispersion curves.
 
 A commonly used three-body potential is the harmonic model:
