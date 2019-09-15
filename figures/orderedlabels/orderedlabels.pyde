@@ -45,7 +45,7 @@ def draw():
     
     
     
-    # stroke(155)
+    stroke(155)
     dash.line(coords[0][0], coords[0][1], coords[27][0], coords[27][1])
     dash.line(coords[2][0], coords[2][1], coords[29][0], coords[29][1])
     dash.line(coords[6][0], coords[6][1], coords[33][0], coords[33][1])
@@ -66,12 +66,59 @@ def draw():
     mncounter = 1
     licounter = 1
     vaccounter = 1
+    intercounter = 1
     
     faded = [1]*len(coords)
     keyli = [2,4,10,20, 28, 32]
     keyo = [5, 11, 13, 19, 23, 31]
     keymn = [14, 22]
     keyvac = [1, 29]
+    
+    inter = [[0,0], [0,0], [0,0]]
+    # Interstitial 1
+    for i in [0,1]:
+        for j in keyli[0:3] + [keymn[0]] + keyo[0:3] + [keyvac[0]]:
+            inter[0][i] += coords[j][i]
+        inter[0][i] = inter[0][i]/8
+
+        for j in keyli[2:4] + keymn + keyo[1:5]:
+            inter[1][i] += coords[j][i]
+        inter[1][i] = inter[1][i]/8
+    
+        for j in keyli[3:] + [keymn[1]] + keyo[3:] + [keyvac[1]]:
+            inter[2][i] += coords[j][i]
+    
+        inter[2][i] = inter[2][i]/8    
+    
+    stroke(0,0,255,200)
+    
+    corners = [[keyli[0], keyo[2]],
+               [keyli[1], keyo[1]],
+               [keyli[2], keyo[1]],
+               [keyvac[0], keymn[0]],
+               
+               [keyli[2], keyo[4]],
+               [keyli[3], keyo[2]],
+               [keyo[1], keymn[1]],
+               [keyo[3], keymn[0]],
+               
+               [keyli[3], keyo[5]],
+               [keyli[4], keyo[4]],
+               [keyli[5], keyo[3]],
+               [keyvac[1], keymn[1]]]
+    dash.pattern(5,30)
+    for i in corners:
+        w = 5
+        
+        w1x = (coords[i[0]][0] * w + coords[i[1]][0]) / (w+1)
+        w1y = (coords[i[0]][1] * w + coords[i[1]][1]) / (w+1)
+        
+        w2x = (coords[i[0]][0] + coords[i[1]][0] * w) / (w+1)
+        w2y = (coords[i[0]][1] + coords[i[1]][1] * w) / (w+1)
+        dash.line(w1x, w1y, w2x, w2y)
+               
+    dash.pattern(width/100,width/100)
+    
     for i in keyli + keyo + keymn + keyvac:
         faded[i] = 0
     
@@ -87,7 +134,7 @@ def draw():
             circle(coords[i][0], coords[i][1], diam)
             if faded[i] == 0:
                 fill(0)
-                text(str(licounter),coords[i][0], coords[i][1])
+                text(str(licounter),coords[i][0], coords[i][1]-5)
                 licounter += 1
             
         elif type[i] == 1:
@@ -95,21 +142,31 @@ def draw():
             dash.rect(coords[i][0], coords[i][1], diam, diam)
             if faded[i] == 0:
                 fill(0)
-                text(str(vaccounter),coords[i][0], coords[i][1])
+                text(str(vaccounter),coords[i][0], coords[i][1]-5)
                 vaccounter += 1
         elif type[i] == 2:
             fill(255,0,0, opac)
             circle(coords[i][0], coords[i][1], diam)
             if faded[i] == 0:
                 fill(0)
-                text(str(ocounter),coords[i][0], coords[i][1])
+                text(str(ocounter),coords[i][0], coords[i][1]-5)
                 ocounter += 1
         elif type[i] == 3:
             fill(128,0,128, opac)
             circle(coords[i][0], coords[i][1], diam)
             if faded[i] == 0:
                 fill(255)
-                text(str(mncounter),coords[i][0], coords[i][1])
+                text(str(mncounter),coords[i][0], coords[i][1]-5)
                 mncounter += 1
+        
+    for i in inter:
+        fill(180,180,255)
+        stroke(0,0,255,200)
+        
+        circle(i[0], i[1],150)
+        fill(255)
+        text(str(intercounter), i[0], i[1] - 20)
+        intercounter += 1
+        
     noLoop()
     exit()
