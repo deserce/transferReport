@@ -527,34 +527,22 @@ One such technique, time averaged density plots, discretises the simulation doma
 Visualising this data thresholding to include only those regions with a high probability of containing species of interest, allows for migration pathways between lattice sites to be identified.
 \section{Potential fitting}
 In order for simulations to provide valuable insights into the material being studies, the potential forms used closely approximate the true energy surface.
-Whilst some universal forcefields are available, the phenomenon of interest in cathode materials cannot be adequately replicated with these.
-As such, unless some potentials developed for the same or similar systems is already available, some new potentials must be derived for the system or class of systems being studied.
-
-\subsection{Basis}
-In order to fit a potential, some prior information about the system must be available. 
-If experimental data is available for material of interest, it is possible to fit potentials to this.
+Some prior information about the system must be available to serve as the basis to which parameters are fit.
 Crystallographic data provides atomic coordinates and unit cell parameters which, if replicated by a given set of potential, serve as a good metric of performance.
-Of course, the number of degrees of freedom associated with a typical potential set is large, so crystallographic data may not be sufficient to yield a unique potential set.
 Dielectric constants, elastic constants and other easily measured parameters may also serve as a basis for fitting.
+In the absence of experimental data, it is possible to fit directly to the potential energy surface yielded from \textit{ab initio} studies.
 
-In the absence of experimental data, such as in screening studies, \textit{ab initio} studies can be used as a substitute. 
-In this case, it is possible to fit directly to the potential energy surface the \textit{ab initio} yields.
-
-\subsection{Selection of potential form}
-The selection of potential forms will influence the quality of fit, with more complex potential forms able to more closely replicate the energy surface of the basis information.
 
 
 \subsection{Metrics}
 In order to distinguish between sets of potential parameters, an appropriate metric must be selected.
-Some commonly used metrics to compare the basis information and calculated structure:
+Some commonly used metrics to compare the basis information and calculated structure are:
 \begin{labeling}{\textbf{Atomic displacements}}
 	\item [\textbf{Lattice parameters}] The length and angles of the unit cell basis vectors
 	\item [\textbf{Atomic displacements}] Cartesian or fractional displacement of each atom
 	\item [\textbf{Forces}] The magnitude and direction of the force on each atom
 \end{labeling}
 Some or all of these metrics can be used, depending on the quality and nature of the basis information.
-For example, while forces can be used as a metric for fitting using crystallographic data as a basis, all forces will be zero in this case, so use of \textit{ab initio} data may be preferable for this metric, allowing the potential to be fit to a wider range of interatomic separations.
-
 A generic cost function can then be defined as:
 \begin{equation}
 	F = \sum_{n=1}^{N_{obs}}w_i(f_i^{obs} - f_i^{calc})^{n_i}
@@ -566,18 +554,16 @@ $n_i$ can be set as 1 to give a linear fit, where the cost function is simply th
 \subsection{Search algorithms}
 A number of pre-existing strategies for searching the parameter space (analogous to the configuration space discussed in Section \ref{sec:minimization}).
 Many of the techniques discussed in that section can also be applied to this problem.
-Of course, unlike in energy minimisation simulations where a reasonable initial condition can be determined, it is often the case in potential fitting that minimal prior information is available, or it is not possible to arrive at some initial conditions intuitively.
+However, the high dimensionality of parameter spaces may mean that several minima may exist when fitting to sparse data like crystallographic data.
 In such cases local optimisers, which must be initialised close to the global minima for it to be found, may not be appropriate.
-Global optimisers, such as genetic algorithms and Monte-Carlo techniques may be appropriate in these conditions.
-Pairing global optimisers (to broadly sample the parameter space), with local optimisers (to improve on the quality of parameters yielded by the global optimiser) is one way of overcoming the limits of local optimisers while limiting the cost of global optimisers.
 
-A limitation of all these approaches is that unless the selected potential form is such that all the basis data can be perfectly and uniquely replicated by a given parameter set, it is expected that the cost function surface will contain numerous local minima.
-This is especially likely where experimental data is being used, introducing some degree of random error to the basis information.
+Global optimisers, such as genetic algorithms and Monte-Carlo are suitable in such cases.
+Pairing global optimisers (to broadly sample the parameter space), with local optimisers (to improve on the quality of parameters yielded by the global optimiser) is one way of overcoming the limits of local optimisers without the cost of pure global optimisers.
+A limitation of all these approaches is that it can be difficult to distinguish between parameter sets which replicate the physics of the interactions, and those which are only suitable for replicating the basis data.
+This is especially likely when fitting to experimental parameters, introducing some degree of random error to the basis data.
 
-An approach currently in development by the author, in collaboration with Dr. Benjamin Morgan and Dr. Lucy Morgan, is to use Bayesian techniques to derive interatomic potentials.
-Sequential Monte Carlo for Approximate Bayesian Computation (SMC-ABC),\cite{Toni2009a} in contrast to frequentist approaches, preserves the uncertainty inherent in deriving an interatomic potential.
-
-Instead of yielding a single parameter set by gradient descent or similar, in SMC-ABC each parameter is modelled as being described by some initially broad statistical distribution.
+An approach currently in development by the author, in collaboration with Dr. Benjamin Morgan and Dr. Lucy Morgan, is to use a Bayesian approach (SMC-ABC\cite{Toni2009a}) to derive interatomic potentials.
+Instead of yielding a single parameter set by gradient descent or similar, each parameter is modelled as being described by some initially broad statistical distribution.
 Parameter sets are sampled from these prior distributions, and those which adequately replicate the basis data sets are used to update the prior distribution, biasing the new distribution to more frequently give parameter values close to those used in accepted trials.
-Iteratively applying this procedure yields distributions for each parameter being fitted, which correspond not to values which are necessarily the global minimum, but those values which offer good agreement with the basis data with low sensitivity to the values of the other fitted parameters.
-This is therefore suitable for fitting to data with some inherent error, and for cases where overfitting leads to the selection of potential parameters which are not robust to new data.
+Iteratively applying this procedure yields distributions for each parameter being fitted, which correspond not to values which are necessarily the global minimum, but those values which offer good agreement with the basis data with low sensitivity to the values of the other fitted parameters, yielding robust parameter sets.
+
