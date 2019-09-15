@@ -11,35 +11,33 @@ Some work presented in this section is derived from the MRes report which led to
 \section{Atomistic modelling}
 An understanding of the forces atoms experience as a function of their environment is vital to gain insights into the properties of systems of interest.
 One class of approaches for calculating the interatomic forces between atoms, \textit{ab initio} techniques, are based on quantum mechanics, and seek to determine electron density as a function of position. Whilst the scale of systems these strategies can be used for is increasing with developments in computational resource available, these techniques remain prohibitively expensive for large systems or systems studied over large time-scales.
-
-In contrast, atomistic techniques seek to express the forces between atoms as a series of empirically derived models, either fitted to experimental or \textit{ab initio} data, which can be cheaply evaluated, allowing for large scale systems to be studied over large time scales. This is particularly important when considering phenomenon which occur over large time scales, such as diffusion. 
+In contrast, atomistic techniques seek to express the forces between atoms as a series of empirically derived models, either fitted to experimental or \textit{ab initio} data, which can be cheaply evaluated, allowing for large scale systems to be studied over large time scales. 
+This is particularly important when considering phenomena which occur over large time scales, such as diffusion. 
 
 \section{Potential models}
 All atoms in a system, and their current position, momentum, and oxidation state, give rise to highly complex interactions contributing to the internal energy of the system, which must be enumerated if a perfect atomistic model is to be developed.
-
 Potential models are used to determine the forces in such systems by treating these as a series of discrete isolated interactions which sum to the same overall effect. 
 The internal energy of the system can then be given as the sum from one to n-body terms as such:\cite{Gale2003}
 \begin{align}
 U &=& &\sum_{i = 1} U_i&         &+& &\frac{1}{2}\sum_{i = 1} \sum_{j = 1} U_{ij}&  &+& &\frac{1}{6}\sum_{i = 1} \sum_{j = 1} \sum_{k = 1} U_{ijk}& &+& &\cdots\\
 &=& &\sum_{i = 1}^\prime U_i&  &+& &\sum_{i,j = 1}^\prime U_{ij}&                 &+& &\sum_{i,j,k = 1}^\prime U_{ijk}&                           &+& &\cdots
-\label{eq:taylor}
+\label{eq:terms}
 \end{align}
 With the first term accounting for single-body terms, the second term accounting for those interactions which exist between pairs of bodies and so on.
-The primed sum in Equation \ref{eq:taylor} distinguishes between interactions that are enumerated repeatedly, and instead counts each unique interaction only once, hence cancelling the $\frac{1}{N!}$ term.
+The primed sum in Equation \ref{eq:terms} distinguishes between interactions that are enumerated repeatedly, and instead counts each unique interaction only once, hence cancelling the $\frac{1}{N!}$ term.
 This expansion is exact if expanded to account for all N-body interactions in a system.
 
 As it is only the low order terms which give rise to the majority of the internal energy of a system, it suffices to truncate this expansion to lower order terms.
 Typically, this is limited to two-body terms, although higher order terms are included where these strongly impact the system (e.g. bond angles).
 Beyond this, higher order terms are only considered where the calculation of a specific property of interest requires their inclusion.
 Three-body interactions are required to calculate phonon distribution curves for example.
-
 Furthermore, as the number of bodies in an interaction increases, it becomes increasingly difficult to find a rational physical basis on which an empirical model can be based. 
  
 Single body interactions are implemented to represent an external forcefield being applied to a system, such as the application of an external electric field interacting with charged species.
 They are also used in the Einstein model, in which species do not interact with one another, and instead are attached to their lattice sites by a spring term.
 Single body terms are not used in the course of this study, but are referenced here for completeness sake.
 \subsection{Two-body interactions}
-The two-body terms in Equation \ref{eq:taylor}: 
+The two-body terms in Equation \ref{eq:terms}: 
 \begin{equation}
 \sum_{i,j = 1}^\prime U_{ij}
 \end{equation}
