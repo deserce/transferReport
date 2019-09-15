@@ -345,7 +345,6 @@ GULP will automatically use symmetry optimised minimisation techniques where pos
 \label{sec:MD}
 Energy minimisation techniques are used to study systems at zero Kelvin.
 As such, phenomenon arising only where ions have thermal energy cannot be studied with these techniques.
-
 Molecular dynamics (MD) can overcome this issue by assigning each particle a velocity (usually subject to a Boltzmann distribution) and allows the system to evolve over time subject to some imposed constraints.
 This in effect allows for phenomenon arising from thermal effects to be studied,
 assigns and tracks kinetic energy of atoms, allowing the system to evolve over time.
@@ -505,7 +504,7 @@ Similarly, the system pressure can be controlled by scaling the atomic coordinat
 In order to extract useful information from MD simulations, analysis of the positions of atoms as a function of time must be undertaken.
 A number of key parameters are calculated, from which interesting material properties can be derived.
 \paragraph{Mean square displacement}
-The mean square displacement (MSD) measures the distance each atom has moved from its position at a given time, usually treating $t_0$ as the first time step after the equilibration period.
+The mean square displacement (MSD) measures the distance each atom has moved from its position at a given time since equilibration.
 The MSD for an $N$ body system at time $t$ is defined as:
 \begin{equation}
 	MSD_t = \langle (\mathbf{x}_t - \mathbf{x}_0)^2 \rangle = \frac{1}{N}\sum_{i=1}^N(x_{i, t = t} - x_{i, t = 0})^2
@@ -516,13 +515,12 @@ By calculating the diffusion coefficient associated with all the particles of a 
 	MSD_t &= 2dDt\\[5pt]
 	D &= \frac{MSD_{t_2} - MSD_{t_1}}{2d(t_2 - t_1)}t
 \end{align}
-
-The activation barrier associated with an average site hopping event can then be found by plotting the natural logarithm of the diffusion coefficient versus the inverse temperature:
+\noindent
+The activation barrier associated with an average site hopping event can be found by plotting the natural logarithm of the diffusion coefficient versus the inverse temperature, giving insights not accessible in zero Kelvin calculations:
 \begin{equation}
 	\ln{D} = \frac{-E_a}{R}\cdot\frac{1}{T} + \ln{A}
 \end{equation}
 
-This activation energy may offer insights into migration barriers not accessible in zero Kelvin calculations.
 \paragraph{Time averaged densities}
 Given the vast quantities of data obtained over a moderate length MD simulation, visualisation techniques which allow for features persistent across the entire simulation are particularly useful.
 One such technique, time averaged density plots, discretises the simulation domain and calculates the probability that a given species will be found in each subdomain at any given time.
