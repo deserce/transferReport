@@ -120,8 +120,26 @@ Experimental \cite{Freire2016}& & 4.1733  &  & & 90.0 &  &  &&&&&& \\
 
 \newpage
 \subsection{Ordered structures}
-As generation of random structures led to unstable simulations, irrespective of potentials selected, ordered structures were taken from literature.
-\citet{Diaz-Lopez2017} proposed a ground state structure, shown in Figure 
+As generation of random structures led to unstable simulations for dynamics studies, irrespective of the potential parameters selected, ordered structures were taken from literature as a basis for structural modelling.
+\citet{Diaz-Lopez2017} proposed a ground state structure, shown in Figure \ref{fig:random_initial}.
+The lattice parameters give good agreement with literature, within 2.5\% of DFT data.
+Additionally, as can be seen in Figure \ref{fig:random}, there is minimal movement of atoms from their initial sites.
+This agreement with DFT data serves to validate the suitability of the interatomic potentials used for modelling this system.
+\vfill
+\begin{table}[h]
+\centering
+\caption{Calculated lattice parameters of ordered \ce{Li4Mn2O5} compared to DFT data from literature.}
+\begin{tabular}{lS[table-format=4.4]S[table-format=4.4]S[table-format=4.4]S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]}
+\toprule
+\textbf{Lattice parameter} &\mc{\textbf{a} (\AA)}   & \mc{\textbf{b} (\AA)} & \mc{\textbf{c} (\AA)}& \mc{$\boldsymbol{\alpha}$ (\si{\degree})} & \mc{$\boldsymbol{\beta}$ (\si{\degree})} & \mc{$\boldsymbol{\gamma}$ (\si{\degree})}\\
+\midrule
+DFT structure \cite{Diaz-Lopez2017} &  4.0390  & 12.4312 &  4.0268 & 90.0       & \tableline & \tableline \\
+This work                           &  3.9446  & 12.3911 &  3.9541 & 90.0       & \tableline & \tableline \\ 
+\textit{$\Delta$}                   & -0.0944  & -0.0401 & -0.0726 & \tableline & \tableline & \tableline \\
+\textit{$\Delta$ (\%)}              & -2.34    & -0.32   & -1.80   & \tableline & \tableline & \tableline \\ \bottomrule
+\end{tabular}
+\end{table}
+\vspace{0.25\textheight}
 
 \begin{figure}[p]
 \centering
@@ -139,21 +157,6 @@ As generation of random structures led to unstable simulations, irrespective of 
 
 \caption[Comparison of the initial and relaxed structures for ordered \ce{Li4Mn2O5}]{Comparison of the initial and relaxed structures for \ce{Li4Mn2O5}, with ordering as proposed by \citet{Diaz-Lopez2017}.}
 \end{figure}
-
-\begin{table}[p]
-\centering
-\caption{Calculated lattice parameters of ordered \ce{Li4Mn2O5} compared to DFT data from literature.}
-\begin{tabular}{lS[table-format=4.4]S[table-format=4.4]S[table-format=4.4]S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]}
-\toprule
-\textbf{Lattice parameter} &\mc{\textbf{a} (\AA)}   & \mc{\textbf{b} (\AA)} & \mc{\textbf{c} (\AA)}& \mc{$\boldsymbol{\alpha}$ (\si{\degree})} & \mc{$\boldsymbol{\beta}$ (\si{\degree})} & \mc{$\boldsymbol{\gamma}$ (\si{\degree})}\\
-\midrule
-DFT structure \cite{Diaz-Lopez2017} &  4.0390  & 12.4312 &  4.0268 & 90.0       & \tableline & \tableline \\
-This work                           &  3.9446  & 12.3911 &  3.9541 & 90.0       & \tableline & \tableline \\ 
-\textit{$\Delta$}                   & -0.0944  & -0.0401 & -0.0726 & \tableline & \tableline & \tableline \\
-\textit{$\Delta$ (\%)}              & -2.34    & -0.32   & -1.80   & \tableline & \tableline & \tableline \\ \bottomrule
-\end{tabular}
-\end{table}
-
 
 \newpage
 \begin{figure}[h]
