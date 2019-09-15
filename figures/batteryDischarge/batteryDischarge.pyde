@@ -75,12 +75,12 @@ def draw():
     roundedRect(-rw / 2, -rh / 2, electrodew, rh, 50, 50)
 
     text("Cathode", -rw / 2 + electrodew / 2, rh / 2 + wireh / 2)
-    text(u"LiCoO\u2082", -rw / 2 + electrodew / 2, rh / 2 + wireh * 5 / 4)
+    text(u"(LiCoO\u2082)", -rw / 2 + electrodew / 2, rh / 2 + wireh * 5 / 4)
 
     fill(100, 100, 255)
     roundedRect(rw / 2 - electrodew, -rh / 2, electrodew, rh, 50, 50)
     text("Anode", rw / 2 - electrodew / 2, rh / 2 + wireh / 2)
-    text("Graphite", rw / 2 - electrodew / 2, rh / 2 + wireh * 5 / 4)
+    text("(Graphite)", rw / 2 - electrodew / 2, rh / 2 + wireh * 5 / 4)
 
     fill(184, 115, 51)
     rect(rw / 2 - wireo - platew / 2, -rh / 2, platew, rh * 0.95)
