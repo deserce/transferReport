@@ -287,32 +287,44 @@ The relatively low energy of the second most favourable defect type, O Frenkel, 
 \newpage
 
 
-\section{Migration energetics and pathways}
-\label{sec:migration}
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \caption{Li vacancy migration energies in \ce{Li4Mn2O5} in eV.}
-
-\begin{tabular}{c *{6}{d{3.4}}}
+\resizebox{0.6\columnwidth}{!}{
+\begin{tabular}{c *{6}{d{2.3}}}
 \toprule
 & \multicolumn{6}{c}{Final site} \\
 \cmidrule(lr){2-7}
 Initial site & \mc{1}     & \mc{2}     & \mc{3}     & \mc{4}     & \mc{5}     & \mc{6}     \\ \midrule
-1            & \tableline & 0.32       & 1.68       & \tableline & \tableline & \tableline \\   
-2            & 1.68       & \tableline & 2.13       & \tableline & \tableline & \tableline \\
-3            & 1.29       & 0.45       & \tableline & 0.61       & \tableline & \tableline \\
-4            & \tableline & \tableline & 0.61       & \tableline & 1.29       & 0.45       \\
-5            & \tableline & \tableline & \tableline & 1.61       & \tableline & 1.61       \\
-6            & \tableline & \tableline & \tableline & 2.13       & 1.68       & \tableline \\
+1            &            & 0.32       & 1.68       & \tableline & \tableline & \tableline \\   
+2            & 1.68       &            & 2.13       & \tableline & \tableline & \tableline \\
+3            & 1.29       & 0.45       &            & 0.61       & \tableline & \tableline \\
+4            & \tableline & \tableline & 0.61       &            & 1.29       & 0.45       \\
+5            & \tableline & \tableline & \tableline & 1.61       &            & 0.32       \\
+6            & \tableline & \tableline & \tableline & 2.13       & 1.68       &            \\
 \bottomrule
 \end{tabular}
-
-\label{tab:migrationMn}
+}
+\label{tab:migration}
 \end{table}
 
+\section{Migration energetics and pathways}
+\label{sec:migration}
+Table \ref{tab:migration} shows the Li migration energies for feasible migration pathways in the ordered \ce{Li4Mn2O5} structure.
+Rather than a random series of percolation paths as would be expected in a disordered rock-salt, the ordered structure consists of alternating Li1/Li2 and Li5/Li6 grids, connected by Li3/Li4 bridges. 
 
 
+With the exception of the path between sites 3 and 4, all migration pathways are highly energetically anisotropic.
+This arises from the significant difference in vacancy formation energies between sites, shown in Table \ref{tab:vacancies}.
+The overall effect of this is that upon partial delithiation of this model system, vacant low energy Li sites will rapidly be filled by Li ions in adjacent higher energy lattice sites, at which point lithium mobility will drop.
 
-\newpage
+Whilst the energy required to hop between sites 3 and 4 is relatively low, the barriers to move to either of these sites from a ``grid'' site is at least \SI{1.61}{\electronvolt}, so little to no interlayer diffusion is expected.
+As for migration through the layers, any migration route consists of alternating hops of \SI{0.32}{\electronvolt} and \SI{1.68}{\electronvolt}.
+Again, once Li ions have moved to occupy adjacent vacant low energy sites, little to no lithium mobility would be expected at typical operating temperatures.
+
+With \SIrange{0.4}{0.8}{\electronvolt} being typical migration barriers for a viable electrode material, the high barriers here demonstrate that this ordered approximation of \ce{Li4Mn2O5} is unrepresentative of disordered \ce{Li4Mn2O5}, which has demonstrated good electrochemical performance in experimental studies.\cite{Freire2016}
+%Whilst these barriers are consistent with those reported in literature,\cite{Diaz-Lopez2018} a means of generating structures containing percolation networks is needed in order to simulate long range ion migration.
+
+
 \section{Dynamics study}
 \newpage
