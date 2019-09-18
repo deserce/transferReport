@@ -1,0 +1,96 @@
+\chapter{Concluding remarks}
+
+\section{Conclusions}
+This work has highlighted the difficulties that arise when studying highly disordered crystalline materials.
+Whilst valuable insights into the energetics of defect formation can be yielded, neither random structure generation nor ordered structures are suited to the study of lithium mobility in disordered rock-salts.
+A need for new techniques suited to the study of these systems has been highlighted, 
+\newpage
+\section{Future work}
+
+\subsection{Solid electrolytes: \ce{Li3OX} (X = \ce{Cl}, \ce{Br})}
+The importance of solid electrolytes to the creation of an all-solid-state battery has led to their research being an active and rapidly evolving area.
+Lithium-rich anti-perovskite ceramics (including \ce{Li3OCl}, \ce{Li3OBr} and their derivatives)\cite{Zhao2012} have demonstrated high ionic conductivity, low electronic conductivity, good performance upon cycling, and wide stability windows.
+A number of factors are known to impact the performance of these materials, including grain boundaries,\cite{Dawson2018} protonation,\cite{Dawson2018a}, and halide composition,\cite{Dawson2018b} providing scope for a wide range of research avenues.
+
+Work done by experimental collaborators has indicated the possibility of O/Cl exchange in \ce{Li3OCl}, but no work in literature has yet examined this phenomenon.
+Work in the Islam group by Dr. James Dawson has already demonstrated that potentials well suited to the study of this system are known, offering confidence that this project can be completed in the timeframe proposed in Figure \ref{fig:gantt}.
+
+Further, the results of this study coupled with further findings by experimental collaborators may lead to further projects.
+The familiarity with this system that this initial project will provide, should allow for follow up studies to be completed on a relatively short time scale.
+
+\subsection{Disordered solids}
+Chapter 3 has demonstrated that a means of generating energetically feasible quasi-random structures is a necessity if dynamics studies are to be performed on disordered cathode materials.
+Cluster expansion\cite{Wood2015} allows for the generation of such structures, and is a suitable avenue to be explored for generating feasible structures.
+An extension of this technique to concatenate such structures, allowing for large scale disordered structures not computable in DFT to be studied using MD techniques may be a necessary extension to generate random percolation pathways characteristic of disordered rock-salts.
+
+\subsection{Additional work}
+The rapidly evolving field of battery materials necessitates that projects topics are decided upon somewhat reactively, with the results of previous studies and new findings in literature strongly influencing what topics might be considered topical at a given time.
+
+A nine month block in Figure \ref{fig:gantt} has been left as undecided, to allow for the findings of the previous studies and upcoming work to be reflected in the choice of research topics in the later stages of the PhD.
+\newpage
+\begin{figure}
+\centering
+\ganttset{group/.append style={black},
+milestone/.append style={red},
+progress label node anchor/.append style={text=red}}
+
+     \begin{ganttchart}[%Specs
+     y unit title=0.5cm,
+     y unit chart=0.8cm,
+     vgrid,hgrid,
+     title height=1,
+%     title/.style={fill=none},
+     title label font=\bfseries\footnotesize,
+%     bar/.style={fill=white},
+     bar height=0.4,
+%   progress label text={},
+     group right shift=0,
+     group top shift=0.7,
+     group height=.3,
+     group peaks width={0.2},
+     inline,
+     expand chart=\textwidth]{1}{24}
+    \gantttitle{Approximate schedule for future work}{24}\\  % title 1
+    \gantttitle[]{2019}{3}                 % title 2
+    \gantttitle[]{2020}{12} 
+    \gantttitle[]{2021}{9} \\              
+    \gantttitle{Q4}{3}                      % title 3
+    \gantttitle{Q1}{3}
+    \gantttitle{Q2}{3}
+    \gantttitle{Q3}{3}
+    \gantttitle{Q4}{3}
+    \gantttitle{Q1}{3}
+    \gantttitle{Q2}{3} 
+    \gantttitle{Q3}{3}\\
+    % Setting group if any
+    \ganttgroup[inline=false]{Solid electrolytes}{1}{5}\\ 
+    \ganttbar[inline=false]{Literature review}{1}{1}\\
+    \ganttbar[inline=false]{Calculations}{1}{5}\\
+    \ganttbar[inline=false]{Writing}{5}{5}\\
+    \ganttmilestone[inline=false]{Publication(s)}{6} \\
+    \ganttmilestone[inline=false]{Present: Arcachon}{10} \\
+	
+	\ganttgroup[inline=false]{Disordered cathodes}{6}{10}\\
+	\ganttbar[inline=false]{Method development}{6}{7}\\
+	\ganttbar[inline=false]{Calculations}{7}{9}\\
+	\ganttbar[inline=false]{Writing}{9}{10}\\
+	\ganttmilestone[inline=false]{Publication(s)}{11}\\
+	\ganttmilestone[inline=false]{Present: RSC Xmas Meeting}{15} \\
+	
+	\ganttgroup[inline=false]{Material TBC}{11}{19}\\ 
+	\ganttmilestone[inline=false]{Present: MRS Spring Meeting}{19} \\
+    
+    \ganttgroup[inline=false]{Produce thesis}{20}{24}\\ 
+    \ganttbar[inline=false]{Resolve research}{20}{21}\\
+    \ganttmilestone[inline=false]{Archive data}{21}\\
+    \ganttbar[inline=false]{Writing}{20}{24}\\
+    \ganttmilestone[inline=false]{First draft}{23}\\
+    \ganttmilestone[inline=false]{Submission}{24}
+
+    
+
+    
+\end{ganttchart}
+\caption{Gantt chart showing the proposed timeline of work to completion of the PhD.}
+\label{fig:gantt}
+\end{figure}
