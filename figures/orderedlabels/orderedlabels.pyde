@@ -2,10 +2,10 @@ add_library('pdf')
 add_library('dashedlines')
 def setup():
 
-    size(2000, 2500, PDF, 'orderedlabels.pdf')
+    size(2200, 2800, PDF, 'orderedlabels.pdf')
 def draw():
     background(255)
-    translate(width/2, width/8)
+    translate(width/2 + 180, width/8)
     voffset = width/3
     
     
@@ -13,7 +13,7 @@ def draw():
     
     layeryy = width/15
     layeryx = - width/12
-    layerx = width/3
+    layerx = width/3 - 100
     
     dash = DashedLines(this)
     dash.pattern(width/100,width/100)
@@ -90,7 +90,7 @@ def draw():
     
         inter[2][i] = inter[2][i]/8    
     
-    stroke(0,0,255,200)
+    stroke(0,0,255,230)
     
     corners = [[keyli[0], keyo[2]],
                [keyli[1], keyo[1]],
@@ -106,7 +106,8 @@ def draw():
                [keyli[4], keyo[4]],
                [keyli[5], keyo[3]],
                [keyvac[1], keymn[1]]]
-    dash.pattern(5,30)
+    dash.pattern(15,30)
+    strokeWeight(2)
     for i in corners:
         w = 5
         
@@ -125,7 +126,7 @@ def draw():
     for i in range(len(coords)):
         
         if faded[i] == 1:
-            opac = 50
+            opac = 100
         else: opac = 255
         stroke(255-opac)
         
@@ -167,6 +168,26 @@ def draw():
         fill(255)
         text(str(intercounter), i[0], i[1] - 20)
         intercounter += 1
-        
+    
+    stroke(0)
+    strokeWeight(4)
+    fill(0)
+    translate(-width/2 - 100, 7*height/8)
+    line(0,0,0,-150)
+    ah = 10
+    triangle(-ah, -150, ah, -150, 0, -150-2*ah)
+    
+    line(0,0,-layeryx*0.5,-layeryy*0.5)
+    triangle(-layeryx*0.5 - ah, -layeryy*0.5, 
+             -layeryx*0.5 + ah, -layeryy*0.5,
+             -layeryx*0.55, -layeryy*0.55)
+
+    line(0,0,150,0)
+    triangle(150, ah, 150, -ah, 150+2*ah, 0)
+    
+    textSize(50)
+    text('a',-layeryx*0.7-20, -layeryy*0.7 - 10)
+    text('b',0, -210)
+    text('c',190, -ah)
     noLoop()
     exit()
