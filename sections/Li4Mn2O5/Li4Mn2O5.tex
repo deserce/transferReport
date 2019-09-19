@@ -297,25 +297,25 @@ With \SIrange{0.4}{0.8}{\electronvolt} being typical migration barriers for a vi
 %Whilst these barriers are consistent with those reported in literature,\cite{Diaz-Lopez2018} a means of generating structures containing percolation networks is needed in order to simulate long range ion migration.
 
 
-\section{Dynamics study}
-An understanding of lithium ion mobility in battery materials is key to characterising their performance.
+\section{Li-ion diffusion from MD}
+%An understanding of lithium ion mobility in battery materials is key to characterising their performance.
 As \ce{Li4Mn2O5} is a disordered rock-salt, isotropic diffusion throughout the bulk material is expected, even if there is some degree of anisotropy locally.
 The results presented in Section \ref{sec:migration} showed that the majority of lithium migration pathways have too large a migration barrier for high lithium mobility to be observed at moderate temperatures.
 In order to verify that this holds true with thermal effects present, a MD study was performed.
 A system consisting of 11264 ions (an 8x8x8 supercell of the ground structure proposed by \citet{Diaz-Lopez2017}) had 10\% of lithium ions removed (10854 ions) at random, charge compensated by the reduction of \ce{Mn^3+ -> Mn^4+}.
 
 Figure \ref{fig:msdall} shows the MSD of lithium ions throughout the structure as a function of temperature.
-At temperatures below 850K, little to no lithium mobility is observed.
-Whilst no experimental diffusion data is available in literature, the complete lack of lithium mobility at these temperatures is not consistent with experimental work in which the cathode cycled readily.
+At temperatures below 850K, little to no lithium diffusion is found.
+Whilst no experimental diffusion data is available in the literature, the complete lack of lithium mobility at these temperatures is not consistent with experimental work in which the cathode cycled readily.
 
-Figure \ref{fig:msd1000} shows the MSD of the system at 1000K, split into ion motion in Li1/Li2 and Li3/Li4 grids (a--c plane) and diffusion onto and between sites 3 and 4 (b-direction).
+Figure \ref{fig:msd1000} shows the MSD of the system at 1000K, split into ion motion in Li1/Li2 and Li3/Li4 grids (ac plane) and diffusion onto and between sites 3 and 4 (b-direction).
 There is clear anistropy, with no diffusion in the b-direction, which poorly replicates the expected isotropic diffusion characteristic of disordered rock-salts.
-Further, the diffusion rate in the a--c plane is very low considering the high temperatures of this simulation.
+Further, the diffusion rate in the ac plane is very low considering the high temperatures of this simulation.
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=0.8\linewidth]{figures/static/MSD_all}
-\caption{MSD plots of lithium ion diffusion through 10\% delithiated \ce{Li4Mn2O5} at a range of temperatures.}
+\caption{MSD plots of lithium ion diffusion in 10\% delithiated \ce{Li4Mn2O5} at a range of temperatures.}
 \label{fig:msdall}
 \end{figure}
 
