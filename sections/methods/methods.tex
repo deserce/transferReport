@@ -551,18 +551,18 @@ A generic cost function can then be defined as:
 Where $w_i$ is a weighting term, increasing the bias of the fit towards matching certain observables.
 $n_i$ can be set as 1 to give a linear fit, where the cost function is simply the sum of the error of the observables, or 2, giving the sum square of errors which more heavily penalises large errors in a given observation.
 
-\subsection{Search algorithms}
-A number of pre-existing strategies for searching the parameter space (analogous to the configuration space discussed in Section \ref{sec:minimization}).
-Many of the techniques discussed in that section can also be applied to this problem.
-However, the high dimensionality of parameter spaces may mean that several minima may exist when fitting to sparse data like crystallographic data.
+\subsection{Search algorithms} %TODO Review search algorithms
+There are a number of strategies for searching a given parameter space for stationary points.
+Many of the techniques used to search the configuration space (Section \ref{sec:minimization}) can also be applied to this problem.
+However, the high dimensionality of parameter spaces means several minima may exist when fitting to sparse information such as crystallographic data.
 In such cases local optimisers, which must be initialised close to the global minima for it to be found, may not be appropriate.
 
-Global optimisers, such as genetic algorithms and Monte-Carlo are suitable in such cases.
-Pairing global optimisers (to broadly sample the parameter space), with local optimisers (to improve on the quality of parameters yielded by the global optimiser) is one way of overcoming the limits of local optimisers without the cost of pure global optimisers.
-A limitation of all these approaches is that it can be difficult to distinguish between parameter sets which replicate the physics of the interactions, and those which are only suitable for replicating the basis data.
+Global optimisers, such as genetic algorithms and Monte-Carlo approaches, are suitable in such cases.
+Pairing global optimisers (to broadly sample the parameter space) with local optimisers (to improve on the quality of parameters yielded by the global optimiser) is one way of overcoming the limits of local optimisers without the cost of pure global optimisers.
+A limitation of all these approaches is that it can be difficult to distinguish between parameter sets which replicate the true physics of a system, and those which are only suitable for replicating the basis data.
 This is especially likely when fitting to experimental parameters, introducing some degree of random error to the basis data.
 
-An approach currently in development by the author, in collaboration with Dr. Benjamin Morgan and Dr. Lucy Morgan, is to use a Bayesian approach (SMC-ABC\cite{Toni2009a}) to derive interatomic potentials.
+An approach currently in development, in collaboration with Dr. Benjamin Morgan and Dr. Lucy Morgan, is to use a Bayesian approach (SMC-ABC\cite{Toni2009a}) to derive interatomic potentials.
 Instead of yielding a single parameter set by gradient descent or similar, each parameter is modelled as being described by some initially broad statistical distribution.
 Parameter sets are sampled from these prior distributions, and those which adequately replicate the basis data sets are used to update the prior distribution, biasing the new distribution to more frequently give parameter values close to those used in accepted trials.
 Iteratively applying this procedure yields distributions for each parameter being fitted, which correspond not to values which are necessarily the global minimum, but those values which offer good agreement with the basis data with low sensitivity to the values of the other fitted parameters, yielding robust parameter sets.
