@@ -121,7 +121,8 @@ Experimental \cite{Freire2016}& & 4.1733  & 4.1733 & 4.1733 & 90.0 & 90.0 & 90.0
 
 \newpage
 \subsection{Ordered structures}
-As generation of random structures led to unstable simulations for dynamics studies, irrespective of the potential parameters selected, ordered structures were taken from literature as a basis for structural modelling.
+\label{sec:ordered}
+As the generation of random structures led to unstable simulations for MD studies, irrespective of the potential parameters selected, ordered structures were taken from literature as a basis for structural modelling.
 The ground state structure proposed by \citet{Diaz-Lopez2017}, shown in Figure \ref{fig:random_initial}, is used in this work.
 The calculated lattice parameters give good agreement with literature, within 2.5\% of DFT data.
 Additionally, as can be seen in Figure \ref{fig:random}, there is minimal movement of atoms from their initial sites.
@@ -129,15 +130,15 @@ This agreement with DFT data serves to validate the suitability of the interatom
 \vfill
 \begin{table}[h]
 \centering
-\caption{Calculated lattice parameters of ordered \ce{Li4Mn2O5} compared to DFT data from literature.}
-\begin{tabular}{lS[table-format=4.4]S[table-format=4.4]S[table-format=4.4]S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]}
+\caption{Calculated lattice parameters of ordered \ce{Li4Mn2O5} compared to DFT data.}
+\begin{tabular}{lS[table-format=4.4]S[table-format=4.4]S[table-format=4.4]S[table-format=2.1]}
 \toprule
-\textbf{Lattice parameter} &\mc{\textbf{a} (\AA)}   & \mc{\textbf{b} (\AA)} & \mc{\textbf{c} (\AA)}& \mc{$\boldsymbol{\alpha}$ (\si{\degree})} & \mc{$\boldsymbol{\beta}$ (\si{\degree})} & \mc{$\boldsymbol{\gamma}$ (\si{\degree})}\\
+\textbf{Lattice parameter} &\mc{\textbf{a} (\AA)}   & \mc{\textbf{b} (\AA)} & \mc{\textbf{c} (\AA)}&\mc{$\boldsymbol{\alpha} = \boldsymbol{\beta} = \boldsymbol{\gamma}$ (\si{\degree})}\\
 \midrule
-DFT structure \cite{Diaz-Lopez2017} &  4.0390  & 12.4312 &  4.0268 & 90.0       & \tableline & \tableline \\
-This work                           &  3.9446  & 12.3911 &  3.9541 & 90.0       & \tableline & \tableline \\ 
-\textit{$\Delta$}                   & -0.0944  & -0.0401 & -0.0726 & \tableline & \tableline & \tableline \\
-\textit{$\Delta$ (\%)}              & -2.34    & -0.32   & -1.80   & \tableline & \tableline & \tableline \\ \bottomrule
+DFT structure \cite{Diaz-Lopez2017} &  4.0390  & 12.4312 &  4.0268 & 90.0 \\
+This work                           &  3.9446  & 12.3911 &  3.9541 & 90.0 \\ 
+\textit{$\Delta$}                   & -0.0944  & -0.0401 & -0.0726 &  0.0 \\
+\textit{$\Delta$ (\%)}              & -2.34    & -0.32   & -1.80   &  0.0 \\ \bottomrule
 \end{tabular}
 \end{table}
 \vspace{0.25\textheight}
