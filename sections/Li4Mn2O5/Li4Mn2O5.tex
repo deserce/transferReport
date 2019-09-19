@@ -61,20 +61,15 @@ Mean-field                     &  4.0705  & 90.0 \\
 \end{table}
 \newpage
 
-\subsection{Random structure generation}
-In the absence of information regarding the energetics or stability of given local environments, nor a means of determining forces by calculated electron densities and thus modelling ``extreme'' environments, it must suffice to study randomly generated structures.
-These structures may well contain local environments not stable with the potential parameters used.
+\subsection{Disordered structure generation} %TODO Review disordered structure generation
+In the absence of prior information regarding the energetics or stability of given local environments, nor a means of procedurally generating and analysing structures, random generation of structures is performed.
+Twenty random structures were generated, half containing 216 atoms and the other half containing 1728 atoms (to conserve stoichiometry), with each site randomly assigned an atom in accordance with the occupancy of that site.
+A number of these structures contained local environments not numerically stable with the potential parameters used, leading to these simulations crashing.
 
-Twenty random structures were generated, half containing 216 atoms and the other half containing 1728 atoms, with each site randomly assigned an atom in accordance with the occupancy of that site.
-As each site now explicitly contained a single ion, the core-shell model could be used in order to increase the accuracy of calculations.
-Of the ten systems generated for the 216 and 1728 atom systems, two and eight of these systems converged respectively.
-The other systems either exceeded the maximum number of function calls (100,000), which in GULP is generally indicative that a system is unlikely to converge, or some core-shell distance exceeded 0.6 \AA, indicating that a local environment existed which could not adequately be modelled by the potential parameters selected.
+Table \ref{tab:randomresults} gives the lattice parameters of each of the relaxed random structures which converged, with cell lengths scaled for comparison with experimental data.\cite{Freire2016}
+Whilst some structures do give good agreement with experimental lattice parameters (e.g. 1728 atoms, trial 9), some other randomly generated structures have cell lengths which differ from experiment by over 7 percent, suggesting that random structure generation does not produce structures which reliably agree with experiment.
 
-Table \ref{tab:randomresults} gives the lattice parameters of each of the relaxed random structures which converged.
-Supercell lengths are scaled to allow direct comparison with experimental data.\cite{Freire2016}
-Whilst some structures do give good agreement with experimental lattice parameters (e.g. 1728 atoms, trial 9), some other randomly generated structures have cell lengths which differ from experiment by over 7 percent.
-
-Even for those structures which do closely match experimental lattice parameters, local deviations of atom positions are huge, suggesting that either the potentials selected are not suitable for the material or that randomly generating structures in this manner leads to unphysical local environments forming. This can be seen in Figure \ref{fig:random}, which is representative of the distortions seen in all randomly generated structures upon relaxation.
+Even for those structures which do closely match experimental lattice parameters, local deviations of atom positions are huge, suggesting that either the potential parameters selected are not suitable for the material or that randomly generating structures in this manner leads to unphysical local environments forming. This can be seen in Figure \ref{fig:random}, which is representative of the distortions seen in all randomly generated structures upon relaxation.
 
 \newpage
 \begin{landscape}
