@@ -170,116 +170,89 @@ This work                           &  3.9446  & 12.3911 &  3.9541 & 90.0 \\
 \end{figure}
 
 \section{Intrinsic defects}
-Using the ordered structure proposed by \citet{Diaz-Lopez2017}, a series of point defect calculations were calculated, allowing for the formation energies of Schottky, Frenkel, and anti-site defects to be determined.
+Using the ordered structure from Section \ref{sec:ordered}, a series of point defect calculations were calculated, allowing for the formation energies of Schottky, Frenkel, and anti-site defects to be determined.
 Figure \ref{fig:orderedlabel} shows the labelling scheme used to refer to each symmetrically unique site in the structure throughout this section.
 \newpage
-\paragraph{Kr\"oger-Vink notation for \ce{Li4Mn2O5} vacancies}
-
-\begin{align}
-\varnothing &\rightarrow \ce{V^\prime_{Li_n}}\\
-\varnothing &\rightarrow \ce{V^{\prime \prime \prime}_{Mn_n}}\\
-\varnothing &\rightarrow \ce{V^{\bullet\bullet}_{O_n}}
-\end{align}
-\vfill
-\begin{table}[h]
+\begin{table}[p]
 \centering
-\caption{Isolated defect energies for the formation of vacancies in \ce{Li4Mn2O5} in eV.}
-\begin{tabular}{l *{3}{d{2.3}}}
+\caption{Isolated defect formation energies in ordered \ce{Li4Mn2O5}.}
+\vspace{0.5cm}
+\begin{subtable}{\linewidth}\centering
+\caption{Vacancies.}
+\begin{tabular}{l *{3}{d{2.2}}}
 \toprule
-&\multicolumn{3}{c}{Species}\\
+&\multicolumn{3}{c}{Energy (eV)}\\
 \cmidrule(lr){2-4}
-\textbf{Site (n)} & \mc{\ce{Li}} & \mc{\ce{Mn}} & \mc{\ce{O}}\\
+\textbf{Site (n)} & \mc{$\ce{V_{Li_n}}$} & \mc{$\ce{V_{Mn_n}}$} & \mc{$\ce{V_{O_n}}$}\\
 \midrule
-1 & 6.931 & 46.193 & 24.771 \\
-2 & 5.573 & 46.193 & 23.240 \\
-3 & 7.255 & \tableline & 24.612 \\
-4 & 7.255 & \tableline & 23.240 \\
-5 & 6.931 & \tableline & 24.612 \\
-6 & 5.573 & \tableline & 24.771 \\
+1 & 6.93 & 46.19 & 24.77 \\
+2 & 5.57 & 46.19 & 23.24 \\
+3 & 7.26 & \tableline & 24.61 \\
+4 & 7.26 & \tableline & 23.24 \\
+5 & 6.93 & \tableline & 24.61 \\
+6 & 5.57 & \tableline & 24.77 \\
 \midrule
-Minimum & 5.573 & 46.193 & 23.240  \\
+Minimum & 5.57 & 46.19 & 23.24  \\
 \bottomrule
 \end{tabular}
 \label{tab:vacancies}
-\end{table}
-\vspace{0.25\textheight}
-\newpage
-\paragraph{Kr\"oger-Vink notation for \ce{Li4Mn2O5} interstitial defects}
-\begin{align}
-\varnothing &\rightarrow \ce{Li^{\bullet}_{i_n}}\\
-\varnothing &\rightarrow \ce{Mn^{\bullet\bullet\bullet}_{i_n}}\\
-\varnothing &\rightarrow \ce{O^{\prime \prime}_{i_n}}
-\end{align}
+\end{subtable}
+\vspace{1cm}
 
-
-\vfill
-\begin{table}[h]
-\centering
-\caption{Isolated defect energies for interstitial defects in \ce{Li4Mn2O5} in eV. Sites 1, 2 and 3 refer interstices, whilst sites V1 and V2 refer to vacant O sites.}
-\begin{tabular}{l *{3}{d{3.3}}}
+\begin{subtable}{\linewidth}\centering
+\caption{Interstitial defects; 1 -- 3 refer to interstices, whilst V1 and V2 refer to vacant O sites.}
+\begin{tabular}{l *{3}{d{3.2}}}
 \toprule
-&\multicolumn{3}{c}{Species}\\
+&\multicolumn{3}{c}{Energy (eV)}\\
 \cmidrule(lr){2-4}
-\textbf{Site (n)} & \mc{\ce{Li}} & \mc{\ce{Mn}} & \mc{\ce{O}}\\
+\textbf{Site (n)} & \mc{$\ce{Li_{i_n}}$} & \mc{$\ce{Mn_{i_n}}$} & \mc{$\ce{O_{i_n}}$}\\
 \midrule
-1 & -3.850 & -36.410 & \tableline \\
-2 & -3.799 & -36.712 & -17.087 \\
-3 & -3.850 & -36.410 & \tableline \\
-V1 & -2.942 & -36.122 & -20.161 \\
-V2 & -2.942 & -36.122 & -20.161 \\
+1 & -3.85 & -36.41 & \tableline \\
+2 & -3.80 & -36.71 & -17.09 \\
+3 & -3.85 & -36.41 & \tableline \\
+V1 & -2.94 & -36.12 & -20.16 \\
+V2 & -2.94 & -36.12 & -20.16 \\
 \midrule
-Minimum & -3.850 & -36.712 & -20.161  \\
+Minimum & -3.85 & -36.71 & -20.16  \\
 \bottomrule
 \end{tabular}
 \label{tab:interstitial}
+\end{subtable}
+\label{tab:primitivedefects}
 \end{table}
-\vspace{0.25\textheight}
-\newpage
 
-\subsection{Isolated defects}
-Tables \ref{tab:vacancies} and \ref{tab:interstitial} show the formation energies of vacancies and interstitial defects at each site labelled in Figure \ref{fig:orderedlabel}.
-Oxygen interstitial defects introduced at interstices 1 and 3 migrated into the adjacent oxygen vacancy, with only interstitial site 2 able to host stable interstitial oxygen vacancies.
-It is more energetically favourable to introduce oxygen interstitial defects onto the vacant lattice sites.
+\clearpage
+\noindent
+Table \ref{tab:primitivedefects} shows the isolated energies of vacancies and interstitial defects at each site labelled in Figure \ref{fig:orderedlabel}.
+Oxygen interstitial defects introduced at interstices 1 and 3 displace into the adjacent oxygen vacancy, with only interstitial site 2 able to host stable interstitial oxygen vacancies.
+As expected, it is more energetically favourable to introduce oxygen interstitial defects onto the vacant lattice sites.
+The high energies associated with the formation of both manganese and oxygen vacancies suggests that such defects will be present at a very low concentration in the pristine material.
 The formation energy of lithium vacancies differs significantly between sites, which would lead to these sites being preferentially delithiated.
 
-\subsection{Compound defects}
-\begin{table}[h]
+\begin{table}[t]
 \centering
-\caption{Schottky defect energies in \ce{Li4Mn2O5}}
-\resizebox{0.9\columnwidth}{!}{
+\caption{Schottky and Frenkel defect energies in \ce{Li4Mn2O5}}
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{l l d{2.3} }
 \toprule
 \textbf{Type} & \textbf{Formula} & \mc{Formation energy (\si{\electronvolt})}\\
 \midrule
-Full & $\varnothing \rightarrow \ce{4 V^\prime_{Li} +  3 V^{\prime \prime \prime}_{Mn} + 4V^{\bullet \bullet}_{O} + Li4Mn2O5}$ & 15.11 \\
+Full Schottky& $\varnothing \rightarrow \ce{4 V^\prime_{Li} +  3 V^{\prime \prime \prime}_{Mn} + 4V^{\bullet \bullet}_{O} + Li4Mn2O5}$ & 15.11 \\
 Li Schottky-like & $\varnothing \rightarrow \ce{2V^\prime_{Li} + V^{\bullet \bullet}_{O} + Li2O} $ & 5.38 \\
 Mn Schottky-like & $\varnothing \rightarrow \ce{2V^{\prime \prime \prime}_{Mn} + 3 V^{\bullet \bullet}_{O} + Mn2O3}$ & 5.12 \\
+Li Frenkel & $\varnothing \rightarrow \ce{V^\prime_{Li} +  Li^{\bullet}_{i}}$                               & 1.72 \\
+Mn Frenkel& $\varnothing \rightarrow \ce{V^{\prime \prime \prime}_{Mn} +  Mn^{\bullet\bullet\bullet}_{i}}$ & 9.48 \\
+O Frenkel& $\varnothing \rightarrow \ce{V^{\bullet\bullet}_{O} +  O^{\prime \prime}_{i}}$                 & 3.08 \\
 \bottomrule
 \end{tabular}
 }
-\label{tab:schottky}
+\label{tab:schottkyfrenkel}
 \end{table}
 
-\begin{table}[h]
-\centering
-\caption{Frenkel defect energies in \ce{Li4Mn2O5}}
-\resizebox{0.6\columnwidth}{!}{
-\begin{tabular}{l l d{2.3}}
-\toprule
-\textbf{Species} & \textbf{Formula} & \mc{Formation energy (\si{\electronvolt})}\\
-\midrule
-Li & $\varnothing \rightarrow \ce{V^\prime_{Li} +  Li^{\bullet}_{i}}$                               & 1.72 \\
-Mn & $\varnothing \rightarrow \ce{V^{\prime \prime \prime}_{Mn} +  Mn^{\bullet\bullet\bullet}_{i}}$ & 9.48 \\
-O  & $\varnothing \rightarrow \ce{V^{\bullet\bullet}_{O} +  O^{\prime \prime}_{i}}$                 & 3.08 \\
-\bottomrule
-\end{tabular}
-}
-\label{tab:frenkel}
-\end{table}
 \noindent
-Tables \ref{tab:schottky} and \ref{tab:frenkel} show the formation energies of Schottky and Frenkel defects in \ce{Li4Mn2O5}.
-The high energies associated with all such defects shows that the equilibrium concentration all defects will be very low in the fully lithiated system.
-The most favourable, a Li Frenkel defect, would likely be unstable in a partially delithiated structure where few interstitial sites not adjacent to a Li vacancy would exist.
+Tables \ref{tab:schottkyfrenkel} shows the formation energies of Schottky and Frenkel defects in \ce{Li4Mn2O5}.
+The high energies associated with such defects suggests that the equilibrium concentration of all defects will be very low in the fully lithiated system.
+The most favourable, the Li Frenkel defect, would likely be unstable in a partially delithiated structure where few interstitial sites not adjacent to a Li vacancy would exist.
 The relatively low energy of the second most favourable defect type, O Frenkel, can be attributed to the presence of vacant O sites throughout the rock-salt structure.
 
 \newpage
