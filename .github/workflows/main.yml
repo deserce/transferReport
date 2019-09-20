@@ -10,3 +10,8 @@ jobs:
         uses: xu-cheng/latex-action@master
         with:
           root_file: transfer.tex
+      - name: Create artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: transfer.tex
+          path: ~
