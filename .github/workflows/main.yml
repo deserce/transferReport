@@ -12,5 +12,5 @@ jobs:
           root_file: transfer.tex
       - uses: actions/upload-artifact@master
         with:
-          name: transfer.pdf
-          path: /home/runner/work/transferReport/transferReport
+          name: report
+          path: /home/runner/work/transferReport/transferReport/transfer.pdf
