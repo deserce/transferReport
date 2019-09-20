@@ -10,7 +10,9 @@ jobs:
         uses: xu-cheng/latex-action@master
         with:
           root_file: transfer.tex
-      - uses: actions/upload-artifact@master
+      - name: Create artifact
+        if: contains(github.event.commits[0].message, '[pdf]') == true
+        uses: actions/upload-artifact@master
         with:
           name: report
           path: /home/runner/work/transferReport/transferReport/transfer.pdf
