@@ -411,7 +411,7 @@ Subtraction of equation \ref{eq:verlet2} from \ref{eq:verlet2} yields:
 \end{equation}
 giving the Verlet velocity.
 As with the $\Theta(\Delta t^2)$ term being too large for calculating the position with a Euler integration scheme, the error term here requires prohibitively small time steps for complex systems.
-Velocities are to determine the temperature of the system, which in turn must be a conserved quantity in certain ensembles. %TODO
+Velocities are used to determine the temperature of the system, which in turn must be a conserved quantity in certain ensembles, requiring low errors in the velocities calculated.
 
 \paragraph{Velocity Verlet} The Velocity-Verlet algorithm explicitly calculates velocities at half time steps:
 \begin{align}
@@ -550,7 +550,7 @@ A generic cost function can then be defined as:
 Where $w_i$ is a weighting term, increasing the bias of the fit towards matching certain observables.
 $n_i$ can be set as 1 to give a linear fit, where the cost function is simply the sum of the error of the observables, or 2, giving the sum square of errors which more heavily penalises large errors in a given observation.
 
-\subsection{Search algorithms} %TODO Review search algorithms
+\subsection{Search algorithms}
 There are a number of strategies for searching a given parameter space for stationary points.
 Many of the techniques used to search the configuration space (Section \ref{sec:minimization}) can also be applied to this problem.
 However, the high dimensionality of parameter spaces means several minima may exist when fitting to sparse information such as crystallographic data.
