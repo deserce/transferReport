@@ -3,8 +3,22 @@
 \usepackage{geometry}
 \geometry{a4paper,left=40mm,top=30mm, right = 20mm, bottom = 30mm} 
 
-\usepackage{nomencl}
+\usepackage[intoc]{nomencl}
+
 \makenomenclature
+
+\makeatletter
+\def\thenomenclature{%
+  \section*{\nomname}
+  \if@intoc\addcontentsline{toc}{chapter}{\nomname}\fi%
+  \nompreamble
+  \list{}{%
+    \labelwidth\nom@tempdim
+    \leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \itemsep\nomitemsep
+    \let\makelabel\nomlabel}}
+\makeatother
 
 \linespread{1.5}
 \usepackage{float}
@@ -120,7 +134,6 @@ This thesis may be made available for consultation within the University Library
 
 \newpage
 \input{sections/frontmatter/nomenclature}
-\addcontentsline{toc}{chapter}{Nomenclature}
 
 \newpage
 \pagenumbering{arabic}
