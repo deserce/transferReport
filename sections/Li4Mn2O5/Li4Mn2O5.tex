@@ -12,22 +12,10 @@ Further, the highly disordered nature of this material presents challenges to th
 \begin{figure}[h]
 \centering
 \vspace{1cm}
-\includegraphics[width=0.8\linewidth]{figures/structures/Li4Mn2O5_compressed}
-\caption[Crystal structure of \ce{Li4Mn2O5}]{Crystal structure of \ce{Li4Mn2O5}, showing an average \ce{MnO} rock-salt structure (space-group 225) with the random substitution of 2/\nth{3}\textsuperscript{s} of \ce{Mn} sites with Li, charge compensated by 1/\nth{6} of oxygen sites being vacant.. Li ions: green; Mn ions: purple; \ce{O} ions: red. Each lattice site shows a pie chart, corresponding to the occupancy of that site.}
+\includegraphics[width=0.4\linewidth]{figures/structures/Li4Mn2O5_compressed}
+\caption[Crystal structure of \ce{Li4Mn2O5}]{Crystal structure of \ce{Li4Mn2O5}, showing an average \ce{MnO} rock-salt structure (space-group 225) with the random substitution of 2/\nth{3}\textsuperscript{s} of \ce{Mn} sites with Li, charge compensated by 1/\nth{6} of oxygen sites being vacant. Li ions: green; Mn ions: purple; \ce{O} ions: red. Each lattice site shows a pie chart, corresponding to the occupancy of that site.}
 \label{fig:Li4Mn2O5-average}
 \end{figure}
-
-\section{Structure generation and modelling}
-While no ordering is noted in experimental work,\cite{Freire2016,Diaz-Lopez2018a} computational studies have identified a number of ordered structures which lower energies than pseudo-random structures generated for comparison.\cite{Diaz-Lopez2017,Bhandari2019}
-
-\newpage
-\subsection{Mean-field approximation}
-The mean-field approximation can be used to study systems with partially occupied sites without the need to assign either a vacancy or given species to each site.
-This is a useful exercise for the purposes of validating potential parameters against experimental lattice parameters.
-The potential parameters used to study this system were taken from past work in the literature on lithium manganese oxides by \citet{Ammundsen1999}, and are listed in Table \ref{tab:potentials}, although the mean-field approximation necessitates the use of a rigid-ion model.
-
-The calculated lattice parameters give good agreement with the experimental structure (within $2.5\%$).
-It is noted in the literature that local deviations from the rock-salt structure arising from structural disorder give rise to a broad range of inter-atomic spacings.\cite{Yahia2019}
 
 \begin{table}[h]
 \centering
@@ -44,6 +32,48 @@ It is noted in the literature that local deviations from the rock-salt structure
 \label{tab:potentials}
 \end{table}
 
+\section{Structure generation and modelling}
+While no ordering is noted in experimental work,\cite{Freire2016,Diaz-Lopez2018a} computational studies have identified a number of \ce{Li4Mn2O5} ordered structures which lower energies than pseudo-random structures generated for comparison.\cite{Diaz-Lopez2017,Bhandari2019} The potential parameters used to study this system were taken from past work in the literature on lithium manganese oxides by \citet{Ammundsen1999}, and are listed in Table \ref{tab:potentials}, although the mean-field approximation necessitates the use of a rigid-ion model.
+
+
+
+\newpage
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.5\textwidth}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.7\textwidth]{figures/structures/Li4Mn2O5}};
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+    \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt]
+        (0.05,0.1) -- (0.05,0.8) node [black,midway,xshift=-1cm] 
+{\footnotesize $4.1733$\AA};
+    \end{scope}
+\end{tikzpicture}
+\caption{Initial structure}
+\end{subfigure}%
+\begin{subfigure}{0.5\textwidth}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.7\textwidth]{figures/structures/Li4Mn2O5}};
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+    \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt]
+        (0.05,0.1) -- (0.05,0.8) node [black,midway,xshift=-1cm] 
+{\footnotesize $4.0705$\AA};
+    \end{scope}
+\end{tikzpicture}
+\caption{Relaxed structure}
+\end{subfigure}	
+\caption{Comparison of the initial and final structures of \ce{Li4Mn2O5}, modelled using the mean-field approximation.}
+\label{fig:pointlesscomparison}
+\end{figure}
+
+\subsection{Mean-field approximation}
+The mean-field approximation can be used to study systems with partially occupied sites without the need to assign either a vacancy or given species to each site.
+This is a useful exercise for the purposes of validating potential parameters against experimental lattice parameters.
+
+The calculated lattice parameters shown in Table \ref{tab:lattice} give good agreement with the experimental structure (within $2.5\%$, as shown in Figure \ref{fig:pointlesscomparison}).
+It is noted in the literature that local deviations from the rock-salt structure arising from structural disorder give rise to a broad range of inter-atomic spacings.\cite{Yahia2019}
+
+
 
 \newcommand{\tableline}{\multicolumn{1}{c}{--}}
 \newcommand{\tableliner}{\multicolumn{1}{c}{{\color{red}--}}}
@@ -51,7 +81,7 @@ It is noted in the literature that local deviations from the rock-salt structure
 
 \begin{table}[h]
 \centering
-\caption{Calculated lattice parameters of \ce{Li4Mn2O5} using mean-field approximation compared to experimental data.}
+\caption{Lattice parameters of \ce{Li4Mn2O5} calculated using the mean-field approximation compared to experimental data.}
 \begin{tabular}{lS[table-format=1.4]S[table-format=2.1]}
 \toprule
 \textbf{Lattice parameter} &\mc{\textbf{a} = \textbf{b} = \textbf{c} (\AA)} & \mc{$\boldsymbol{\alpha} = \boldsymbol{\beta} = \boldsymbol{\gamma}$ (\si{\degree})}\\
@@ -61,6 +91,7 @@ Mean-field                     &  4.0705  & 90.0 \\
 \textit{$\Delta$}              & -0.1028  & 0.0  \\
 \textit{$\Delta$ (\%)}         & -2.46    & 0.0  \\\bottomrule
 \end{tabular}
+\label{tab:lattice}
 \end{table}
 \newpage
 
