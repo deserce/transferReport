@@ -296,12 +296,13 @@ The relatively low energy of the second most favourable defect type, O Frenkel, 
 
 \newpage
 
-
-\begin{table}[t] %TODO Try other table format for migration paths
+\begingroup
+\renewcommand*{\arraystretch}{0.8}
+\begin{table}[t]
 \centering
 \caption{Li vacancy migration energies and path lengths in ordered \ce{Li4Mn2O5}.}
-\resizebox{0.6\columnwidth}{!}{
-\begin{tabular}{c c *{3}{d{2.3}}}
+\resizebox{0.7\columnwidth}{!}{
+\begin{tabular}{c c *{3}{d{3.3}}}
 \toprule
 & &  & \multicolumn{2}{c}{Migration energy (eV)}\\
 \cmidrule(lr){4-5}
@@ -319,6 +320,7 @@ Li5          & Li6        & 2.79 & 0.45 & 2.13 \\
 \label{tab:migration}
 \end{table}
 
+\endgroup
 \section{Li-ion migration energetics and pathways}
 \label{sec:migration}
 Understanding the intrinsic mobility of \ce{Li+} ion species, and the migration pathways these ions can take, is vital to predicting and understanding the performance of these materials as cathodes.
